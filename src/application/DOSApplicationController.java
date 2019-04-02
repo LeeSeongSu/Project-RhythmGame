@@ -21,7 +21,7 @@ public class DOSApplicationController implements Initializable{
 	public void initialize(URL url, ResourceBundle rb) {
 		Image backgroundImage = (new ImageParser("main.gif").getImage());
 		backgroundImageView.setImage(backgroundImage);
-		Music introMusic = new Music("bensound-dubstep.mp3", true);
+		Music introMusic = new Music("Game On.mp3", true);
 		try {
 			Thread.sleep(4500);
 			introMusic.start();

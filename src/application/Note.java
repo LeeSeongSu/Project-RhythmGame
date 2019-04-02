@@ -26,8 +26,9 @@ public class Note extends Thread {
 	public void screenDraw(Graphics2D g) {
 		g.drawImage(noteBasicImage, x, y, null);
 	}
-	
+
 	@Override
-	public void run() {}
+	public void run() {
+	}
 
 }
