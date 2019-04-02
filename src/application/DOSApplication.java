@@ -12,15 +12,13 @@ import javafx.stage.Stage;
  * 해당 클래스는 메인디능을 담당하는 JavaFX Application클래스를 상속받는 클래스입니다.
  */
 public class DOSApplication extends Application{
-
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			Music introMusic = new Music("bensound-dubstep.mp3", true);
-			introMusic.start();
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
