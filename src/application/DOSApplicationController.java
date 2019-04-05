@@ -15,13 +15,13 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
- * @author �쟾遺� MainScreen.fxml�쓽 而⑦듃濡ㅻ윭�뙆�씪
+ * @author 태일 MainScreen.fxml DOSApplication을 컨트롤하는 컨트롤러
  */
 public class DOSApplicationController implements Initializable {
    @FXML
    private ImageView backgroundImageView;
    @FXML
-   private Button btnlogin;
+   private Button loginBtn;
 
    @Override
    public void initialize(URL url, ResourceBundle rb) {
@@ -34,6 +34,8 @@ public class DOSApplicationController implements Initializable {
       } catch (Exception e) {
          e.printStackTrace();
       }
+      
+      loginBtn.setOnAction(e -> movePage());
    }
    /**
     * @author 재원,성수 페어(페이지 전환)
@@ -42,9 +44,7 @@ public class DOSApplicationController implements Initializable {
 
       // 새 스테이지 추가
 
-      Stage newStage = new Stage();
-
-      Stage stage = (Stage) btnlogin.getScene().getWindow();
+      Stage stage = (Stage) loginBtn.getScene().getWindow();
 
       try {
 

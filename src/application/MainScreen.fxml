@@ -25,7 +25,7 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="btnlogin" layoutX="1242.0" layoutY="487.0" mnemonicParsing="false" onAction="#movePage" prefHeight="146.0" prefWidth="148.0" style="-fx-background-color: gray; -fx-background-radius: 15;" text="Enter" textFill="WHITE">
+      <Button fx:id="loginBtn" layoutX="1242.0" layoutY="487.0" mnemonicParsing="false" prefHeight="146.0" prefWidth="148.0" style="-fx-background-color: gray; -fx-background-radius: 15;" text="Enter" textFill="WHITE">
 
       </Button>
       <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: transparent;" />
