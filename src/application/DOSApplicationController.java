@@ -37,6 +37,8 @@ public class DOSApplicationController implements Initializable {
       
       loginBtn.setOnAction(e -> movePage());
    }
+   
+   
    /**
     * @author 재원,성수 페어(페이지 전환)
     */
