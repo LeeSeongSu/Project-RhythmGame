@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -50,12 +51,12 @@ public class DOSApplicationController implements Initializable {
 
       try {
 
-         Parent second = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
-
+         AnchorPane second = FXMLLoader.load(getClass().getResource("SelectScreen.fxml"));
+         
+         Menubar menubar = new Menubar(second);
          // 씬에 레이아웃 추가
-
          Scene sc = new Scene(second);
-
+         
          stage.setScene(sc);
    
          stage.show();
