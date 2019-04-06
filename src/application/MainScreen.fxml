@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -10,38 +11,50 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DOSApplicationController">
    <children>
       <ImageView fx:id="backgroundImageView" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" />
-      
-     <VBox layoutX="714.0" layoutY="487.0" prefHeight="168.0" prefWidth="492.0" style="-fx-background-color: transparent;">
+      <ImageView fx:id="MainlogoView" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Main_logo.png" />
+         </image>
+      </ImageView>
+      <Group fx:id="loginscreen" layoutX="-54.0" layoutY="2.0">
          <children>
-                  <HBox prefHeight="100.0" prefWidth="492.0" style="-fx-background-color: transparent;">
-                     <children>
-                  <TextField fx:id="txt211" prefHeight="54.0" prefWidth="507.0" promptText="PASSWORD" style="-fx-prompt-text-fill: white; -fx-background-radius: 20;" />
-                     </children>
-                  </HBox>
-            <HBox prefHeight="91.0" prefWidth="492.0" style="-fx-background-color: transparent;">
+            <HBox layoutX="714.0" layoutY="668.0" prefHeight="91.0" prefWidth="492.0" style="-fx-background-color: transparent;">
                <children>
-                  <TextField fx:id="txt21" prefHeight="54.0" prefWidth="801.0" promptText="PASSWORD" style="-fx-prompt-text-fill: white; -fx-background-radius: 20;" />
+                  <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="249.0" style="-fx-background-color: TRANSPARENT;" text="회원가입" textFill="#f2f2f2">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="293.0" style="-fx-background-color: TRANSPARENT;" text="비밀번호 찾기" textFill="#f2f2f2">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Button>
                </children>
             </HBox>
-         </children>
-      </VBox>
-      <Button fx:id="loginBtn" layoutX="1242.0" layoutY="487.0" mnemonicParsing="false" prefHeight="146.0" prefWidth="148.0" style="-fx-background-color: gray; -fx-background-radius: 15;" text="Enter" textFill="WHITE">
+            <Button fx:id="loginBtn" layoutX="1241.0" layoutY="487.0" mnemonicParsing="false" prefHeight="146.0" prefWidth="135.0" style="-fx-background-color: gray; -fx-background-radius: 15;" text="Enter" textFill="WHITE">
 
       </Button>
-      <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: transparent;" />
-      <HBox layoutX="714.0" layoutY="667.0" prefHeight="91.0" prefWidth="492.0" style="-fx-background-color: transparent;">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="249.0" style="-fx-background-color: TRANSPARENT;" text="회원가입" textFill="#f2f2f2">
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="293.0" style="-fx-background-color: TRANSPARENT;" text="비밀번호 찾기" textFill="#f2f2f2">
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Button>
+            
+                                                                                   <VBox layoutX="714.0" layoutY="487.0" prefHeight="168.0" prefWidth="492.0" style="-fx-background-color: transparent;">
+               <children>
+                        <HBox prefHeight="100.0" prefWidth="492.0" style="-fx-background-color: transparent;">
+                           <children>
+                        <TextField fx:id="txt211" prefHeight="54.0" prefWidth="507.0" promptText="ID" style="-fx-prompt-text-fill: white; -fx-background-radius: 20;" text="ID" />
+                           </children>
+                        </HBox>
+                  <HBox prefHeight="91.0" prefWidth="492.0" style="-fx-background-color: transparent;">
+                     <children>
+                        <TextField fx:id="txt21" prefHeight="54.0" prefWidth="801.0" promptText="PASSWORD" style="-fx-prompt-text-fill: white; -fx-background-radius: 20;" text="PASSWORD" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
-      </HBox>
+      </Group>
+      <Button fx:id="press" layoutX="555.0" layoutY="734.0" mnemonicParsing="false" onKeyPressed="#press" prefHeight="178.0" prefWidth="810.0" style="-fx-background-color: transparent;" text="press the Anykey" textFill="#f5f5f5">
+         <font>
+            <Font size="75.0" />
+         </font></Button>
    </children>
 </AnchorPane>
