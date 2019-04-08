@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
 <?import java.lang.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DOSApplicationController">
    <children>
@@ -22,40 +22,71 @@
          </image>
       </ImageView>
       <Group fx:id="loginscreen" layoutX="-54.0" layoutY="2.0">
-         <children>
-            <Button fx:id="loginBtn" layoutX="1241.0" layoutY="487.0" mnemonicParsing="false" prefHeight="146.0" prefWidth="135.0" style="-fx-background-color: gray; -fx-background-radius: 15;" text="Enter" textFill="WHITE">
-
-      </Button>
-            
-                                                                                   <VBox layoutX="714.0" layoutY="487.0" prefHeight="533.0" prefWidth="854.0" style="-fx-background-color: transparent;">
-               <children>
-                        <HBox prefHeight="118.0" prefWidth="405.0" style="-fx-background-color: transparent;">
-                           <children>
-                        <TextField fx:id="idTextField" prefHeight="118" prefWidth="405" promptText="ID" style="-fx-prompt-text-fill: black; -fx-background-image: url(/images/Login_id_text.png); -fx-padding: 30; -fx-font-size: 25; -fx-text-fill: black;" />
-                           </children>
-                        </HBox>
-                  <HBox prefHeight="118.0" prefWidth="405.0" style="-fx-background-color: transparent;">
-                     <children>
-                        <TextField fx:id="pwTextField" prefHeight="118.0" prefWidth="405.0" promptText="PASSWORD" style="-fx-prompt-text-fill: black; -fx-background-image: url(/images/Login_pw_text.png); -fx-padding: 30; -fx-font-size: 25; -fx-text-fill: black;" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="91.0" prefWidth="492.0" style="-fx-background-color: transparent;">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="249.0" style="-fx-background-color: TRANSPARENT;" text="회원가입" textFill="#f2f2f2">
-                           <font>
-                              <Font size="31.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="293.0" style="-fx-background-color: TRANSPARENT;" text="비밀번호 찾기" textFill="#f2f2f2">
-                           <font>
-                              <Font size="31.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </Group>
+      <children>
+            <ImageView fitHeight="365.0" fitWidth="763.0" layoutX="669.0" layoutY="434.0">
+               <image>
+                  <Image url="@../images/Login_bg.png" />
+               </image>
+            </ImageView>
+        <HBox layoutX="714.0" layoutY="668.0" prefHeight="91.0" prefWidth="492.0" style="-fx-background-color: transparent;">
+          <children>
+            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="249.0" style="-fx-background-color: TRANSPARENT;">
+              <font>
+                <Font size="31.0" fx:id="x1" />
+              </font>
+              <graphic>
+                <ImageView fitHeight="59.0" fitWidth="249.0">
+                  <image>
+                    <Image url="@../images/Login_join.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+            <Button font="$x1" mnemonicParsing="false" prefHeight="59.0" prefWidth="293.0" style="-fx-background-color: TRANSPARENT;">
+              <graphic>
+                <ImageView fitHeight="59.0" fitWidth="293.0">
+                  <image>
+                    <Image url="@../images/Login_find.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+          </children>
+        </HBox>
+        <Button fx:id="loginBtn" layoutX="1241.0" layoutY="487.0" mnemonicParsing="false" prefHeight="156.0" prefWidth="111.0" style="-fx-background-color: transparent; -fx-background-radius: 15;">
+          <graphic>
+            <ImageView fitHeight="146.0" fitWidth="135.0">
+              <image>
+                <Image url="@../images/Login_login.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <VBox layoutX="864.0" layoutY="501.0" prefHeight="92.0" prefWidth="339.0" style="-fx-background-color: transparent;">
+          <children>
+            <Group>
+              <children>
+                <ImageView fitHeight="68.0" fitWidth="356.0">
+                  <image>
+                    <Image url="@../images/Login_id_text.png" />
+                  </image>
+                </ImageView>
+                <TextField fx:id="idTextField" layoutX="16.0" layoutY="2.0" prefHeight="63.0" prefWidth="332.0" style="-fx-text-inner-color: white;" />
+              </children>
+            </Group>
+            <Group>
+              <children>
+                <ImageView fitHeight="68.0" fitWidth="356.0">
+                  <image>
+                    <Image url="@../images/Login_pw_text.png" />
+                  </image>
+                </ImageView>
+                <PasswordField fx:id="txt2111" layoutX="16.0" layoutY="2.0" prefHeight="63.0" prefWidth="329.0" style="-fx-text-inner-color: white;" />
+              </children>
+            </Group>
+          </children>
+        </VBox>
+      </children>
+    </Group>
    </children>
 </AnchorPane>
