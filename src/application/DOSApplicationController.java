@@ -100,15 +100,13 @@ public class DOSApplicationController extends Thread implements Initializable {
 		Task<Void> task = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
-				double y = 356.0;
-				while (y > 156) {
-					y = y - 1;
-					mainLogoView.setLayoutY(y);
-					Thread.sleep(12);
+				double opacity = 1;
+				while(opacity>0) {
+					opacity = opacity - 0.01;
+					mainLogoView.setOpacity(opacity);
+					Thread.sleep(30);
 				}
-				Image tmp = (new ImageParser("Login_id_text.png").getImage());
-//				idTextField.setBackground(new Background(new BackgroundImage(tmp,null,null,null,
-//						null)));
+				mainLogoView.setVisible(false);
 				loginscreen.setVisible(true);// 로그인창 보임
 				return null;
 			}
