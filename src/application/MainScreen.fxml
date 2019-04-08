@@ -1,60 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
 <?import java.lang.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DOSApplicationController">
-   <children>
-      <ImageView fx:id="backgroundImageView" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="MainlogoView" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Main_logo.png" />
-         </image>
-      </ImageView>
-      <Group fx:id="loginscreen" layoutX="-54.0" layoutY="2.0">
-         <children>
-            <HBox layoutX="714.0" layoutY="668.0" prefHeight="91.0" prefWidth="492.0" style="-fx-background-color: transparent;">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="249.0" style="-fx-background-color: TRANSPARENT;" text="회원가입" textFill="#f2f2f2">
-                     <font>
-                        <Font size="31.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="293.0" style="-fx-background-color: TRANSPARENT;" text="비밀번호 찾기" textFill="#f2f2f2">
-                     <font>
-                        <Font size="31.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <Button fx:id="loginBtn" layoutX="1241.0" layoutY="487.0" mnemonicParsing="false" prefHeight="146.0" prefWidth="135.0" style="-fx-background-color: gray; -fx-background-radius: 15;" text="Enter" textFill="WHITE">
-
-      </Button>
-            
-                                                                                   <VBox layoutX="714.0" layoutY="487.0" prefHeight="168.0" prefWidth="492.0" style="-fx-background-color: transparent;">
-               <children>
-                        <HBox prefHeight="100.0" prefWidth="492.0" style="-fx-background-color: transparent;">
-                           <children>
-                        <TextField fx:id="txt211" prefHeight="54.0" prefWidth="507.0" promptText="ID" style="-fx-prompt-text-fill: white; -fx-background-radius: 20;" text="ID" />
-                           </children>
-                        </HBox>
-                  <HBox prefHeight="91.0" prefWidth="492.0" style="-fx-background-color: transparent;">
-                     <children>
-                        <TextField fx:id="txt21" prefHeight="54.0" prefWidth="801.0" promptText="PASSWORD" style="-fx-prompt-text-fill: white; -fx-background-radius: 20;" text="PASSWORD" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </Group>
-      <Button fx:id="press" layoutX="555.0" layoutY="734.0" mnemonicParsing="false" onKeyPressed="#press" prefHeight="178.0" prefWidth="810.0" style="-fx-background-color: transparent;" text="press the Anykey" textFill="#f5f5f5">
-         <font>
-            <Font size="75.0" />
-         </font></Button>
-   </children>
+  <children>
+    <ImageView fx:id="backgroundImageView" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="MainlogoView" fitHeight="1080.0" fitWidth="1920.0" layoutX="1.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../images/Main_logo.png" />
+      </image>
+    </ImageView>
+    <Group fx:id="loginscreen" layoutX="-54.0" layoutY="2.0">
+      <children>
+            <ImageView fitHeight="365.0" fitWidth="763.0" layoutX="669.0" layoutY="434.0">
+               <image>
+                  <Image url="@../images/Login_bg.png" />
+               </image>
+            </ImageView>
+        <HBox layoutX="714.0" layoutY="668.0" prefHeight="91.0" prefWidth="492.0" style="-fx-background-color: transparent;">
+          <children>
+            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="249.0" style="-fx-background-color: TRANSPARENT;">
+              <font>
+                <Font size="31.0" fx:id="x1" />
+              </font>
+              <graphic>
+                <ImageView fitHeight="59.0" fitWidth="249.0">
+                  <image>
+                    <Image url="@../images/Login_join.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+            <Button font="$x1" mnemonicParsing="false" prefHeight="59.0" prefWidth="293.0" style="-fx-background-color: TRANSPARENT;">
+              <graphic>
+                <ImageView fitHeight="59.0" fitWidth="293.0">
+                  <image>
+                    <Image url="@../images/Login_find.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+          </children>
+        </HBox>
+        <Button fx:id="loginBtn" layoutX="1241.0" layoutY="487.0" mnemonicParsing="false" prefHeight="156.0" prefWidth="111.0" style="-fx-background-color: transparent; -fx-background-radius: 15;">
+          <graphic>
+            <ImageView fitHeight="146.0" fitWidth="135.0">
+              <image>
+                <Image url="@../images/Login_login.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <VBox layoutX="864.0" layoutY="501.0" prefHeight="92.0" prefWidth="339.0" style="-fx-background-color: transparent;">
+          <children>
+            <Group>
+              <children>
+                <ImageView fitHeight="68.0" fitWidth="356.0">
+                  <image>
+                    <Image url="@../images/Login_id_text.png" />
+                  </image>
+                </ImageView>
+                <TextField fx:id="txt211" layoutX="16.0" layoutY="2.0" prefHeight="63.0" prefWidth="332.0" style="-fx-background-color: transparent; -fx-background-radius: 20; -fx-text-inner-color: white;" />
+              </children>
+            </Group>
+            <Group>
+              <children>
+                <ImageView fitHeight="68.0" fitWidth="356.0">
+                  <image>
+                    <Image url="@../images/Login_pw_text.png" />
+                  </image>
+                </ImageView>
+                <TextField fx:id="txt2111" layoutX="16.0" layoutY="2.0" prefHeight="63.0" prefWidth="329.0" style="-fx-background-color: transparent; -fx-background-radius: 20; -fx-text-inner-color: white;" />
+              </children>
+            </Group>
+          </children>
+        </VBox>
+      </children>
+    </Group>
+    <Button fx:id="press" layoutX="555.0" layoutY="734.0" mnemonicParsing="false" onKeyPressed="#press" prefHeight="178.0" prefWidth="810.0" style="-fx-background-color: transparent;">
+      <font>
+        <Font size="75.0" />
+      </font>
+           <graphic>
+             <ImageView fitHeight="100.0" fitWidth="400.0"> 
+                  <image>
+                      <Image url="@../images/Main_start.png" />
+                  </image>
+                </ImageView>
+            </graphic>
+      
+    </Button>
+  </children>
 </AnchorPane>
