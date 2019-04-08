@@ -6,10 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
- 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <!-- TODO Add Nodes -->
   <children>
-    <ImageView fitHeight="1080.0" fitWidth="1920.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView id="Lobby_bg.png" layoutX="0" layoutY="0">
+      <image>
+        <Image url="@../images/Lobby_bg.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
   </children>
 </AnchorPane>

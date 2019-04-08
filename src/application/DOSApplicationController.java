@@ -33,19 +33,22 @@ public class DOSApplicationController extends Thread implements Initializable {
 	private ImageView backgroundImageView, mainStartImageView;
 	@FXML
 	private ImageView mainLogoView;// 메인로고
+	
+
 	@FXML
 	private Button loginBtn;// 로그인 버튼
 	@FXML
 	private Group loginscreen;// 로그인 화면
 	@FXML
 	private TextField idTextField;
-	
+
 	private boolean twinkleStop = false;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		Image backgroundImage = (new ImageParser("Main_bg.gif").getImage());
 		backgroundImageView.setImage(backgroundImage);
+		
 		Music introMusic = new Music("Game On.mp3", true);
 		try {
 			Thread.sleep(4500);
@@ -98,8 +101,8 @@ public class DOSApplicationController extends Thread implements Initializable {
 			@Override
 			protected Void call() throws Exception {
 				double y = 356.0;
-				while(y>156) {
-					y=y-1;
+				while (y > 156) {
+					y = y - 1;
 					mainLogoView.setLayoutY(y);
 					Thread.sleep(12);
 				}
@@ -110,7 +113,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 				return null;
 			}
 		};
-		
+
 		Thread thread = new Thread(task);
 		thread.start();
 	}
@@ -127,6 +130,8 @@ public class DOSApplicationController extends Thread implements Initializable {
 		try {
 
 			AnchorPane second = FXMLLoader.load(getClass().getResource("SelectScreen.fxml"));
+			
+		
 
 			Menubar menubar = new Menubar(second);
 			// 씬에 레이아웃 추가

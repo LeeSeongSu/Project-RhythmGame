@@ -18,11 +18,6 @@ public class Menubar {
 
 	public Menubar(AnchorPane pane) {
 		this.pane = pane;
-		Image menuBackgroundImage = (new ImageParser("menu_background.png").getImage());
-		menuBackground = new ImageView(menuBackgroundImage);
-		menuBackground.setLayoutX(0);
-		menuBackground.setLayoutY(0);
-		pane.getChildren().add(menuBackground);
 		
 		Image backIconImage = (new ImageParser("back_icon.png").getImage());
 		backIcon = new ImageView(backIconImage);

@@ -8,26 +8,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DOSApplicationController">
-   <children>
-      <ImageView fx:id="backgroundImageView" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="mainLogoView" layoutX="524.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Main_logo.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="mainStartImageView" layoutX="759.0" layoutY="665.0" pickOnBounds="true" preserveRatio="true">
-      	<image>
-            <Image url="@../images/Main_start.png" />
-         </image>
-      </ImageView>
-      <Group fx:id="loginscreen" layoutX="-54.0" layoutY="2.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.DOSApplicationController">
+  <children>
+    <ImageView fx:id="backgroundImageView" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="mainLogoView" layoutX="524.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../images/Main_logo.png" />
+      </image>
+    </ImageView>
+    <ImageView fx:id="mainStartImageView" layoutX="759.0" layoutY="665.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../images/Main_start.png" />
+      </image>
+    </ImageView>
+    <Group fx:id="loginscreen" layoutX="-92.0" layoutY="2.0" scaleX="1.0" scaleY="1.0">
       <children>
-            <ImageView fitHeight="365.0" fitWidth="763.0" layoutX="669.0" layoutY="434.0">
-               <image>
-                  <Image url="@../images/Login_bg.png" />
-               </image>
-            </ImageView>
+        <ImageView fitHeight="365.0" fitWidth="763.0" layoutX="669.0" layoutY="434.0">
+          <image>
+            <Image url="@../images/Login_bg.png" />
+          </image>
+        </ImageView>
         <HBox layoutX="714.0" layoutY="668.0" prefHeight="91.0" prefWidth="492.0" style="-fx-background-color: transparent;">
           <children>
             <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="249.0" style="-fx-background-color: TRANSPARENT;">
@@ -88,5 +88,5 @@
         </VBox>
       </children>
     </Group>
-   </children>
+  </children>
 </AnchorPane>
