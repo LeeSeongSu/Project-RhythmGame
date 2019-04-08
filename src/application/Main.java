@@ -12,3 +12,4 @@ public class Main {
 		DOSApplication.launch(DOSApplication.class, args);
 	}
 }
+

@@ -1,1 +1,10 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.text-field { 
+    -fx-text-box-border: transparent; 
+    -fx-background-color: rgba(0,0,0,0);
+    -fx-background-insets: 0; 
+    -fx-padding: 1 3 1 3; 
+} 
+.text-field:focused { 
+    -fx-focus-color: transparent; 
+} 

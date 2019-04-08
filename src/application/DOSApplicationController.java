@@ -3,17 +3,24 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -23,22 +30,22 @@ import javafx.stage.Stage;
  */
 public class DOSApplicationController extends Thread implements Initializable {
 	@FXML
-	private ImageView backgroundImageView;
+	private ImageView backgroundImageView, mainStartImageView;
 	@FXML
-	private ImageView MainlogoView;// 메인로고
-
+	private ImageView mainLogoView;// 메인로고
 	@FXML
 	private Button loginBtn;// 로그인 버튼
 	@FXML
-	private Button press;// 아무키나 누르시오
-	@FXML
 	private Group loginscreen;// 로그인 화면
+	@FXML
+	private TextField idTextField;
+	
+	private boolean twinkleStop = false;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		Image backgroundImage = (new ImageParser("Main_bg.gif").getImage());
 		backgroundImageView.setImage(backgroundImage);
-
 		Music introMusic = new Music("Game On.mp3", true);
 		try {
 			Thread.sleep(4500);
@@ -46,20 +53,66 @@ public class DOSApplicationController extends Thread implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		loginBtn.setOnAction(e -> movePage());
 		loginscreen.setVisible(false);// 로그인창 숨김
+		changeOpacity(mainStartImageView);
+		mainStartImageView.setOnMouseClicked(e -> pressAnyKey());
+	}
+
+	public void changeOpacity(ImageView imageView) {
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				double opacity = 1;
+				boolean decent = true;
+				while (!twinkleStop) {
+					if (decent) {
+						opacity = opacity - 0.01;
+						imageView.setOpacity(opacity);
+						if (opacity < 0)
+							decent = false;
+					} else {
+						opacity = opacity + 0.01;
+						imageView.setOpacity(opacity);
+						if (opacity > 1)
+							decent = true;
+					}
+					try {
+						Thread.sleep(30);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		thread.start();
 	}
 
 	/**
-	 * @author 성수(메인화면에서 아무키나 눌렀을 때)
+	 * @author 태일
 	 */
-	public void press() {
-
-		press.setVisible(false);// 아무키나 누르시오 창 숨김
-		MainlogoView.setLayoutY(-350);// 메인로고 위치
-		loginscreen.setVisible(true);// 로그인창 보임
-
+	public void pressAnyKey() {
+		twinkleStop = true;
+		mainStartImageView.setVisible(false);
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				double y = 356.0;
+				while(y>156) {
+					y=y-1;
+					mainLogoView.setLayoutY(y);
+					Thread.sleep(12);
+				}
+				Image tmp = (new ImageParser("Login_id_text.png").getImage());
+//				idTextField.setBackground(new Background(new BackgroundImage(tmp,null,null,null,
+//						null)));
+				loginscreen.setVisible(true);// 로그인창 보임
+				return null;
+			}
+		};
+		
+		Thread thread = new Thread(task);
+		thread.start();
 	}
 
 	/**
