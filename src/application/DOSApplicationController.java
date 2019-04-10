@@ -130,8 +130,8 @@ public class DOSApplicationController extends Thread implements Initializable {
 			AnchorPane second = FXMLLoader.load(getClass().getResource("SelectScreen.fxml"));
 			
 		
-
-			Menubar menubar = new Menubar(second);
+			LobbyView lobbyView = new LobbyView(second);
+			//Menubar menubar = new Menubar(second);
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(second);
 
