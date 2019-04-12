@@ -37,7 +37,7 @@ public class Menubar {
       homeBtn.setBackground(new Background(selectBtnBgImg));
       homeBtn.setLayoutX(0);
       homeBtn.setLayoutY(0);
-      homeBtn.setOpacity(0);
+      homeBtn.setOpacity(1);
       homeBtn.setOnMouseClicked(e -> homeBtnClick());
 
       themeBtn = new Button();
@@ -45,7 +45,7 @@ public class Menubar {
       themeBtn.setBackground(new Background(selectBtnBgImg));
       themeBtn.setLayoutX(381);
       themeBtn.setLayoutY(0);
-      themeBtn.setOpacity(1);
+      themeBtn.setOpacity(0);
       themeBtn.setOnMouseClicked(e -> themeBtnClick());
 
       storeBtn = new Button();
@@ -53,7 +53,7 @@ public class Menubar {
       storeBtn.setBackground(new Background(selectBtnBgImg));
       storeBtn.setLayoutX(760);
       storeBtn.setLayoutY(0);
-      storeBtn.setOpacity(1);
+      storeBtn.setOpacity(0);
       storeBtn.setOnMouseClicked(e -> storeBtnClick());
 
       pane.getChildren().add(homeBtn);
