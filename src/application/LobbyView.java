@@ -1,5 +1,9 @@
 package application;
 
+import java.io.IOException;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -8,6 +12,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
+import javafx.stage.Stage;
 
 public class LobbyView {
 	private AnchorPane pane;
@@ -48,6 +53,7 @@ public class LobbyView {
 		start = new ImageView(startImage);
 		start.setLayoutX(1330);
 		start.setLayoutY(870);
+		start.setOnMouseClicked(e -> startBtnClick());
 		pane.getChildren().add(start);// 스타트 사진
 		
 		multiBtn = new Button();
@@ -119,5 +125,29 @@ public class LobbyView {
 			return;
 		onBtn.setBackground(new Background(onBtnBgImg));
 		offBtn.setBackground(new Background(offBtnBgEffectImg));
+	}
+	
+	private void startBtnClick() {
+		Stage stage = (Stage) start.getScene().getWindow();
+
+		try {	
+			AnchorPane pane = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+			
+			Game game = new Game("bensound-happyrock.mp3",pane);
+			game.playGame();
+			
+			// 씬에 레이아웃 추가
+			Scene sc = new Scene(pane);
+
+			stage.setScene(sc);
+
+			stage.show();
+			
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
 	}
 }
