@@ -31,3 +31,4 @@ End of https://www.gitignore.io/api/java
 .settings/*
 bin/*
 bin/.gitignore
+.classpath
