@@ -43,13 +43,14 @@ public class DOSApplicationController extends Thread implements Initializable {
 	private TextField idTextField;
 
 	private boolean twinkleStop = false;
+	Music introMusic;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		Image backgroundImage = (new ImageParser("Main_bg.gif").getImage());
 		backgroundImageView.setImage(backgroundImage);
 		
-		Music introMusic = new Music("Game On.mp3", true);
+		introMusic = new Music("Game On.mp3", true);
 		try {
 			Thread.sleep(4500);
 			introMusic.start();
@@ -145,6 +146,10 @@ public class DOSApplicationController extends Thread implements Initializable {
 
 		}
 
+	}
+	
+	public void startGame(String title) {
+		introMusic.close();
 	}
 
 }
