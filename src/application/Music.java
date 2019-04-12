@@ -17,6 +17,7 @@ public class Music extends Thread {
 	private File file;
 	private FileInputStream fis;
 	private BufferedInputStream bis;
+	private boolean flag=false;
 
 	public Music(String name, boolean isLoop) {
 		try {
@@ -41,10 +42,20 @@ public class Music extends Thread {
 		player.close();
 		this.interrupt();
 	}
+	
+	public void changeFlag() {
+		if(flag)
+			flag=false;
+		else
+			flag=true;
+	}
 
 	@Override
 	public void run() {
 		try {
+			if(flag) {
+				Thread.sleep(2000);
+			}
 			do {
 				player.play();
 				fis = new FileInputStream(file);

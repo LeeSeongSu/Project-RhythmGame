@@ -43,7 +43,8 @@ public class DOSApplicationController extends Thread implements Initializable {
 	private TextField idTextField;
 
 	private boolean twinkleStop = false;
-	Music introMusic;
+	
+	public static Music introMusic;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -132,7 +133,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 			
 		
 			LobbyView lobbyView = new LobbyView(second);
-			//Menubar menubar = new Menubar(second);
+			Menubar menubar = new Menubar(second);
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(second);
 

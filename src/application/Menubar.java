@@ -3,104 +3,89 @@
  */
 package application;
 
+
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
 
 /**
- * @author 민경&태일 Pair
+ * @author  재원(코딩), 성수(로직) 페어 :홈,테마,스토어 버튼 이벤트 추가
  *
  */
 public class Menubar {
 
-	private AnchorPane pane;
-	private ImageView Background, single, multi, on, off, start, singleeffect, multieffect, oneffect, offeffect;
+   private AnchorPane pane;
+   private ImageView Background, select;
+   private BackgroundImage selectBtnBgImg;
+   private Button homeBtn, themeBtn, storeBtn;
 
-	public Menubar(AnchorPane pane) {
-		this.pane = pane;
+   public Menubar(AnchorPane pane) {
+      this.pane = pane;
 
-		Image backGroundImage = (new ImageParser("Lobby.png").getImage());
-		Background = new ImageView(backGroundImage);
-		pane.getChildren().add(Background);// 로비 배경
+      Image selectImage = (new ImageParser("Lobby_selectEffect.png").getImage());
 
-		Image singleImage = (new ImageParser("Lobby_single.png").getImage());
-		single = new ImageView(singleImage);
-		single.setLayoutX(1475);
-		single.setLayoutY(545);
-		single.setOnMouseClicked(e -> singleeffect());
-		pane.getChildren().add(single);// 싱글 사진
+      selectBtnBgImg = new BackgroundImage(selectImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+            BackgroundPosition.CENTER, null);
 
-		Image singleeffectImage = (new ImageParser("Lobby_singleEffect.png").getImage());
-		singleeffect = new ImageView(singleeffectImage);
-		singleeffect.setLayoutX(1465);
-		singleeffect.setLayoutY(532);// 싱글 이펙트 사진
+      homeBtn = new Button();
+      homeBtn.setPrefSize(388, 125);
+      homeBtn.setBackground(new Background(selectBtnBgImg));
+      homeBtn.setLayoutX(0);
+      homeBtn.setLayoutY(0);
+      homeBtn.setOpacity(0);
+      homeBtn.setOnMouseClicked(e -> homeBtnClick());
 
-		Image multiImage = (new ImageParser("Lobby_multi.png").getImage());
-		multi = new ImageView(multiImage);
-		multi.setLayoutX(1645);
-		multi.setLayoutY(545);
-		multi.setOnMouseClicked(e -> multieffect());
-		pane.getChildren().add(multi);// 멀티 사진
+      themeBtn = new Button();
+      themeBtn.setPrefSize(388, 125);
+      themeBtn.setBackground(new Background(selectBtnBgImg));
+      themeBtn.setLayoutX(381);
+      themeBtn.setLayoutY(0);
+      themeBtn.setOpacity(1);
+      themeBtn.setOnMouseClicked(e -> themeBtnClick());
 
-		Image multieffectImage = (new ImageParser("Lobby_multiEffect.png").getImage());
-		multieffect = new ImageView(multieffectImage);
-		multieffect.setLayoutX(1635);
-		multieffect.setLayoutY(532);// 멀티 이펙트 사진
+      storeBtn = new Button();
+      storeBtn.setPrefSize(388, 125);
+      storeBtn.setBackground(new Background(selectBtnBgImg));
+      storeBtn.setLayoutX(760);
+      storeBtn.setLayoutY(0);
+      storeBtn.setOpacity(1);
+      storeBtn.setOnMouseClicked(e -> storeBtnClick());
 
-		Image onImage = (new ImageParser("Lobby_on.png").getImage());
-		on = new ImageView(onImage);
-		on.setLayoutX(1475);
-		on.setLayoutY(740);
-		on.setOnMouseClicked(e -> oneffect());
-		pane.getChildren().add(on);// 켜기 사진
+      pane.getChildren().add(homeBtn);
+      pane.getChildren().add(themeBtn);
+      pane.getChildren().add(storeBtn);
 
-		Image oneffectImage = (new ImageParser("Lobby_onEffect.png").getImage());
-		oneffect = new ImageView(oneffectImage);
-		oneffect.setLayoutX(1465);
-		oneffect.setLayoutY(727);// 켜기 이펙트 사진
+   }
 
-		Image offImage = (new ImageParser("Lobby_off.png").getImage());
-		off = new ImageView(offImage);
-		off.setLayoutX(1645);
-		off.setLayoutY(740);
-		off.setOnMouseClicked(e -> offeffect());
-		pane.getChildren().add(off);// 끄기 사진
+   private void homeBtnClick() {// off
 
-		Image offeffectImage = (new ImageParser("Lobby_offEffect.png").getImage());
-		offeffect = new ImageView(offeffectImage);
-		offeffect.setLayoutX(1635);
-		offeffect.setLayoutY(727);// 끄기 이펙트 사진
+      homeBtn.setBackground(new Background(selectBtnBgImg));
+      homeBtn.setOpacity(1);
+      themeBtn.setOpacity(0);
+      storeBtn.setOpacity(0);
+   }
 
-		Image startImage = (new ImageParser("Lobby_start.png").getImage());
-		start = new ImageView(startImage);
-		start.setLayoutX(1330);
-		start.setLayoutY(870);
-		pane.getChildren().add(start);// 스타트 사진
+   private void themeBtnClick() {// off
 
-	}
+      themeBtn.setBackground(new Background(selectBtnBgImg));
+      homeBtn.setOpacity(0);
+      themeBtn.setOpacity(1);
+      storeBtn.setOpacity(0);
 
-	private void singleeffect() {// 싱글사진 이펙트
+   }
 
-		pane.getChildren().add(singleeffect);
-		pane.getChildren().remove(multieffect);
-	}
+   private void storeBtnClick() {
 
-	private void multieffect() {// 멀티사진 이펙트
+      storeBtn.setBackground(new Background(selectBtnBgImg));
+      homeBtn.setOpacity(0);
+      themeBtn.setOpacity(0);
+      storeBtn.setOpacity(1);
 
-		pane.getChildren().add(multieffect);
-		pane.getChildren().remove(singleeffect);
-	}
-
-	private void oneffect() {// on이펙트
-
-		pane.getChildren().add(oneffect);
-		pane.getChildren().remove(offeffect);
-	}
-
-	private void offeffect() {// off이펙트
-
-		pane.getChildren().add(offeffect);
-		pane.getChildren().remove(oneffect);
-	}
+   }
 
 }
