@@ -135,18 +135,13 @@ public class LobbyView {
 		try {	
 			AnchorPane pane = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
 			
-			Game game = new Game("bensound-happyrock.mp3",pane);
-			
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(pane);
-
 			stage.setScene(sc);
-
+			Game game = new Game("bensound-happyrock.mp3",pane,sc);
 			stage.show();
-			//Platform.runLater(()->game.run());
 			Task<Void> task = new Task<Void>() {
 			    public Void call() throws Exception {
-//			    	Platform.runLater(()->game.run());
 			    	game.run();
 			        return null;
 			    }
@@ -154,7 +149,6 @@ public class LobbyView {
 			Thread t = new Thread(task);
 			t.setDaemon(true);
 			t.run();
-//			game.run();
 		} catch (IOException e) {
 
 			e.printStackTrace();

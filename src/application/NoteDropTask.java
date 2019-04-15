@@ -5,27 +5,70 @@ import javafx.concurrent.Task;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-public class NoteDropTask<V> extends Task<V> {
+public class NoteDropTask<Void> extends Task<Void> {
 
 	ImageView imgView;
 	AnchorPane pane;
-	int y = 0;
-
-	public NoteDropTask(ImageView imgView, AnchorPane pane) {
-		this.imgView = imgView;
-		this.pane = pane;
+	int y;
+	Note note;
+	
+	public NoteDropTask(Note note) {
+		this.imgView = note.getImageView();
+		this.pane = note.getPane();
+		this.y = note.getY();
+		this.note = note;
 	}
 
 	@Override
-	protected V call() throws Exception {
-		while (y < 1200) {
-			y += Main.NOTE_SPEED;
-			Platform.runLater(()-> imgView.setLayoutY(y));
-			Thread.sleep(Main.SLEEP_TIME);
-			updateProgress(y, 1200);
+	protected Void call() throws Exception {
+		while (true) {
+			if(note.isProceeded()) {
+				drop();
+				Platform.runLater(()-> imgView.setLayoutY(y));
+				Thread.sleep(Main.SLEEP_TIME);
+			}else {
+				Platform.runLater(()->pane.getChildren().remove(imgView));
+				this.cancel();
+				break;
+			}
 		}
-		pane.getChildren().remove(imgView);
 		return null;
+	}
+	
+	public void drop() {
+		y += Main.NOTE_SPEED;
+		if(y>1100) {
+			System.out.println("Miss");
+			note.close();
+			Game.noteList.remove(note);
+		}
+	}
+	
+	public void judge() {
+		System.out.println(y);
+		if( y >= 1005) {
+			System.out.println("Late");
+			note.close();
+		}else if( y >= 945) {
+			System.out.println("Good");
+			note.close();
+		}else if( y>=885) {
+			System.out.println("Great");
+			note.close();
+		}else if( y>=825) {
+			System.out.println("Perfect");
+			note.close();
+		}else if( y>=765) {
+			System.out.println("Great");
+			note.close();
+		}else if( y>=705) {
+			System.out.println("Good");
+			note.close();
+		}else if( y>=645) {
+			System.out.println("Early");
+			note.close();
+		}
+		Game.noteList.remove(note);
 	}
 
 }

@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.layout.AnchorPane;
@@ -9,10 +11,11 @@ public class MakeGameTask extends Task<Void>{
 	Note[] notes;
 	Music music;
 	AnchorPane pane;
-	
-	public MakeGameTask(Music music,AnchorPane pane) {
+	ArrayList<Note> noteList;
+	public MakeGameTask(Music music,AnchorPane pane,ArrayList<Note> noteList) {
 		this.music = music;
 		this.pane = pane;
+		this.noteList = noteList;
 	}
 	
 	@Override
@@ -46,10 +49,12 @@ public class MakeGameTask extends Task<Void>{
 		Note[] notes = new Note[beats.length];
 		for(int i=0; i<beats.length;i++) {
 			notes[i]= new Note(beats[i].getNoteLocation(), pane);
+			noteList.add(notes[i]);
 		}
 		int i=0;
 		music.changeFlag();
 		music.start();
+		System.out.println(notes.length);
 		for(i=0;i<notes.length;i++) {
 			Thread.sleep(1);
 			if(beats[i].getTime()<=music.getTime()) {
