@@ -21,7 +21,27 @@ public class MakeGameTask extends Task<Void>{
 				new Beat(1000, 0),
 				new Beat(2000, 1),
 				new Beat(3000, 2),
-				new Beat(4000, 3)
+				new Beat(4000, 3),
+				new Beat(5000, 3),
+				new Beat(5500, 4),
+				new Beat(5500, 5),
+				new Beat(6000, 6),
+				new Beat(6000, 1),
+				new Beat(7000, 3),
+				new Beat(7000, 4),
+				new Beat(7500, 3),
+				new Beat(7500, 2),
+				new Beat(8000, 3),
+				new Beat(8000, 4),
+				new Beat(8500, 3),
+				new Beat(8500, 2),
+				new Beat(9000, 6),
+				new Beat(9000, 1),
+				new Beat(9500, 3),
+				new Beat(9500, 4),
+				new Beat(9500, 5),
+				new Beat(10000, 3),
+				new Beat(10000, 4)
 		};
 		Note[] notes = new Note[beats.length];
 		for(int i=0; i<beats.length;i++) {
@@ -31,7 +51,7 @@ public class MakeGameTask extends Task<Void>{
 		music.changeFlag();
 		music.start();
 		for(i=0;i<notes.length;i++) {
-			Thread.sleep(50);
+			Thread.sleep(1);
 			if(beats[i].getTime()<=music.getTime()) {
 				Note tmp = notes[i];
 				Platform.runLater(new Runnable() {
