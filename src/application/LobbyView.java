@@ -2,6 +2,8 @@ package application;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -134,7 +136,6 @@ public class LobbyView {
 			AnchorPane pane = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
 			
 			Game game = new Game("bensound-happyrock.mp3",pane);
-			game.playGame();
 			
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(pane);
@@ -142,8 +143,18 @@ public class LobbyView {
 			stage.setScene(sc);
 
 			stage.show();
-			
-
+			//Platform.runLater(()->game.run());
+			Task<Void> task = new Task<Void>() {
+			    public Void call() throws Exception {
+//			    	Platform.runLater(()->game.run());
+			    	game.run();
+			        return null;
+			    }
+			};
+			Thread t = new Thread(task);
+			t.setDaemon(true);
+			t.run();
+//			game.run();
 		} catch (IOException e) {
 
 			e.printStackTrace();

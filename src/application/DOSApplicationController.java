@@ -90,6 +90,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 				}
 			}
 		};
+		thread.setDaemon(true);
 		thread.start();
 	}
 
@@ -115,6 +116,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 		};
 
 		Thread thread = new Thread(task);
+		thread.setDaemon(true);
 		thread.start();
 	}
 
