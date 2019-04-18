@@ -27,7 +27,8 @@ public class Game extends Thread {
 		this.title = title;
 		this.sc = sc;
 		DOSApplicationController.introMusic.close();
-		sc.setOnKeyPressed(new KeyListener(noteList));
+		sc.setOnKeyPressed(new KeyListener(pane, noteList));
+		sc.setOnKeyReleased(new NoteEffectKeyListener(pane));
 	}
 
 	public void playGame() {

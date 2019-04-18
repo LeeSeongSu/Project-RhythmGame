@@ -40,7 +40,6 @@ public class NoteDropTask<Void> extends Task<Void> {
 		if(y>1100) {
 			System.out.println("Miss");
 			note.close();
-			Game.noteList.remove(note);
 		}
 	}
 	
@@ -68,7 +67,6 @@ public class NoteDropTask<Void> extends Task<Void> {
 			System.out.println("Early");
 			note.close();
 		}
-		Game.noteList.remove(note);
 	}
 
 }
