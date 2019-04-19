@@ -68,5 +68,30 @@ public class NoteDropTask<Void> extends Task<Void> {
 			note.close();
 		}
 	}
+	
+	public void soundJudge() {
+		if( y >= 1035) {
+			System.out.println("Late");
+			note.close();
+		}else if( y >= 965) {
+			System.out.println("Good");
+			note.close();
+		}else if( y>=895) {
+			System.out.println("Great");
+			note.close();
+		}else if( y>=815) {
+			System.out.println("Perfect");
+			note.close();
+		}else if( y>=755) {
+			System.out.println("Great");
+			note.close();
+		}else if( y>=675) {
+			System.out.println("Good");
+			note.close();
+		}else if( y>=615) {
+			System.out.println("Early");
+			note.close();
+		}
+	}
 
 }

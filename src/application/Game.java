@@ -2,8 +2,6 @@ package application;
 
 import java.awt.Image;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.concurrent.ExecutorService;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -21,7 +19,10 @@ public class Game extends Thread {
 	Music music;
 	String title;
 	Image image;
+	VoiceKeyListener voice;
+	Boolean isVoiceMode;
 	static ArrayList<Note> noteList = new ArrayList<>();
+	
 	public Game(String title, AnchorPane pane, Scene sc) {
 		this.pane = pane;
 		this.title = title;
@@ -29,8 +30,9 @@ public class Game extends Thread {
 		DOSApplicationController.introMusic.close();
 		sc.setOnKeyPressed(new KeyListener(pane, noteList));
 		sc.setOnKeyReleased(new NoteEffectKeyListener(pane));
+		voice=new VoiceKeyListener(pane);
 	}
-
+	
 	public void playGame() {
 		dropNotes();
 	}
@@ -48,6 +50,8 @@ public class Game extends Thread {
 		Thread t = new Thread(new MakeGameTask(music,pane,noteList));
 		t.setDaemon(true);
 		t.start();
+		Thread voiceT = new Thread(voice);
+		voiceT.start();
 	}
 
 	@Override
