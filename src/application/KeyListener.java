@@ -49,7 +49,6 @@ public class KeyListener implements EventHandler<KeyEvent>{
 			if(note.getX()==i) {
 				try {
 					note.getTask().judge();
-					noteList.remove(note);
 					break;
 				}catch (Exception e) {
 					// TODO: handle exception

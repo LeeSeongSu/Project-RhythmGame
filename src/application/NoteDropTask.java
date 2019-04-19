@@ -47,51 +47,67 @@ public class NoteDropTask<Void> extends Task<Void> {
 		System.out.println(y);
 		if( y >= 1005) {
 			System.out.println("Late");
+			Game.noteList.remove(note);
 			note.close();
 		}else if( y >= 945) {
 			System.out.println("Good");
+			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=885) {
 			System.out.println("Great");
+			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=825) {
 			System.out.println("Perfect");
+			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=765) {
 			System.out.println("Great");
+			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=705) {
 			System.out.println("Good");
+			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=645) {
 			System.out.println("Early");
+			Game.noteList.remove(note);
 			note.close();
 		}
 	}
 	
 	public void soundJudge() {
 		if( y >= 1035) {
-			System.out.println("Late");
+			System.out.println("sound Late");
+			Game.noteList.remove(note);
 			note.close();
 		}else if( y >= 965) {
-			System.out.println("Good");
+			System.out.println("sound Good");
+			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=895) {
-			System.out.println("Great");
+			System.out.println("sound Great");
+			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=815) {
-			System.out.println("Perfect");
+			System.out.println("sound Perfect");
+			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=755) {
-			System.out.println("Great");
+			System.out.println("sound Great");
+			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=675) {
-			System.out.println("Good");
+			System.out.println("sound Good");
+			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=615) {
-			System.out.println("Early");
+			System.out.println("sound Early");
+			Game.noteList.remove(note);
 			note.close();
 		}
+		
+
 	}
 
 }

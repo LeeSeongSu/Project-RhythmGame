@@ -123,7 +123,7 @@ public class VoiceKeyListener extends Task<Void> {
 			if (note.getX() == 3) {
 				try {
 					note.getTask().soundJudge();
-					Game.noteList.remove(note);
+					System.out.println("sound judge");
 					break;
 				} catch (Exception e) {
 					// TODO: handle exception
