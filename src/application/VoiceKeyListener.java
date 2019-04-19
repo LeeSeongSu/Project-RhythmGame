@@ -25,7 +25,7 @@ public class VoiceKeyListener extends Task<Void> {
 
 	ImageView effectImgView;
 	AnchorPane pane;
-
+	static boolean lock = false;
 	private static AudioFormat getAudioFormat() {
 		float sampleRate = 8000.0F; // The number of samples that will be acquired
 		// 8000,11025,16000,22050,44100 each second for each channel of audio data.
@@ -92,13 +92,15 @@ public class VoiceKeyListener extends Task<Void> {
 					// calculates the number of frequency and
 					// stores to the voiceFreq variable
 					if (voiceFreq >= 5&& voiceFreq <= 50) {
-						if (!pane.getChildren().contains(ImageStorage.effectImgView[3])) {
+						if (!lock&&!pane.getChildren().contains(ImageStorage.effectImgView[3])) {
+							lock=true;
 							Platform.runLater(() -> pane.getChildren().add(ImageStorage.effectImgView[3]));
 						}
 						judge();
 					} else {
-						if (pane.getChildren().contains(ImageStorage.effectImgView[3])) {
+						if (lock&&pane.getChildren().contains(ImageStorage.effectImgView[3])) {
 							Platform.runLater(() -> pane.getChildren().remove(ImageStorage.effectImgView[3]));
+							lock=false;
 						}
 					}
 				} catch (Exception e) {
