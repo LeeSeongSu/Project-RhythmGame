@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
  * @author 양태일
  *	게임화면에서의 노트를 음악에 맞게 떨어트리는 클래스
  */
+
 public class Game extends Thread {
 	
 	Scene sc;

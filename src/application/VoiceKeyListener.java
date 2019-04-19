@@ -9,6 +9,8 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.TargetDataLine;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.image.ImageView;
@@ -46,7 +48,7 @@ public class VoiceKeyListener extends Task<Void> {
 	}
 
 	@Override
-	protected Void call() throws Exception {
+	 protected Void call() throws Exception {
 		TargetDataLine line;
 		AudioFormat audioFormat = getAudioFormat();
 		boolean stopped = false;
@@ -90,7 +92,7 @@ public class VoiceKeyListener extends Task<Void> {
 					}
 					voiceFreq = countzero;
 					// calculates the number of frequency and
-					// stores to the voiceFreq variable
+					// stores to the voiceFreq variable	
 					if (voiceFreq >= 5&& voiceFreq <= 50) {
 						if (!pane.getChildren().contains(ImageStorage.effectImgView[3])) {
 							Platform.runLater(() -> pane.getChildren().add(ImageStorage.effectImgView[3]));
@@ -101,6 +103,7 @@ public class VoiceKeyListener extends Task<Void> {
 							Platform.runLater(() -> pane.getChildren().remove(ImageStorage.effectImgView[3]));
 						}
 					}
+				
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
