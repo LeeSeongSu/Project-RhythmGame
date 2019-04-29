@@ -22,6 +22,21 @@ public class Game extends Thread {
 	Image image;
 	VoiceKeyListener voice;
 	Boolean isVoiceMode;
+	public static int combo=0;
+	public static int score=0;
+	
+	public static synchronized void addScore(int addScore) {
+		score = score+addScore+combo*10;
+	}
+	
+	public static synchronized void addCombo() {
+		combo++;
+	}
+	
+	public static synchronized void resetCombo() {
+		combo=0;
+	}
+	
 	static ArrayList<Note> noteList = new ArrayList<>();
 	
 	public Game(String title, AnchorPane pane, Scene sc) {

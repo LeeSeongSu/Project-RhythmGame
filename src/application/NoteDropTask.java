@@ -38,75 +38,136 @@ public class NoteDropTask<Void> extends Task<Void> {
 	public void drop() {
 		y += Main.NOTE_SPEED;
 		if(y>1100) {
-			System.out.println("Miss");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.missImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.missImage);
+			}
+			Game.resetCombo();
 			note.close();
 		}
 	}
 	
 	public void judge() {
-		System.out.println(y);
 		if( y >= 1005) {
-			System.out.println("Late");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.badImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.badImage);
+			}
+			Game.resetCombo();
+			Game.addScore(70);
 			Game.noteList.remove(note);
 			note.close();
 		}else if( y >= 945) {
-			System.out.println("Good");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.goodImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.goodImage);
+			}
+			Game.addCombo();
+			Game.addScore(80);
 			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=885) {
-			System.out.println("Great");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.greatImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.greatImage);
+			}
+			Game.addCombo();
+			Game.addScore(90);
 			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=825) {
-			System.out.println("Perfect");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.perfectImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.perfectImage);
+			}
+			Game.addCombo();
+			Game.addScore(100);
 			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=765) {
-			System.out.println("Great");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.greatImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.greatImage);
+			}
+			Game.addCombo();
+			Game.addScore(90);
 			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=705) {
-			System.out.println("Good");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.goodImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.goodImage);
+			}
+			Game.addCombo();
+			Game.addScore(80);
 			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=645) {
-			System.out.println("Early");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.badImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.badImage);
+			}
+			Game.resetCombo();
+			Game.addScore(70);
 			Game.noteList.remove(note);
 			note.close();
 		}
+		System.out.println("combo = " +Game.combo);
+		System.out.println("score = " +Game.score);
 	}
 	
 	public void soundJudge() {
 		if( y >= 1035) {
-			System.out.println("sound Late");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.badImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.badImage);
+			}
+			Game.resetCombo();
+			Game.addScore(70);
 			Game.noteList.remove(note);
 			note.close();
 		}else if( y >= 965) {
-			System.out.println("sound Good");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.goodImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.goodImage);
+			}
+			Game.addCombo();
+			Game.addScore(80);
 			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=895) {
-			System.out.println("sound Great");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.greatImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.greatImage);
+			}
+			Game.addCombo();
+			Game.addScore(90);
 			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=815) {
-			System.out.println("sound Perfect");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.perfectImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.perfectImage);
+			}
+			Game.addCombo();
+			Game.addScore(100);
 			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=755) {
-			System.out.println("sound Great");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.greatImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.greatImage);
+			}
+			Game.addCombo();
+			Game.addScore(90);
 			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=675) {
-			System.out.println("sound Good");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.goodImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.goodImage);
+			}
+			Game.addCombo();
+			Game.addScore(80);
 			Game.noteList.remove(note);
 			note.close();
 		}else if( y>=615) {
-			System.out.println("sound Early");
+			if(ImageStorage.judgeImgView.getImage()==null||!ImageStorage.judgeImgView.getImage().equals(ImageStorage.badImage)) {
+				ImageStorage.judgeImgView.setImage(ImageStorage.badImage);
+			}
+			Game.resetCombo();
+			Game.addScore(70);
 			Game.noteList.remove(note);
 			note.close();
 		}
-		
+		System.out.println("combo = " +Game.combo);
+		System.out.println("score = " +Game.score);
 
 	}
 
