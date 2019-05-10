@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 /**
  * @author 양태일
@@ -44,6 +45,35 @@ public class Game extends Thread {
 		this.title = title;
 		this.sc = sc;
 		DOSApplicationController.introMusic.close();
+		
+		Text text1 = new Text();
+		text1.setX(285);
+		text1.setY(29);
+		text1.setLayoutX(150);
+		text1.setLayoutY(300);
+		pane.getChildren().add(text1);
+		
+		Text text2 = new Text();
+		text2.setX(285);
+		text2.setY(29);
+		text2.setLayoutX(150);
+		text2.setLayoutY(335);
+		pane.getChildren().add(text2);
+		
+		Text text3 = new Text();
+		text3.setX(285);
+		text3.setY(29);
+		text3.setLayoutX(150);
+		text3.setLayoutY(370);
+		pane.getChildren().add(text3);
+		
+		Text text4 = new Text();
+		text4.setX(285);
+		text4.setY(29);
+		text4.setLayoutX(150);
+		text4.setLayoutY(405);
+		pane.getChildren().add(text4);
+		
 		sc.setOnKeyPressed(new KeyListener(pane, noteList));
 		sc.setOnKeyReleased(new NoteEffectKeyListener(pane));
 		voice=new VoiceKeyListener(pane);
