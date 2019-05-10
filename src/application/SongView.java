@@ -38,12 +38,10 @@ public class SongView {
 		Background = new ImageView(backGroundImage);
 		pane.getChildren().add(Background);// 로비 배경
 
-		
 		Text text = new Text("BLANK");
 
 		text.setFill(Color.WHITE);
 		text.setFont(Font.font("210 OmniGothic 020", 70));
-		
 
 		pane.getChildren().add(text);
 		text.setX(830);
@@ -304,22 +302,15 @@ public class SongView {
 		Stage stage = (Stage) circleList[0].getScene().getWindow();
 
 		try {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
-
+			AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
+			Menubar menubar = new Menubar(pane);
+			MultiScreenView multiscreenview = new MultiScreenView(pane);
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(pane);
 			stage.setScene(sc);
-			Game game = new Game("bensound-happyrock.mp3", pane, sc);
+
 			stage.show();
-			Task<Void> task = new Task<Void>() {
-				public Void call() throws Exception {
-					game.run();
-					return null;
-				}
-			};
-			Thread t = new Thread(task);
-			t.setDaemon(true);
-			t.run();
+
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -331,8 +322,9 @@ public class SongView {
 		Stage stage = (Stage) circleList[1].getScene().getWindow();
 
 		try {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
-
+			AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
+			Menubar menubar = new Menubar(pane);
+			MultiScreenView multiscreenview = new MultiScreenView(pane);
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(pane);
 			stage.setScene(sc);
@@ -358,7 +350,9 @@ public class SongView {
 		Stage stage = (Stage) circleList[2].getScene().getWindow();
 
 		try {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+			AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
+			Menubar menubar = new Menubar(pane);
+			MultiScreenView multiscreenview = new MultiScreenView(pane);
 
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(pane);
@@ -385,8 +379,9 @@ public class SongView {
 		Stage stage = (Stage) circleList[3].getScene().getWindow();
 
 		try {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
-
+			AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
+			Menubar menubar = new Menubar(pane);
+			MultiScreenView multiscreenview = new MultiScreenView(pane);
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(pane);
 			stage.setScene(sc);
@@ -412,7 +407,9 @@ public class SongView {
 		Stage stage = (Stage) circleList[4].getScene().getWindow();
 
 		try {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+			AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
+			Menubar menubar = new Menubar(pane);
+			MultiScreenView multiscreenview = new MultiScreenView(pane);
 
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(pane);
