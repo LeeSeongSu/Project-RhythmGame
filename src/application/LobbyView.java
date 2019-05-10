@@ -13,6 +13,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class LobbyView {
@@ -22,6 +23,8 @@ public class LobbyView {
 	private BackgroundImage multiBtnBgImg, multiBtnBgEffectImg, singleBtnBgImg, singleBtnBgEffectImg, onBtnBgImg,
 			onBtnBgEffectImg, offBtnBgImg, offBtnBgEffectImg, startBtnBgImg, startEffectBtnBgEffectImg;
 	private Button multiBtn, singleBtn, onBtn, offBtn;
+	
+	public static String mod="Single";
 
 	public LobbyView(AnchorPane pane) {
 
@@ -71,7 +74,7 @@ public class LobbyView {
 		start.setOnMouseExited(e -> startBtnExit());
 		start.setOnMouseClicked(e -> songViewPage());
 		pane.getChildren().add(start);// 스타트 사진
-
+		
 		multiBtn = new Button();
 		multiBtn.setPrefSize(164, 92);
 		multiBtn.setBackground(new Background(multiBtnBgImg));
@@ -114,6 +117,7 @@ public class LobbyView {
 			return;
 		multiBtn.setBackground(new Background(multiBtnBgEffectImg));
 		singleBtn.setBackground(new Background(singleBtnBgImg));
+		mod="Multi";
 	}
 
 	private void singleBtnClick() {// 싱글버튼
@@ -123,6 +127,7 @@ public class LobbyView {
 			return;
 		multiBtn.setBackground(new Background(multiBtnBgImg));
 		singleBtn.setBackground(new Background(singleBtnBgEffectImg));
+		mod="Single";
 	}
 
 	private void onBtnClick() {// on
@@ -152,33 +157,6 @@ public class LobbyView {
 
 		start.setImage(new ImageParser("Lobby_startEffect.png").getImage());
 
-	}
-
-	private void startBtnClick() {
-		Stage stage = (Stage) start.getScene().getWindow();
-
-		try {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
-
-			// 씬에 레이아웃 추가
-			Scene sc = new Scene(pane);
-			stage.setScene(sc);
-			Game game = new Game("bensound-happyrock.mp3", pane, sc);
-			stage.show();
-			Task<Void> task = new Task<Void>() {
-				public Void call() throws Exception {
-					game.run();
-					return null;
-				}
-			};
-			Thread t = new Thread(task);
-			t.setDaemon(true);
-			t.run();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
-		}
 	}
 
 	public void songViewPage() {

@@ -27,9 +27,11 @@ public class SongView {
 	private ImageView left;
 	private Circle[] circleList;
 	private ArrayList<Image> albumImgList;
+	public static ArrayList<String> musicList;
 	private int selectCircleIndex = 1;
 	private ImageView selectCircle;
 	private boolean twinkleStop = false;
+	private String st[];
 
 	public SongView(AnchorPane pane) {
 		this.pane = pane;
@@ -55,12 +57,19 @@ public class SongView {
 		albumImgList.add(new ImageParser("SKY HIGH.jpg").getImage());
 
 		circleList = new Circle[5];
-		String st[] = new String[5];
+		st = new String[5];
 		st[0] = "HAPPY ROCK";
 		st[1] = "BLANK";
 		st[2] = "INVINCIBLE";
 		st[3] = "NEKOZILLA";
 		st[4] = "SKY HIGH";
+		
+		musicList = new ArrayList<String>();
+		musicList.add("bensound-happyrock.mp3");
+		musicList.add("Disfigure - Blank.mp3");
+		musicList.add("Invincible - Deaf Kev.mp3");
+		musicList.add("Different Heaven - Nekozilla.mp3");
+		musicList.add("Elektronomia - Sky High.mp3");
 
 		HashMap s = new HashMap<Integer, String>();
 
@@ -74,23 +83,23 @@ public class SongView {
 
 		circleList[0].setCenterX(1250);
 		circleList[0].setCenterY(450);
-		circleList[0].setOnMouseClicked(e -> startBtnClick0());
+		circleList[0].setOnMouseClicked(e -> startBtnClick(0));
 
 		circleList[1].setCenterX(950);
 		circleList[1].setCenterY(600);
-		circleList[1].setOnMouseClicked(e -> startBtnClick1());
+		circleList[1].setOnMouseClicked(e -> startBtnClick(1));
 
 		circleList[2].setCenterX(650);
 		circleList[2].setCenterY(450);
-		circleList[2].setOnMouseClicked(e -> startBtnClick2());
+		circleList[2].setOnMouseClicked(e -> startBtnClick(2));
 
 		circleList[3].setCenterX(950);
 		circleList[3].setCenterY(-800);
-		circleList[3].setOnMouseClicked(e -> startBtnClick3());
+		circleList[3].setOnMouseClicked(e -> startBtnClick(3));
 
 		circleList[4].setCenterX(950);
 		circleList[4].setCenterY(-800);
-		circleList[4].setOnMouseClicked(e -> startBtnClick4());
+		circleList[4].setOnMouseClicked(e -> startBtnClick(4));
 
 		circleList[1].toFront();
 
@@ -298,47 +307,38 @@ public class SongView {
 		selectCircle.toFront();
 	}
 
-	private void startBtnClick0() {
-		Stage stage = (Stage) circleList[0].getScene().getWindow();
+	private void startBtnClick(int i) {
+		Stage stage = (Stage) circleList[i].getScene().getWindow();
 
 		try {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
-			Menubar menubar = new Menubar(pane);
-			MultiScreenView multiscreenview = new MultiScreenView(pane);
-			// 씬에 레이아웃 추가
-			Scene sc = new Scene(pane);
-			stage.setScene(sc);
-
-			stage.show();
-
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
-		}
-	}
-
-	private void startBtnClick1() {
-		Stage stage = (Stage) circleList[1].getScene().getWindow();
-
-		try {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
-			Menubar menubar = new Menubar(pane);
-			MultiScreenView multiscreenview = new MultiScreenView(pane);
-			// 씬에 레이아웃 추가
-			Scene sc = new Scene(pane);
-			stage.setScene(sc);
-			Game game = new Game("Disfigure - Blank.mp3", pane, sc);
-			stage.show();
-			Task<Void> task = new Task<Void>() {
-				public Void call() throws Exception {
-					game.run();
-					return null;
+			if(LobbyView.mod=="Single") {
+				AnchorPane pane = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+				Menubar menubar = new Menubar(pane);
+				// 씬에 레이아웃 추가
+				Scene sc = new Scene(pane);
+				stage.setScene(sc);
+				Game game = new Game(musicList.get(i), pane, sc);
+				stage.show();
+				Task<Void> task = new Task<Void>() {
+					public Void call() throws Exception {
+						game.run();
+						return null;
+					}
+				};
+				Thread t = new Thread(task);
+				t.setDaemon(true);
+				t.run();
 				}
-			};
-			Thread t = new Thread(task);
-			t.setDaemon(true);
-			t.run();
+			else {
+				AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
+				Menubar menubar = new Menubar(pane);
+				MultiScreenView multiscreenview = new MultiScreenView(pane,i);
+				// 씬에 레이아웃 추가
+				Scene sc = new Scene(pane);
+				stage.setScene(sc);
+
+				stage.show();
+			}
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -346,90 +346,5 @@ public class SongView {
 		}
 	}
 
-	private void startBtnClick2() {
-		Stage stage = (Stage) circleList[2].getScene().getWindow();
-
-		try {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
-			Menubar menubar = new Menubar(pane);
-			MultiScreenView multiscreenview = new MultiScreenView(pane);
-
-			// 씬에 레이아웃 추가
-			Scene sc = new Scene(pane);
-			stage.setScene(sc);
-			Game game = new Game("Invincible - Deaf Kev.mp3", pane, sc);
-			stage.show();
-			Task<Void> task = new Task<Void>() {
-				public Void call() throws Exception {
-					game.run();
-					return null;
-				}
-			};
-			Thread t = new Thread(task);
-			t.setDaemon(true);
-			t.run();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
-		}
-	}
-
-	private void startBtnClick3() {
-		Stage stage = (Stage) circleList[3].getScene().getWindow();
-
-		try {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
-			Menubar menubar = new Menubar(pane);
-			MultiScreenView multiscreenview = new MultiScreenView(pane);
-			// 씬에 레이아웃 추가
-			Scene sc = new Scene(pane);
-			stage.setScene(sc);
-			Game game = new Game("Different Heaven - Nekozilla.mp3", pane, sc);
-			stage.show();
-			Task<Void> task = new Task<Void>() {
-				public Void call() throws Exception {
-					game.run();
-					return null;
-				}
-			};
-			Thread t = new Thread(task);
-			t.setDaemon(true);
-			t.run();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
-		}
-	}
-
-	private void startBtnClick4() {
-		Stage stage = (Stage) circleList[4].getScene().getWindow();
-
-		try {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
-			Menubar menubar = new Menubar(pane);
-			MultiScreenView multiscreenview = new MultiScreenView(pane);
-
-			// 씬에 레이아웃 추가
-			Scene sc = new Scene(pane);
-			stage.setScene(sc);
-			Game game = new Game("Elektronomia - Sky High.mp3", pane, sc);
-			stage.show();
-			Task<Void> task = new Task<Void>() {
-				public Void call() throws Exception {
-					game.run();
-					return null;
-				}
-			};
-			Thread t = new Thread(task);
-			t.setDaemon(true);
-			t.run();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
-		}
-	}
 
 }
