@@ -273,12 +273,7 @@ public class MakeGameTask extends Task<Void>{
 				new Beat(70450, 4),	
 				new Beat(70450, 5),	
 				new Beat(70450, 6),	
-				
-				
-				
-				
-				
-				
+						
 		};
 		Platform.runLater(()-> pane.getChildren().add(ImageStorage.judgeImgView));
 		Note[] notes = new Note[beats.length];
