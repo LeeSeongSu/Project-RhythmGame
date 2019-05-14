@@ -15,7 +15,7 @@ public class ImageStorage {
 			new ImageView(effectImage),new ImageView(effectImage),new ImageView(effectImage),
 			new ImageView(effectImage),new ImageView(effectImage),new ImageView(effectImage)};
 	public ImageStorage() {
-		judgeImgView.setLayoutX(695);
+		judgeImgView.setLayoutX(755);
 		judgeImgView.setLayoutY(645);
 		for(int i=0;i<effectImgView.length;i++) {
 			effectImgView[i].setLayoutX(500+i*115);
