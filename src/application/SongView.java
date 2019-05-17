@@ -27,11 +27,10 @@ public class SongView {
 	private ImageView left;
 	private Circle[] circleList;
 	private ArrayList<Image> albumImgList;
-	public static ArrayList<String> musicList;
+	public static ArrayList<String> mp3List;
 	private int selectCircleIndex = 1;
 	private ImageView selectCircle;
-	private boolean twinkleStop = false;
-	private String st[];
+	public static String[] musicList;
 
 	public SongView(AnchorPane pane) {
 		this.pane = pane;
@@ -57,25 +56,26 @@ public class SongView {
 		albumImgList.add(new ImageParser("SKY HIGH.jpg").getImage());
 
 		circleList = new Circle[5];
-		st = new String[5];
-		st[0] = "HAPPY ROCK";
-		st[1] = "BLANK";
-		st[2] = "INVINCIBLE";
-		st[3] = "NEKOZILLA";
-		st[4] = "SKY HIGH";
 		
-		musicList = new ArrayList<String>();
-		musicList.add("bensound-happyrock.mp3");
-		musicList.add("Disfigure - Blank.mp3");
-		musicList.add("Invincible - Deaf Kev.mp3");
-		musicList.add("Different Heaven - Nekozilla.mp3");
-		musicList.add("Elektronomia - Sky High.mp3");
+		musicList = new String[5];
+		musicList[0] = "HAPPY ROCK";
+		musicList[1] = "BLANK";
+		musicList[2] = "INVINCIBLE";
+		musicList[3] = "NEKOZILLA";
+		musicList[4] = "SKY HIGH";
+		
+		mp3List = new ArrayList<String>();
+		mp3List.add("bensound-happyrock.mp3");
+		mp3List.add("Disfigure - Blank.mp3");
+		mp3List.add("Invincible - Deaf Kev.mp3");
+		mp3List.add("Different Heaven - Nekozilla.mp3");
+		mp3List.add("Elektronomia - Sky High.mp3");
 
-		HashMap s = new HashMap<Integer, String>();
+		HashMap<Integer, String> s = new HashMap<Integer, String>();
 
 		for (int i = 0; i < circleList.length; i++) {
 			circleList[i] = new Circle();
-			s.put(i, st[i]);
+			s.put(i,musicList[i]);
 			circleList[i].setRadius(250);
 			circleList[i].setFill(new ImagePattern(albumImgList.get(i)));
 			pane.getChildren().add(circleList[i]);
@@ -317,7 +317,7 @@ public class SongView {
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
 				stage.setScene(sc);
-				Game game = new Game(musicList.get(i), pane, sc);
+				Game game = new Game(mp3List.get(i), pane, sc);
 				stage.show();
 				Task<Void> task = new Task<Void>() {
 					public Void call() throws Exception {
@@ -330,9 +330,10 @@ public class SongView {
 				t.run();
 				}
 			else {
+				MultiThreadClient.joinRoom(i);
 				AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
 				Menubar menubar = new Menubar(pane);
-				MultiScreenView multiscreenview = new MultiScreenView(pane,i);
+				MultiScreenView multiscreenview = new MultiScreenView(pane);
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
 				stage.setScene(sc);
