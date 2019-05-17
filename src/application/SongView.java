@@ -312,7 +312,7 @@ public class SongView {
 
 		try {
 			if(LobbyView.mod=="Single") {
-				AnchorPane pane = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("GameScreen.fxml"));
 				Menubar menubar = new Menubar(pane);
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
@@ -330,7 +330,7 @@ public class SongView {
 				t.run();
 				}
 			else {
-				AnchorPane pane = FXMLLoader.load(getClass().getResource("MultiScreen.fxml"));
+				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("MultiScreen.fxml"));
 				Menubar menubar = new Menubar(pane);
 				MultiScreenView multiscreenview = new MultiScreenView(pane,i);
 				// 씬에 레이아웃 추가
@@ -339,7 +339,7 @@ public class SongView {
 
 				stage.show();
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 
 			e.printStackTrace();
 

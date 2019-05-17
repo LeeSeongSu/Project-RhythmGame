@@ -30,7 +30,7 @@ public class MultiScreenView {
 		Stage stage = (Stage) startBtn.getScene().getWindow();
 
 		try {
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+			AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("GameScreen.fxml"));
 
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(pane);
@@ -46,7 +46,7 @@ public class MultiScreenView {
 			Thread t = new Thread(task);
 			t.setDaemon(true);
 			t.run();
-		} catch (IOException e) {
+		} catch (Exception e) {
 
 			e.printStackTrace();
 

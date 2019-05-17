@@ -167,7 +167,7 @@ public class LobbyView {
 
 		try {
 
-			AnchorPane second = FXMLLoader.load(getClass().getResource("SelectScreen.fxml"));
+			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SelectScreen.fxml"));
 
 			SongView songview = new SongView(second);
 			Menubar menubar = new Menubar(second);
@@ -178,7 +178,7 @@ public class LobbyView {
 
 			stage.show();
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 
 			e.printStackTrace();
 

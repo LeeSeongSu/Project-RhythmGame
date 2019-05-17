@@ -74,7 +74,7 @@
             <Image url="@../images/Login_pw_text.png" />
           </image>
         </ImageView>
-        <PasswordField fx:id="txt2111" layoutX="876.0" layoutY="665.0" prefHeight="63.0" prefWidth="376.0" style="-fx-text-inner-color: white;" />
+        <PasswordField fx:id="passwordTextField" layoutX="876.0" layoutY="665.0" prefHeight="63.0" prefWidth="376.0" style="-fx-text-inner-color: white;" />
       </children>
     </Group>
   </children>

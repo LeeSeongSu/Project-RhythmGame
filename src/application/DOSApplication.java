@@ -15,11 +15,10 @@ public class DOSApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-			Font f = Font.loadFont(getClass().getResourceAsStream("/images/210 옴니고딕020.ttf"), 50);
-
+			Parent root = FXMLLoader.load(DOSApplication.class.getResource("MainScreen.fxml"));
+			Font f = Font.loadFont(Class.forName("application.Main").getResourceAsStream("/images/210 옴니고딕020.ttf"), 50);
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(DOSApplication.class.getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {

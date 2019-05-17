@@ -2,6 +2,8 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -41,6 +43,8 @@ public class DOSApplicationController extends Thread implements Initializable {
 	private Group loginscreen;// 로그인 화면
 	@FXML
 	private TextField idTextField;
+	@FXML
+	private TextField passwordTextField;
 
 	private boolean twinkleStop = false;
 	
@@ -58,7 +62,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		loginBtn.setOnAction(e -> movePage());
+		loginBtn.setOnAction(e -> login());
 		loginscreen.setVisible(false);// 로그인창 숨김
 		changeOpacity(mainStartImageView);
 		mainStartImageView.setOnMouseClicked(e -> pressAnyKey());
@@ -119,7 +123,36 @@ public class DOSApplicationController extends Thread implements Initializable {
 		thread.setDaemon(true);
 		thread.start();
 	}
-
+	
+	public void login() {
+		String email = idTextField.getText();
+		String password = passwordTextField.getText();
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("password", password);
+		HttpConnector hc = new HttpConnector("login", map);
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				try{
+					Map<String, String> result = hc.request();
+					LoginSession.email=result.get("email");
+					LoginSession.token=result.get("token");
+					LoginSession.nickname=result.get("nickname");
+					System.out.println(LoginSession.nickname);
+					Platform.runLater(()->movePage());
+				}catch (Exception e) {
+					System.out.println("login Fail");
+				}
+				return null;
+			}
+		};
+		Thread thread = new Thread(task);
+		thread.setDaemon(true);
+		thread.start();
+	}
+	
 	/**
 	 * @author 재원,성수 페어(페이지 전환)
 	 */
@@ -131,9 +164,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 
 		try {
 
-			AnchorPane second = FXMLLoader.load(getClass().getResource("SelectScreen.fxml"));
-			
-		
+			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SelectScreen.fxml"));
 			LobbyView lobbyView = new LobbyView(second);
 			Menubar menubar = new Menubar(second);
 			// 씬에 레이아웃 추가
@@ -143,7 +174,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 
 			stage.show();
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 
 			e.printStackTrace();
 

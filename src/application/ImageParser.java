@@ -11,19 +11,12 @@ import javafx.scene.image.Image;
  */
 public class ImageParser {
 	private String name;
-	private File file;
-	private FileInputStream fis;
 	
 	public ImageParser(String name) {
-		try {
-			file = new File(Main.class.getResource("../images/"+name).toURI());
-			fis = new FileInputStream(file);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
+		this.name = name;
 	}
 	
 	public Image getImage() {
-		return new Image(fis);
+		return new Image(ImageParser.class.getResourceAsStream("../images/"+name));
 	}
 }
