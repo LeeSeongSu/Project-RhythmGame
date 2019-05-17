@@ -20,48 +20,10 @@
          <children>
             <VBox prefHeight="643.0" prefWidth="302.0">
                <children>
-                  <VBox prefHeight="643.0" prefWidth="337.0" style="-fx-border-color: White;">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="343.0" prefWidth="371.0" style="-fx-background-color: #292a2b;" text="ONLINE" textFill="#478be4">
-                           <effect>
-                              <Glow level="0.76" />
-                           </effect>
-                           <font>
-                              <Font size="53.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </VBox>
+                  <VBox prefHeight="643.0" prefWidth="337.0" style="-fx-border-color: White;" />
                </children>
             </VBox>
-            <HBox prefHeight="643.0" prefWidth="974.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="236.0" prefWidth="347.0" style="-fx-background-color: #292a2b;" text="ONLINE" textFill="#478be4">
-                     <effect>
-                        <Glow level="0.76" />
-                     </effect>
-                     <font>
-                        <Font size="53.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="236.0" prefWidth="347.0" style="-fx-background-color: #292a2b;" text="ONLINE" textFill="#478be4">
-                     <effect>
-                        <Glow level="0.76" />
-                     </effect>
-                     <font>
-                        <Font size="53.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="236.0" prefWidth="347.0" style="-fx-background-color: #292a2b;" text="ONLINE" textFill="#478be4">
-                     <effect>
-                        <Glow level="0.76" />
-                     </effect>
-                     <font>
-                        <Font size="53.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
+            <HBox prefHeight="643.0" prefWidth="974.0" />
          </children>
       </HBox>
    </children>

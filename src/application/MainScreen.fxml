@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.DOSApplicationController">
   <children>
@@ -37,7 +38,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button layoutX="682.0" layoutY="790.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="353.0" style="-fx-background-color: TRANSPARENT;">
+        <Button fx:id="SignUpBtn" layoutX="682.0" layoutY="790.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="353.0" style="-fx-background-color: TRANSPARENT;">
           <font>
             <Font size="31.0" fx:id="x1" />
           </font>
@@ -65,7 +66,7 @@
                 <Image url="@../images/Login_id_text.png" />
               </image>
             </ImageView>
-            <TextField fx:id="idTextField" layoutX="14.0" layoutY="16.0" prefHeight="63.0" prefWidth="376.0" style="-fx-text-inner-color: white;" />
+            <TextField fx:id="idTextField" layoutX="14.0" layoutY="16.0" prefHeight="63.0" prefWidth="376.0" style="-fx-text-inner-color: white;  -fx-background-color: TRANSPARENT; " />
           </children>
         </Group>
         <Group id="Group" layoutX="367.0" layoutY="292.0" />
