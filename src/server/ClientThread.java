@@ -30,6 +30,7 @@ public class ClientThread extends Thread {
 	private ArrayList<RoomMember> room;
 	private String clientID;
 	private int threadNum;
+	private boolean stop = false;
 	
 	public ClientThread(Socket clientSocket, ClientThread[] threads) {
 		this.clientSocket = clientSocket;
@@ -52,12 +53,13 @@ public class ClientThread extends Thread {
 			for (int i = 0; i < maxClientsCount; i++) {
 				if (threads[i] == this) {
 					threads[i].os.println(i);
+					threads[i].setName("thread "+i);
 					threadNum=i;
 					break;
 				}
 			}
 			
-			while(true) {
+			while(!stop) {
 				String line = is.readLine();
 				
 				if(line.startsWith("@joinRoom")) { // 방 정보
@@ -137,6 +139,29 @@ public class ClientThread extends Thread {
 						}
 					}
 					
+				}
+				else if(line.startsWith("@roomExit")){
+					if(room!=null) {
+						for(int i=0; i<room.size(); i++) {
+							if(room.get(i).getThreadNum()==threadNum) {
+								room.remove(i);
+							}
+						}
+						
+						for(int i=0; i<room.size(); i++) { 
+							obj=room.get(i);
+							num=obj.getThreadNum();
+							threads[num].os.println("@roomReset");
+							for(int j=0; j<room.size(); j++) { 
+								threads[num].os.println("@room "+threads[room.get(j).getThreadNum()].getClientID());
+								threads[num].os.println("@ready "+room.get(j).getReady());
+							}
+						}
+					}
+					System.out.println("Exit");
+				}
+				else if(line.startsWith("@exit")) {
+					stop=true;
 				}
 				else {
 					for (int i = 0; i < maxClientsCount; i++) {

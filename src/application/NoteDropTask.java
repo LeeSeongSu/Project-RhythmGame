@@ -42,6 +42,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 				ImageStorage.judgeImgView.setImage(ImageStorage.missImage);
 			}
 			Game.resetCombo();
+			Game.noteList.remove(note);
 			note.close();
 		}
 	}

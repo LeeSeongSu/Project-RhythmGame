@@ -66,6 +66,10 @@ public class MultiScreenView {
                 			}
                 			exButton.setText(text);
                 		}
+                		
+                		for(int i= room.size(); i<buttons.size();i++) {
+                			buttons.get(i).setText("");
+                		}
                     });
                     try { Thread.sleep(100); } catch (InterruptedException e) {}
                 }

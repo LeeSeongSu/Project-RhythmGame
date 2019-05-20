@@ -37,6 +37,7 @@ public class MultiThreadClient implements Runnable {
 	public static void main(String[] args) {
 
 		int portNumber = 9999;
+//		String host = "192.168.0.45";
 		String host = "localhost";
 
 		if (args.length < 2) {
@@ -135,6 +136,13 @@ public class MultiThreadClient implements Runnable {
 	
 	public static void sendScore(int value) {
 		os.println("@score "+value);
+	}
+	
+	public static void roomExit() {
+		os.println("@roomExit");
+	}
+	public static void exit() {
+		os.println("@exit");
 	}
 
 	public static ArrayList<String> getRoom(){
