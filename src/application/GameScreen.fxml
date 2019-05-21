@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -9,8 +11,9 @@
    <children>
     <ImageView id="Game_bg" layoutX="0" layoutY="0">
       <image>
-        <Image url="@../images/Game_bg.png" preserveRatio="true" smooth="true" />
+        <Image preserveRatio="true" smooth="true" url="@../images/Game_bg.png" />
       </image>
     </ImageView>
+      
    </children>
 </AnchorPane>

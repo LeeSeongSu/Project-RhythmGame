@@ -23,7 +23,7 @@ public class MultiThreadServer {
 	private static int maxClientsCount = 10;
 	private static ClientThread[] threads = new ClientThread[maxClientsCount];
 	
-	private static HashMap<String, ArrayList<ArrayList<RoomMember>>> roomSearchHash = new HashMap<String, ArrayList<ArrayList<RoomMember>>>();
+	private static HashMap<String, ArrayList<Room>> roomSearchHash = new HashMap<String, ArrayList<Room>>();
 	
 	private static String[] musicList;
 
@@ -37,7 +37,7 @@ public class MultiThreadServer {
 		musicList[4] = "SKY HIGH";
 		
 		for(int i=0; i<musicList.length;i++) {
-			roomSearchHash.put(musicList[i], new ArrayList<ArrayList<RoomMember>> ());
+			roomSearchHash.put(musicList[i], new ArrayList<Room> ());
 		}
 
 		int portNumber = 9999;
@@ -79,7 +79,7 @@ public class MultiThreadServer {
 		}
 	}
 	
-	public static ArrayList<ArrayList<RoomMember>> searchRoomList(int musicIndex){ // clientThread에게 해당 곡의 방 리스트를 보내주기 위한 메소드
+	public static ArrayList<Room> searchRoomList(int musicIndex){ // clientThread에게 해당 곡의 방 리스트를 보내주기 위한 메소드
 		return roomSearchHash.get(musicList[musicIndex]);
 	}
 }

@@ -111,6 +111,7 @@ public class MultiScreenView {
 			Scene sc = new Scene(pane);
 			stage.setScene(sc);
 			Game game = new Game(SongView.mp3List.get(musicIndex), pane, sc);
+			new ScoreBoard(pane);
 			stage.show();
 			Task<Void> task = new Task<Void>() {
 				public Void call() throws Exception {

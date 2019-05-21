@@ -24,16 +24,12 @@ public class Game extends Thread {
 	String title;
 	Image image;
 	VoiceKeyListener voice;
-	Boolean isVoiceMode, playing;
-	ArrayList<String> room;
-	ArrayList<String> scores;
-	
+	Boolean isVoiceMode;
 	public static int combo=0;
 	public static int score=0;
 	
 	static ArrayList<Note> noteList = new ArrayList<>();
 	
-	private ArrayList<Label> textList = new ArrayList<Label>();
 	
 	public static synchronized void addScore(int addScore) {
 		score = score+addScore+combo*10;
@@ -53,47 +49,6 @@ public class Game extends Thread {
 		this.title = title;
 		this.sc = sc;
 		DOSApplicationController.introMusic.close();
-		
-		room=MultiThreadClient.getRoom();
-		scores=MultiThreadClient.getScore();
-		
-		Label label;
-		
-		playing=true;
-		
-		for(int i=0; i<room.size(); i++) {
-			scores.add("0");
-			label = new Label(i+1+". "+room.get(i)+" "+scores.get(i));
-			label.setLayoutX(150);
-			label.setLayoutY(300+35*i);
-			label.setStyle("-fx-text-fill: white;");
-			pane.getChildren().add(label);
-			
-			textList.add(label);
-		}
-		
-		Thread thread = new Thread() { // fx UI를 변경하는 쓰레드에 접근하기 위해 만든 쓰레드
-            @Override
-            public void run() {
-            	
-                while (playing) {
-                    Platform.runLater(() -> {
-
-                    	room= MultiThreadClient.getRoom();
-                    	scores=MultiThreadClient.getScore();
-                		for(int i=0; i<room.size();i++) {
-                			textList.get(i).setText(i+1+". "+room.get(i)+" "+scores.get(i));;
-                	
-                		}
-                    });
-                    try { Thread.sleep(100); } catch (InterruptedException e) {}
-                }
-            }
-        };
-        thread.setName("gameScoreUpdate");
-        thread.setDaemon(true);
-        thread.start();
-		
 		
 		sc.setOnKeyPressed(new KeyListener(pane, noteList));
 		sc.setOnKeyReleased(new NoteEffectKeyListener(pane));

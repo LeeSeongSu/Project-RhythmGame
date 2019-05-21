@@ -25,9 +25,11 @@ public class ClientThread extends Thread {
 	private Socket clientSocket = null;
 	private final  ClientThread[] threads;
 	private int maxClientsCount;
+	private int maxRoomMember =4;
 	
-	private ArrayList<ArrayList<RoomMember>> roomList;
-	private ArrayList<RoomMember> room;
+	private ArrayList<Room> roomList;
+	private Room room;
+	private ArrayList<RoomMember> roomMembers;
 	private String clientID;
 	private int threadNum;
 	private boolean stop = false;
@@ -64,14 +66,14 @@ public class ClientThread extends Thread {
 				
 				if(line.startsWith("@joinRoom")) { // 방 정보
 					words=line.split(" ");
-					room=searchRoom(Integer.parseInt(words[1]));
-					for(int i=0; i<room.size(); i++) { // 방의 정보가 업데이트 될때 마다 해당방 클라이언트에게 신호를 보냄.
-						obj=room.get(i);
+					roomMembers=searchRoom(Integer.parseInt(words[1]));
+					for(int i=0; i<roomMembers.size(); i++) { // 방의 정보가 업데이트 될때 마다 해당방 클라이언트에게 신호를 보냄.
+						obj=roomMembers.get(i);
 						num=obj.getThreadNum();
 						threads[num].os.println("@roomReset");
-						for(int j=0; j<room.size(); j++) { 
-							threads[num].os.println("@room "+threads[room.get(j).getThreadNum()].getClientID());
-							threads[num].os.println("@ready "+room.get(j).getReady());
+						for(int j=0; j<roomMembers.size(); j++) { 
+							threads[num].os.println("@room "+threads[roomMembers.get(j).getThreadNum()].getClientID());
+							threads[num].os.println("@ready "+roomMembers.get(j).getReady());
 						}
 					}
 					
@@ -82,45 +84,47 @@ public class ClientThread extends Thread {
 				}
 				else if(line.startsWith("@ready")) {
 					
-					for(int i=0; i<room.size();i++) {
-						if(room.get(i).getThreadNum()==threadNum) {
+					for(int i=0; i<roomMembers.size();i++) {
+						if(roomMembers.get(i).getThreadNum()==threadNum) {
 							num=i;
 							break;
 						}
 					}
-					obj=room.get(num);
+					obj=roomMembers.get(num);
 					
 					if(obj.getReady()==1)
 						obj.setReady(0);
 					else
 						obj.setReady(1);
 					
-					for(int i=0; i<room.size(); i++) { // 방의 정보가 업데이트 될때 마다 해당방 클라이언트에게 신호를 보냄.
-						obj=room.get(i);
+					for(int i=0; i<roomMembers.size(); i++) { // 방의 정보가 업데이트 될때 마다 해당방 클라이언트에게 신호를 보냄.
+						obj=roomMembers.get(i);
 						num=obj.getThreadNum();
 						threads[num].os.println("@readyReset");
-						for(int j=0; j<room.size(); j++) { 
-							threads[num].os.println("@ready "+room.get(j).getReady());
+						for(int j=0; j<roomMembers.size(); j++) { 
+							threads[num].os.println("@ready "+roomMembers.get(j).getReady());
 						}
 					}
 				}
 				else if(line.startsWith("@start")) {
-					for(int i=0; i<room.size();i++) {
-						threads[room.get(i).getThreadNum()].os.println("@start");
+					for(int i=0; i<roomMembers.size();i++) {
+						threads[roomMembers.get(i).getThreadNum()].os.println("@start");
 					}
+					room.setStart(true);
+					
 				}
 				
 				else if(line.startsWith("@score")) {
 					words=line.split(" ");
 					
-					for(int i=0; i<room.size();i++) {
-						if(room.get(i).getThreadNum()==threadNum) {
-							room.get(i).setScore(Integer.parseInt(words[1]));
+					for(int i=0; i<roomMembers.size();i++) {
+						if(roomMembers.get(i).getThreadNum()==threadNum) {
+							roomMembers.get(i).setScore(Integer.parseInt(words[1]));
 							break;
 						}
 					}
 					
-					Collections.sort(room, new Comparator<RoomMember>() {
+					Collections.sort(roomMembers, new Comparator<RoomMember>() {
 
 						@Override
 						public int compare(RoomMember o1, RoomMember o2) {
@@ -130,31 +134,31 @@ public class ClientThread extends Thread {
 					});
 					
 					
-					for(int i=0; i<room.size(); i++) { 
-						obj=room.get(i);
+					for(int i=0; i<roomMembers.size(); i++) { 
+						obj=roomMembers.get(i);
 						num=obj.getThreadNum();
 						threads[num].os.println("@scoreReset");
-						for(int j=0; j<room.size(); j++) { 
-							threads[num].os.println("@score "+threads[room.get(j).getThreadNum()].getClientID()+" "+room.get(j).getScore());
+						for(int j=0; j<roomMembers.size(); j++) { 
+							threads[num].os.println("@score "+threads[roomMembers.get(j).getThreadNum()].getClientID()+" "+roomMembers.get(j).getScore());
 						}
 					}
 					
 				}
 				else if(line.startsWith("@roomExit")){
-					if(room!=null) {
-						for(int i=0; i<room.size(); i++) {
-							if(room.get(i).getThreadNum()==threadNum) {
-								room.remove(i);
+					if(roomMembers!=null) {
+						for(int i=0; i<roomMembers.size(); i++) {
+							if(roomMembers.get(i).getThreadNum()==threadNum) {
+								roomMembers.remove(i);
 							}
 						}
 						
-						for(int i=0; i<room.size(); i++) { 
-							obj=room.get(i);
+						for(int i=0; i<roomMembers.size(); i++) { 
+							obj=roomMembers.get(i);
 							num=obj.getThreadNum();
 							threads[num].os.println("@roomReset");
-							for(int j=0; j<room.size(); j++) { 
-								threads[num].os.println("@room "+threads[room.get(j).getThreadNum()].getClientID());
-								threads[num].os.println("@ready "+room.get(j).getReady());
+							for(int j=0; j<roomMembers.size(); j++) { 
+								threads[num].os.println("@room "+threads[roomMembers.get(j).getThreadNum()].getClientID());
+								threads[num].os.println("@ready "+roomMembers.get(j).getReady());
 							}
 						}
 					}
@@ -178,19 +182,22 @@ public class ClientThread extends Thread {
 	
 	public ArrayList<RoomMember> searchRoom(int musicIndex){  //서버에서 받아온 방 리스트에서 적절한 방을 고르는 메소드
 		roomList=MultiThreadServer.searchRoomList(musicIndex);
-
+		ArrayList<RoomMember> newRoomList;
 		for(int i=0; i<roomList.size();i++) {
-			if(roomList.get(i).size()!=4) {
-				roomList.get(i).add(new RoomMember (threadNum,0,0));
-				return roomList.get(i);
+			newRoomList=roomList.get(i).getRoomMembers();
+			if(!roomList.get(i).isStart()&&newRoomList.size()!=maxRoomMember) {
+				newRoomList.add(new RoomMember (threadNum,0,0));
+				room=roomList.get(i);
+				return newRoomList;
 			}
 				
 		}
 		
-		ArrayList<RoomMember> newRoomList = new ArrayList<RoomMember>();
-		roomList.add(newRoomList);
-		newRoomList.add(new RoomMember (threadNum,0,0));
-		return newRoomList;
+		Room newRoom = new Room();
+		roomList.add(newRoom);
+		room=newRoom;
+		newRoom.getRoomMembers().add(new RoomMember (threadNum,0,0));
+		return newRoom.getRoomMembers();
 	}
 	
 	

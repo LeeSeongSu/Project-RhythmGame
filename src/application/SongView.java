@@ -313,7 +313,6 @@ public class SongView {
 		try {
 			if(LobbyView.mod=="Single") {
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("GameScreen.fxml"));
-				Menubar menubar = new Menubar(pane);
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
 				stage.setScene(sc);
@@ -332,8 +331,6 @@ public class SongView {
 			else {
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("MultiScreen.fxml"));
 				MultiThreadClient.joinRoom(i);
-				
-				Menubar menubar = new Menubar(pane);
 				MultiScreenView multiscreenview = new MultiScreenView(pane);
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
