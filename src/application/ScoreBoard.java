@@ -68,7 +68,7 @@ public class ScoreBoard {
                 			
                 			if(room.get(i).equals(MultiThreadClient.clientId)) {
                 				textList1.get(i).setStyle("-fx-text-fill: red; -fx-font-size : 30px;");
-                				scoreLbl.setText(""+i+1);
+                				scoreLbl.setText(""+(i+1));
                 			}else
                 				textList1.get(i).setStyle("-fx-text-fill: white; -fx-font-size : 30px;");
                 	
