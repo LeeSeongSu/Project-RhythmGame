@@ -61,7 +61,7 @@ public class MultiThreadServer {
 				int i = 0;
 				for (i = 0; i < maxClientsCount; i++) {
 					if (threads[i] == null) {
-						(threads[i] = new ClientThread(clientSocket, threads))
+						(threads[i] = new ClientThread(clientSocket, threads, i))
 								.start();
 						break;
 					}

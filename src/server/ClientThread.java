@@ -24,6 +24,7 @@ public class ClientThread extends Thread {
 	private PrintStream os = null;
 	private Socket clientSocket = null;
 	private final  ClientThread[] threads;
+	private int index;
 	private int maxClientsCount;
 	private int maxRoomMember =4;
 	
@@ -34,9 +35,10 @@ public class ClientThread extends Thread {
 	private int threadNum;
 	private boolean stop = false;
 	
-	public ClientThread(Socket clientSocket, ClientThread[] threads) {
+	public ClientThread(Socket clientSocket, ClientThread[] threads , int index) {
 		this.clientSocket = clientSocket;
 		this.threads = threads;
+		this.index = index;
 		maxClientsCount = threads.length;
 	}
 
@@ -166,6 +168,7 @@ public class ClientThread extends Thread {
 				}
 				else if(line.startsWith("@exit")) {
 					stop=true;
+					threads[index]=null;
 				}
 				else {
 					for (int i = 0; i < maxClientsCount; i++) {
