@@ -1,6 +1,5 @@
 package application;
 
-import java.awt.Image;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
@@ -8,6 +7,7 @@ import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -18,16 +18,17 @@ import javafx.scene.text.Text;
 
 public class Game extends Thread {
 	
-	Scene sc;
-	AnchorPane pane;
-	Music music;
-	String title;
-	Image image;
-	VoiceKeyListener voice;
-	Boolean isVoiceMode;
-	public static int combo=0;
-	public static int score=0;
+	private Scene sc;
+	private AnchorPane pane;
+	private Music music;
+	private String title;
+	private Image image;
+	private VoiceKeyListener voice;
+	private Boolean isVoiceMode;
 	
+	private static int combo=0;
+	private static int score=0;
+
 	static ArrayList<Note> noteList = new ArrayList<>();
 	
 	
@@ -64,6 +65,7 @@ public class Game extends Thread {
 		music.changeFlag();
 		music.start();
 	}
+	
 
 	public void dropNotes(){
 		boolean flag =false;
@@ -134,6 +136,22 @@ public class Game extends Thread {
 
 	public void setNoteList(ArrayList<Note> noteList) {
 		this.noteList = noteList;
+	}
+	
+	public static int getCombo() {
+		return combo;
+	}
+
+	public static void setCombo(int combo) {
+		Game.combo = combo;
+	}
+
+	public static int getScore() {
+		return score;
+	}
+
+	public static void setScore(int score) {
+		Game.score = score;
 	}
 
 }

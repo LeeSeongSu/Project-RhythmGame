@@ -23,9 +23,9 @@ public class MultiScreenView {
 	private	String text;
 	
 
-	public MultiScreenView(AnchorPane pane) {
+	public MultiScreenView(AnchorPane pane, int musicIndex) {
 		this.pane = pane;
-		
+		this.musicIndex = musicIndex;
 		start=false;
 		
 		startBtn = new Button("Start");

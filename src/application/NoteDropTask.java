@@ -105,8 +105,8 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Game.noteList.remove(note);
 			note.close();
 		}
-		System.out.println("combo = " +Game.combo);
-		MultiThreadClient.sendScore(Game.score);
+		System.out.println("combo = " +Game.getCombo());
+		MultiThreadClient.sendScore(Game.getScore());
 	}
 	
 	public void soundJudge() {
@@ -167,8 +167,8 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Game.noteList.remove(note);
 			note.close();
 		}
-		System.out.println("combo = " +Game.combo);
-		MultiThreadClient.sendScore(Game.score);
+		System.out.println("combo = " +Game.getCombo());
+		MultiThreadClient.sendScore(Game.getScore());
 
 	}
 
