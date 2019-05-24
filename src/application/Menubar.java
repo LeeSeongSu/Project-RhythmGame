@@ -3,7 +3,14 @@
  */
 package application;
 
+import java.io.IOException;
+import java.util.ArrayList;
 
+import com.sun.org.apache.xerces.internal.xs.StringList;
+
+import javafx.concurrent.Task;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,80 +19,114 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
+import javafx.stage.Stage;
 
 /**
- * @author  재원(코딩), 성수(로직) 페어 :홈,테마,스토어 버튼 이벤트 추가
+ * @author 재원(코딩), 성수(로직) 페어 :홈,테마,스토어 버튼 이벤트 추가
  *
  */
 public class Menubar {
 
-   private AnchorPane pane;
-   private ImageView Background, select;
-   private BackgroundImage selectBtnBgImg;
-   private Button homeBtn, themeBtn, storeBtn;
+	private AnchorPane pane;
+	private ImageView Background, select;
+	private BackgroundImage selectBtnBgImg;
+	private Button homeBtn, themeBtn, storeBtn, btn;
+	private static ArrayList<Button> buttons;
+	private static ArrayList<String> fxmlList;
+	private static ArrayList<String> screenList;
 
-   public Menubar(AnchorPane pane) {
-      this.pane = pane;
+	public Menubar(AnchorPane pane, int i) {
+		this.pane = pane;
 
-      Image selectImage = (new ImageParser("Lobby_selectEffect.png").getImage());
+		Image selectImage = (new ImageParser("Lobby_selectEffect.png").getImage());
 
-      selectBtnBgImg = new BackgroundImage(selectImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-            BackgroundPosition.CENTER, null);
+		buttons = new ArrayList<Button>();
 
-      homeBtn = new Button();
-      homeBtn.setPrefSize(388, 125);
-      homeBtn.setBackground(new Background(selectBtnBgImg));
-      homeBtn.setLayoutX(0);
-      homeBtn.setLayoutY(0);
-      homeBtn.setOpacity(1);
-      homeBtn.setOnMouseClicked(e -> homeBtnClick());
+		selectBtnBgImg = new BackgroundImage(selectImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+				BackgroundPosition.CENTER, null);
 
-      themeBtn = new Button();
-      themeBtn.setPrefSize(388, 125);
-      themeBtn.setBackground(new Background(selectBtnBgImg));
-      themeBtn.setLayoutX(381);
-      themeBtn.setLayoutY(0);
-      themeBtn.setOpacity(0);
-      themeBtn.setOnMouseClicked(e -> themeBtnClick());
+		for (int a = 0; a < 3; a++) {
+			btn = new Button();
+			btn.setPrefSize(388, 125);
+			btn.setBackground(new Background(selectBtnBgImg));
+			btn.setLayoutX(0 + a * 380);
+			btn.setLayoutY(0);
+			btn.setOpacity(0);
 
-      storeBtn = new Button();
-      storeBtn.setPrefSize(388, 125);
-      storeBtn.setBackground(new Background(selectBtnBgImg));
-      storeBtn.setLayoutX(760);
-      storeBtn.setLayoutY(0);
-      storeBtn.setOpacity(0);
-      storeBtn.setOnMouseClicked(e -> storeBtnClick());
+			buttons.add(btn);
 
-      pane.getChildren().add(homeBtn);
-      pane.getChildren().add(themeBtn);
-      pane.getChildren().add(storeBtn);
+			pane.getChildren().add(btn);
 
-   }
+		}
 
-   private void homeBtnClick() {// off
+		buttons.get(i).setOpacity(1);
 
-      homeBtn.setBackground(new Background(selectBtnBgImg));
-      homeBtn.setOpacity(1);
-      themeBtn.setOpacity(0);
-      storeBtn.setOpacity(0);
-   }
+		buttons.get(0).setOnMouseClicked(e -> btnClick(0));
+		buttons.get(1).setOnMouseClicked(e -> btnClick(1));
+		buttons.get(2).setOnMouseClicked(e -> btnClick(2));
 
-   private void themeBtnClick() {// off
+		fxmlList = new ArrayList<String>();
+		fxmlList.add("HomeScreen.fxml");
+		fxmlList.add("ThemeScreen.fxml");
+		fxmlList.add("StoreScreen.fxml");
 
-      themeBtn.setBackground(new Background(selectBtnBgImg));
-      homeBtn.setOpacity(0);
-      themeBtn.setOpacity(1);
-      storeBtn.setOpacity(0);
+		screenList = new ArrayList<String>();
+		screenList.add("StoreView");
+		screenList.add("HomeView");
+		screenList.add("ThemeView");
 
-   }
+	}
 
-   private void storeBtnClick() {
+	private void btnClick(int i) {
+		for (int j = 0; j < buttons.size(); j++) {
+			if (i == j)
+				buttons.get(j).setOpacity(1);
+			else
+				buttons.get(j).setOpacity(0);
+		}
 
-      storeBtn.setBackground(new Background(selectBtnBgImg));
-      homeBtn.setOpacity(0);
-      themeBtn.setOpacity(0);
-      storeBtn.setOpacity(1);
+		Stage stage = (Stage) buttons.get(i).getScene().getWindow();
 
-   }
+		try {
 
+			if (fxmlList.get(i) == "StoreScreen.fxml") {
+				AnchorPane second = FXMLLoader.load(getClass().getResource(fxmlList.get(i)));
+				StoreView storeview = new StoreView(second, true);
+				Menubar menubar = new Menubar(second, i);
+
+				Scene sc = new Scene(second);
+
+				stage.setScene(sc);
+
+				stage.show();
+			} else if (fxmlList.get(i) == "HomeScreen.fxml") {
+				AnchorPane second = FXMLLoader.load(getClass().getResource("SelectScreen.fxml"));
+				LobbyView Lobbyview = new LobbyView(second);
+
+				Menubar menubar = new Menubar(second, i);
+
+				Scene sc = new Scene(second);
+
+				stage.setScene(sc);
+
+				stage.show();
+			} else {
+				AnchorPane second = FXMLLoader.load(getClass().getResource("ThemeScreen.fxml"));
+				ThemeView themeView = new ThemeView(second);
+
+				Menubar menubar = new Menubar(second, i);
+
+				Scene sc = new Scene(second);
+
+				stage.setScene(sc);
+
+				stage.show();
+			}
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
+	}
 }

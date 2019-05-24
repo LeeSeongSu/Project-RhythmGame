@@ -170,7 +170,7 @@ public class LobbyView {
 			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SelectScreen.fxml"));
 
 			SongView songview = new SongView(second);
-			Menubar menubar = new Menubar(second);
+			Menubar menubar = new Menubar(second,0);
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(second);
 
