@@ -2,10 +2,14 @@ package application;
 
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 
 public class MakeGameTask extends Task<Void>{
@@ -301,6 +305,29 @@ public class MakeGameTask extends Task<Void>{
 				i--;
 			}
 		}
+
+		TimeUnit.SECONDS.sleep(8);// 마지막노트 떨어지는 시점에서 딜레이 8초
+
+		Platform.runLater(() -> {
+
+			Stage stage = (Stage) pane.getScene().getWindow(); 
+
+			try {
+
+				AnchorPane score = FXMLLoader.load(Class.forName("application.Main").getResource("ScoreScreen.fxml"));
+
+				Scene sc = new Scene(score);
+
+				stage.setScene(sc);
+
+				stage.show();
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+			}
+		});
 		return null;
 	}
 
