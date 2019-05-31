@@ -53,6 +53,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 				ImageStorage.judgeImgView.setImage(ImageStorage.missImage);
 			}
 			oneCombo=true;
+			Platform.runLater(()->eraseCombo());
 			Game.resetCombo();
 			Game.noteList.remove(note);
 			note.close();
@@ -144,25 +145,28 @@ public class NoteDropTask<Void> extends Task<Void> {
 	}
 
 	public void drawCombo() {
+		
 		String comboString = String.valueOf(Game.getCombo());
 		char[] comboArr = comboString.toCharArray();
 		for (int i = 0; i < comboArr.length; i++) {
 			if(oneCombo||!pane.getChildren().contains(ImageStorage.comboImageView[0][(int) comboArr[i] - 48])) {
 				ImageStorage.comboImageView[0][(int) comboArr[i] - 48].setLayoutX(920 - 80 * (comboArr.length - i - 1));
-				ImageStorage.comboImageView[0][(int) comboArr[i] - 48].setLayoutY(75);
+				ImageStorage.comboImageView[0][(int) comboArr[i] - 48].setLayoutY(110);
 				pane.getChildren().add(ImageStorage.comboImageView[0][(int) comboArr[i] - 48]);
 				oneCombo=false;
 			}else {
 				for(int j=0;j<ImageStorage.comboImageView.length;j++) {
 					if(!pane.getChildren().contains(ImageStorage.comboImageView[j][(int) comboArr[i] - 48])){
 						ImageStorage.comboImageView[j][(int) comboArr[i] - 48].setLayoutX(920 - 80 * (comboArr.length - i - 1));
-						ImageStorage.comboImageView[j][(int) comboArr[i] - 48].setLayoutY(75);
+						ImageStorage.comboImageView[j][(int) comboArr[i] - 48].setLayoutY(110);
 						pane.getChildren().add(ImageStorage.comboImageView[j][(int) comboArr[i] - 48]);
 						break;
 					}
 				}
 			}
 		}
+		if(!pane.getChildren().contains(ImageStorage.comboWordImageView))
+			pane.getChildren().add(ImageStorage.comboWordImageView);
 	}
 
 	public void eraseCombo() {
@@ -174,6 +178,8 @@ public class NoteDropTask<Void> extends Task<Void> {
 				}
 			}
 		}
+		if(pane.getChildren().contains(ImageStorage.comboWordImageView))
+			pane.getChildren().remove(ImageStorage.comboWordImageView);
 	}
 
 	public void soundJudge() {
