@@ -51,7 +51,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 		Image backgroundImage = (new ImageParser("Main_bg.gif").getImage());
 		backgroundImageView.setImage(backgroundImage);
 		
-		loginBtn.setOnAction(e-> login());
+		loginBtn.setOnAction(e-> loginBeta());
 		SignUpBtn.setOnAction(e-> moveSignUp());
 		
 		if(!visited) {
@@ -71,7 +71,6 @@ public class DOSApplicationController extends Thread implements Initializable {
 		else {;
 			pressAnyKey();
 		}
-		loginBtn.setOnAction(e -> login());
 		loginscreen.setVisible(false);// 로그인창 숨김
 		changeOpacity(mainStartImageView);
 		mainStartImageView.setOnMouseClicked(e -> pressAnyKey());
@@ -166,6 +165,16 @@ public class DOSApplicationController extends Thread implements Initializable {
 		thread.start();
 	}
 	
+	public void loginBeta() {
+		String email = idTextField.getText();
+		String password = passwordTextField.getText();
+		LoginSession.email=email;
+		LoginSession.nickname=email;
+		MultiThreadClient.clientId=LoginSession.nickname;
+		MultiThreadClient.sendID(MultiThreadClient.clientId);
+		moveLobby();
+	}
+	
 	/**
 	 * @author 재원,성수 페어(페이지 전환)
 	 */
@@ -179,7 +188,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 
 			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SelectScreen.fxml"));
 			LobbyView lobbyView = new LobbyView(second);
-			Menubar menubar = new Menubar(second);
+			Menubar menubar = new Menubar(second,0);
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(second);
 

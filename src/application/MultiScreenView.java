@@ -21,7 +21,6 @@ public class MultiScreenView {
 	private ArrayList<String> room;
 	private ArrayList<String> ready;
 	private	String text;
-	
 
 	public MultiScreenView(AnchorPane pane, int musicIndex) {
 		this.pane = pane;

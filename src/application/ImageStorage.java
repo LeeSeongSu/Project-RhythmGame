@@ -14,12 +14,53 @@ public class ImageStorage {
 	public static ImageView[] effectImgView = {new ImageView(effectImage),
 			new ImageView(effectImage),new ImageView(effectImage),new ImageView(effectImage),
 			new ImageView(effectImage),new ImageView(effectImage),new ImageView(effectImage)};
+	
+	public static Image comboImage[] = {new ImageParser("c0.png").getImage(),
+			new ImageParser("c1.png").getImage(),new ImageParser("c2.png").getImage(),
+			new ImageParser("c3.png").getImage(),new ImageParser("c4.png").getImage(),
+			new ImageParser("c5.png").getImage(),new ImageParser("c6.png").getImage(),
+			new ImageParser("c7.png").getImage(),new ImageParser("c8.png").getImage(),
+			new ImageParser("c9.png").getImage()
+	};
+	
+	public static ImageView comboImageView[][] = {{new ImageView(comboImage[0]),
+			new ImageView(comboImage[1]),new ImageView(comboImage[2]),
+			new ImageView(comboImage[3]),new ImageView(comboImage[4]),
+			new ImageView(comboImage[5]),new ImageView(comboImage[6]),
+			new ImageView(comboImage[7]),new ImageView(comboImage[8]),
+			new ImageView(comboImage[9])},
+			{new ImageView(comboImage[0]),
+				new ImageView(comboImage[1]),new ImageView(comboImage[2]),
+				new ImageView(comboImage[3]),new ImageView(comboImage[4]),
+				new ImageView(comboImage[5]),new ImageView(comboImage[6]),
+				new ImageView(comboImage[7]),new ImageView(comboImage[8]),
+				new ImageView(comboImage[9])}
+			,{new ImageView(comboImage[0]),
+				new ImageView(comboImage[1]),new ImageView(comboImage[2]),
+				new ImageView(comboImage[3]),new ImageView(comboImage[4]),
+				new ImageView(comboImage[5]),new ImageView(comboImage[6]),
+				new ImageView(comboImage[7]),new ImageView(comboImage[8]),
+				new ImageView(comboImage[9])}
+			,{new ImageView(comboImage[0]),
+				new ImageView(comboImage[1]),new ImageView(comboImage[2]),
+				new ImageView(comboImage[3]),new ImageView(comboImage[4]),
+				new ImageView(comboImage[5]),new ImageView(comboImage[6]),
+				new ImageView(comboImage[7]),new ImageView(comboImage[8]),
+				new ImageView(comboImage[9])}
+	};
+	
 	public ImageStorage() {
 		judgeImgView.setLayoutX(755);
-		judgeImgView.setLayoutY(645);
+		judgeImgView.setLayoutY(750);
 		for(int i=0;i<effectImgView.length;i++) {
 			effectImgView[i].setLayoutX(500+i*115);
 			effectImgView[i].setLayoutY(310);
+		}
+		for(int i=0;i<comboImageView.length;i++) {
+			for(int j = 0; j<comboImageView[i].length;j++) {
+				comboImageView[i][j].setFitWidth(80);
+				comboImageView[i][j].setFitHeight(80);
+			}
 		}
 	}
 }
