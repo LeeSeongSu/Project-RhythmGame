@@ -51,7 +51,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 		Image backgroundImage = (new ImageParser("Main_bg.gif").getImage());
 		backgroundImageView.setImage(backgroundImage);
 		
-		loginBtn.setOnAction(e-> login());
+		loginBtn.setOnAction(e-> loginBeta());
 		SignUpBtn.setOnAction(e-> moveSignUp());
 		
 		if(!visited) {
@@ -71,7 +71,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 		else {;
 			pressAnyKey();
 		}
-		loginBtn.setOnAction(e -> loginBeta());
+
 		loginscreen.setVisible(false);// 로그인창 숨김
 		changeOpacity(mainStartImageView);
 		mainStartImageView.setOnMouseClicked(e -> pressAnyKey());

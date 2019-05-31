@@ -44,7 +44,6 @@ public class Game extends Thread {
 		combo=0;
 	}
 	
-	
 	public Game(String title, AnchorPane pane, Scene sc) {
 		this.pane = pane;
 		this.title = title;
