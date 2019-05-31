@@ -95,7 +95,7 @@ public class MultiThreadClient implements Runnable {
 					ready.add(words[1]);
 				}
 				else if(responseLine.startsWith("@start")) {
-					MultiScreenView.setStart(true);
+					MultiScreenViewTest.setStart(true);
 				}
 				else if(responseLine.startsWith("@scoreReset")) {
 					score.clear();
