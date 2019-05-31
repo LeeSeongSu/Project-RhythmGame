@@ -71,7 +71,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 		else {;
 			pressAnyKey();
 		}
-		loginBtn.setOnAction(e -> login());
+		loginBtn.setOnAction(e -> loginBeta());
 		loginscreen.setVisible(false);// 로그인창 숨김
 		changeOpacity(mainStartImageView);
 		mainStartImageView.setOnMouseClicked(e -> pressAnyKey());
@@ -179,7 +179,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 
 			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SelectScreen.fxml"));
 			LobbyView lobbyView = new LobbyView(second);
-			Menubar menubar = new Menubar(second);
+			Menubar menubar = new Menubar(second,0);
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(second);
 
@@ -221,7 +221,23 @@ public class DOSApplicationController extends Thread implements Initializable {
 		}
 
 	}
-	
+	public void loginBeta() {
+	      MultiThreadClient.sendID(MultiThreadClient.threadNum);
+	      Task<Void> task = new Task<Void>() {
+	         @Override
+	         protected Void call() throws Exception {
+	            try{
+	               Platform.runLater(()->moveLobby());
+	            }catch (Exception e) {
+	               System.out.println("login Fail");
+	            }
+	            return null;
+	         }
+	      };
+	      Thread thread = new Thread(task);
+	      thread.setDaemon(true);
+	      thread.start();
+	   }
 	public void startGame(String title) {
 		introMusic.close();
 	}
