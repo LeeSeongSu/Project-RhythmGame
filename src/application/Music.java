@@ -1,45 +1,50 @@
 package application;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 
-import javazoom.jl.player.Player;
-
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 /**
  * @author 태일 해당 클래스는 음악기능을 위한 클래스입니다.
  *
  */
 public class Music extends Thread {
 
-	private Player player;
 	private boolean isLoop;
 	private File file;
-	private FileInputStream fis;
-	private BufferedInputStream bis;
 	private boolean flag=false;
+	private Media media;
+	private MediaPlayer mediaPlayer;
 
 	public Music(String name, boolean isLoop) {
 		try {
 			this.isLoop = isLoop;
 			file = new File(Class.forName("application.Main").getResource("../music/" + name).toURI());
-			fis = new FileInputStream(file);
-			bis = new BufferedInputStream(fis);
-			player = new Player(bis);
+			media = new Media(file.toURI().toString());
+			mediaPlayer = new MediaPlayer(media);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public int getTime() {
-		if (player == null)
+		if (mediaPlayer == null)
 			return 0;
-		return player.getPosition();
+		return (int) mediaPlayer.getCurrentTime().toMillis();
+	}
+	
+	public void silence() {
+		mediaPlayer.setVolume(0);
+	}
+	
+	public void normalVolume() {
+		mediaPlayer.setVolume(1);
 	}
 
 	public void close() {
 		isLoop = false;
-		player.close();
+		mediaPlayer.stop();
 		this.interrupt();
 	}
 	
@@ -57,10 +62,8 @@ public class Music extends Thread {
 				Thread.sleep(2000);
 			}
 			do {
-				player.play();
-				fis = new FileInputStream(file);
-				bis = new BufferedInputStream(fis);
-				player = new Player(bis);
+				mediaPlayer.play();
+
 			} while (isLoop);
 		} catch (Exception e) {
 			e.printStackTrace();
