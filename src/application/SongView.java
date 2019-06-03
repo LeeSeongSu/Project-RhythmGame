@@ -34,7 +34,7 @@ public class SongView {
 
 	public SongView(AnchorPane pane) {
 		this.pane = pane;
-	
+
 		Image backGroundImage = (new ImageParser("Select_bg.png").getImage());
 		Background = new ImageView(backGroundImage);
 		pane.getChildren().add(Background);// 로비 배경
@@ -56,14 +56,14 @@ public class SongView {
 		albumImgList.add(new ImageParser("Elektronomia - Sky High.jpg").getImage());
 
 		circleList = new Circle[5];
-		
+
 		musicList = new String[5];
 		musicList[0] = "HAPPY ROCK";
 		musicList[1] = "BLANK";
 		musicList[2] = "INVINCIBLE";
 		musicList[3] = "NEKOZILLA";
 		musicList[4] = "SKY HIGH";
-		
+
 		mp3List = new ArrayList<String>();
 		mp3List.add("bensound - happyrock.mp3");
 		mp3List.add("Disfigure - Blank.mp3");
@@ -75,7 +75,7 @@ public class SongView {
 
 		for (int i = 0; i < circleList.length; i++) {
 			circleList[i] = new Circle();
-			s.put(i,musicList[i]);
+			s.put(i, musicList[i]);
 			circleList[i].setRadius(250);
 			circleList[i].setFill(new ImagePattern(albumImgList.get(i)));
 			pane.getChildren().add(circleList[i]);
@@ -311,24 +311,54 @@ public class SongView {
 		Stage stage = (Stage) circleList[i].getScene().getWindow();
 
 		try {
-			if(LobbyView.mod=="Single") {
+			if (LobbyView.mod.equals("Single") && LobbyView.mode_voice.equals("voice")) {
+
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("GameScreen.fxml"));
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
 				stage.setScene(sc);
-				Game game = new Game(mp3List.get(i), pane, sc);
+				Game game = null;
 				stage.show();
 				Task<Void> task = new Task<Void>() {
 					public Void call() throws Exception {
-						game.run();
+						Game tmp = game;
+						tmp = new Game(SongView.mp3List.get(selectCircleIndex), pane, sc, true);
+						tmp.run();
 						return null;
 					}
 				};
 				Thread t = new Thread(task);
 				t.setDaemon(true);
 				t.run();
-				}
-			else {
+			} else if (LobbyView.mod.equals("Single") && LobbyView.mode_voice.equals("none")) {
+
+				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("GameScreen.fxml"));
+				// 씬에 레이아웃 추가
+				Scene sc = new Scene(pane);
+				stage.setScene(sc);
+				Game game = null;
+				stage.show();
+				Task<Void> task = new Task<Void>() {
+					public Void call() throws Exception {
+						Game tmp = game;
+						tmp = new Game(SongView.mp3List.get(selectCircleIndex), pane, sc, false);
+						tmp.run();
+						return null;
+					}
+				};
+				Thread t = new Thread(task);
+				t.setDaemon(true);
+				t.run();
+			} else if (LobbyView.mod.equals("Multi") && LobbyView.mode_voice.equals("voice")) {
+				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("MultiScreen.fxml"));
+				MultiThreadClient.joinRoom(i);
+				new MultiScreenViewTest(pane, i);
+				// 씬에 레이아웃 추가
+				Scene sc = new Scene(pane);
+				stage.setScene(sc);
+
+				stage.show();
+			} else if (LobbyView.mod.equals("Multi") && LobbyView.mode_voice.equals("none")) {
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("MultiScreen.fxml"));
 				MultiThreadClient.joinRoom(i);
 				new MultiScreenViewTest(pane, i);
@@ -343,8 +373,7 @@ public class SongView {
 			e.printStackTrace();
 
 		}
-		
-	}
 
+	}
 
 }

@@ -25,7 +25,7 @@ public class Game extends Thread {
 	private static String title;
 	private Image image;
 	private VoiceKeyListener voice;
-	private Boolean isVoiceMode;
+	private boolean isVoiceMode;
 	
 	private static int combo=0;
 	private static int score=0;
@@ -45,14 +45,20 @@ public class Game extends Thread {
 		combo=0;
 	}
 	
-	public Game(String title, AnchorPane pane, Scene sc) {
+	public Game(String title, AnchorPane pane, Scene sc, boolean isVoiceMode) {
 		this.pane = pane;
 		this.title = title;
 		this.sc = sc;
+		this.isVoiceMode= isVoiceMode;
 		DOSApplicationController.introMusic.close();
-		
 		sc.setOnKeyPressed(new KeyListener(pane, noteList));
 		sc.setOnKeyReleased(new NoteEffectKeyListener(pane));
+		if(isVoiceMode) {
+			voiceMode();
+		}
+		
+	}
+	public void voiceMode() {
 		voice=new VoiceKeyListener(pane);
 	}
 	

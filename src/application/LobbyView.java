@@ -23,8 +23,9 @@ public class LobbyView {
 	private BackgroundImage multiBtnBgImg, multiBtnBgEffectImg, singleBtnBgImg, singleBtnBgEffectImg, onBtnBgImg,
 			onBtnBgEffectImg, offBtnBgImg, offBtnBgEffectImg, startBtnBgImg, startEffectBtnBgEffectImg;
 	private Button multiBtn, singleBtn, onBtn, offBtn;
-	
-	public static String mod="Single";
+
+	public static String mod = "Single";
+	public static String mode_voice = "none";
 
 	public LobbyView(AnchorPane pane) {
 
@@ -74,7 +75,7 @@ public class LobbyView {
 		start.setOnMouseExited(e -> startBtnExit());
 		start.setOnMouseClicked(e -> songViewPage());
 		pane.getChildren().add(start);// 스타트 사진
-		
+
 		multiBtn = new Button();
 		multiBtn.setPrefSize(164, 92);
 		multiBtn.setBackground(new Background(multiBtnBgImg));
@@ -117,7 +118,7 @@ public class LobbyView {
 			return;
 		multiBtn.setBackground(new Background(multiBtnBgEffectImg));
 		singleBtn.setBackground(new Background(singleBtnBgImg));
-		mod="Multi";
+		mod = "Multi";
 	}
 
 	private void singleBtnClick() {// 싱글버튼
@@ -127,7 +128,7 @@ public class LobbyView {
 			return;
 		multiBtn.setBackground(new Background(multiBtnBgImg));
 		singleBtn.setBackground(new Background(singleBtnBgEffectImg));
-		mod="Single";
+		mod = "Single";
 	}
 
 	private void onBtnClick() {// on
@@ -137,6 +138,7 @@ public class LobbyView {
 			return;
 		onBtn.setBackground(new Background(onBtnBgEffectImg));
 		offBtn.setBackground(new Background(offBtnBgImg));
+		mode_voice = "voice";
 	}
 
 	private void offBtnClick() {// off
@@ -146,6 +148,7 @@ public class LobbyView {
 			return;
 		onBtn.setBackground(new Background(onBtnBgImg));
 		offBtn.setBackground(new Background(offBtnBgEffectImg));
+		mode_voice = "none";
 	}
 
 	private void startBtnExit() {
@@ -170,7 +173,7 @@ public class LobbyView {
 			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SelectScreen.fxml"));
 
 			SongView songview = new SongView(second);
-			Menubar menubar = new Menubar(second,0);
+			Menubar menubar = new Menubar(second, 0);
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(second);
 

@@ -184,12 +184,19 @@ public class MultiScreenViewTest {
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(pane);
 			stage.setScene(sc);
-			Game game = new Game(SongView.mp3List.get(musicIndex), pane, sc);
+		
+			Game game = null;
 			new ScoreBoard(pane);
 			stage.show();
 			Task<Void> task = new Task<Void>() {
 				public Void call() throws Exception {
-					game.run();
+					Game tmp = game;
+					if(LobbyView.mode_voice.equals("voice")) {
+						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,true);
+					}else {
+						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,false);
+					}
+					tmp.run();
 					return null;
 				}
 			};
