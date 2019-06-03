@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 
+
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
@@ -21,7 +22,7 @@ public class Game extends Thread {
 	private Scene sc;
 	private AnchorPane pane;
 	private Music music;
-	private String title;
+	private static String title;
 	private Image image;
 	private VoiceKeyListener voice;
 	private Boolean isVoiceMode;
@@ -113,7 +114,7 @@ public class Game extends Thread {
 		this.music = music;
 	}
 
-	public String getTitle() {
+	public static String getTitle() {
 		return title;
 	}
 

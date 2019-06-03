@@ -34,7 +34,7 @@ public class SongView {
 
 	public SongView(AnchorPane pane) {
 		this.pane = pane;
-
+	
 		Image backGroundImage = (new ImageParser("Select_bg.png").getImage());
 		Background = new ImageView(backGroundImage);
 		pane.getChildren().add(Background);// 로비 배경
@@ -49,11 +49,11 @@ public class SongView {
 		text.setY(940);// 위치 바꾸기
 
 		albumImgList = new ArrayList<Image>();
-		albumImgList.add(new ImageParser("happyrock.jpg").getImage());
-		albumImgList.add(new ImageParser("BLANK.jpg").getImage());
-		albumImgList.add(new ImageParser("Invincible.jpg").getImage());
-		albumImgList.add(new ImageParser("NEKOZILLA.png").getImage());
-		albumImgList.add(new ImageParser("SKY HIGH.jpg").getImage());
+		albumImgList.add(new ImageParser("bensound - happyrock.jpg").getImage());
+		albumImgList.add(new ImageParser("Disfigure - Blank.jpg").getImage());
+		albumImgList.add(new ImageParser("Invincible - Deaf Kev.jpg").getImage());
+		albumImgList.add(new ImageParser("Different Heaven - Nekozilla.jpg").getImage());
+		albumImgList.add(new ImageParser("Elektronomia - Sky High.jpg").getImage());
 
 		circleList = new Circle[5];
 		
@@ -65,7 +65,7 @@ public class SongView {
 		musicList[4] = "SKY HIGH";
 		
 		mp3List = new ArrayList<String>();
-		mp3List.add("bensound-happyrock.mp3");
+		mp3List.add("bensound - happyrock.mp3");
 		mp3List.add("Disfigure - Blank.mp3");
 		mp3List.add("Invincible - Deaf Kev.mp3");
 		mp3List.add("Different Heaven - Nekozilla.mp3");
@@ -343,6 +343,7 @@ public class SongView {
 			e.printStackTrace();
 
 		}
+		
 	}
 
 

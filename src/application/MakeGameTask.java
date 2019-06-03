@@ -316,6 +316,8 @@ public class MakeGameTask extends Task<Void>{
 
 				AnchorPane score = FXMLLoader.load(Class.forName("application.Main").getResource("ScoreScreen.fxml"));
 
+				ScoreView Score = new ScoreView(score);
+				
 				Scene sc = new Scene(score);
 
 				stage.setScene(sc);
