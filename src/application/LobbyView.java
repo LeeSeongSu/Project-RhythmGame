@@ -86,7 +86,7 @@ public class LobbyView {
 
 		singleBtn = new Button();
 		singleBtn.setPrefSize(164, 92);
-		singleBtn.setBackground(new Background(singleBtnBgImg));
+		singleBtn.setBackground(new Background(singleBtnBgEffectImg));
 		singleBtn.setLayoutX(1465);
 		singleBtn.setLayoutY(532);
 		singleBtn.setOnMouseClicked(e -> singleBtnClick());
@@ -103,7 +103,7 @@ public class LobbyView {
 
 		offBtn = new Button();
 		offBtn.setPrefSize(164, 92);
-		offBtn.setBackground(new Background(offBtnBgImg));
+		offBtn.setBackground(new Background(offBtnBgEffectImg));
 		offBtn.setLayoutX(1635);
 		offBtn.setLayoutY(740);
 		offBtn.setOnMouseClicked(e -> offBtnClick());
