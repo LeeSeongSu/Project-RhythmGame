@@ -18,7 +18,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class SignUpController {
+public class FindController {
 
 	private ImageView Background;
 	private TextField id, name, mail;
@@ -28,7 +28,7 @@ public class SignUpController {
 	private Button signUpBtn, BackBtn;
 	private AnchorPane pane;
 
-	public SignUpController(AnchorPane pane) {
+	public FindController(AnchorPane pane) {
 		this.pane = pane;
 
 		BackBtn = new Button("Back");
@@ -46,7 +46,7 @@ public class SignUpController {
 		id.setLayoutY(325);
 		pane.getChildren().add(id);
 
-		idlbl = new Label("ID");
+		idlbl = new Label("아이디");
 		idlbl.setLayoutX(600);
 		idlbl.setLayoutY(340);
 		idlbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
@@ -59,7 +59,7 @@ public class SignUpController {
 		pw.setLayoutY(425);
 		pane.getChildren().add(pw);
 
-		pwlbl = new Label("Password");
+		pwlbl = new Label("비밀번호");
 		pwlbl.setLayoutX(600);
 		pwlbl.setLayoutY(440);
 		pwlbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
@@ -77,7 +77,7 @@ public class SignUpController {
 		rePw.setLayoutY(525);
 		pane.getChildren().add(rePw);
 
-		rePwlbl = new Label("Confirm Password");
+		rePwlbl = new Label("비밀번호 확인");
 		rePwlbl.setLayoutX(600);
 		rePwlbl.setLayoutY(540);
 		rePwlbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
@@ -96,7 +96,7 @@ public class SignUpController {
 		name.setLayoutY(625);
 		pane.getChildren().add(name);
 
-		namelbl = new Label("Nickname");
+		namelbl = new Label("닉네임");
 		namelbl.setLayoutX(600);
 		namelbl.setLayoutY(640);
 		namelbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
@@ -109,7 +109,7 @@ public class SignUpController {
 		mail.setLayoutY(725);
 		pane.getChildren().add(mail);
 
-		maillbl = new Label("Email");
+		maillbl = new Label("이메일");
 		maillbl.setLayoutX(600);
 		maillbl.setLayoutY(740);
 		maillbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");

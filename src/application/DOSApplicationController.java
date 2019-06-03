@@ -31,7 +31,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 	
 
 	@FXML
-	private Button loginBtn,SignUpBtn;// 로그인 ,회원가입 버튼
+	private Button loginBtn,SignUpBtn,FindBtn;// 로그인 ,회원가입 버튼,아이디 비밀번호 찾기
 	@FXML
 	private Group loginscreen;// 로그인 화면
 	@FXML
@@ -53,7 +53,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 		
 		loginBtn.setOnAction(e-> loginBeta());
 		SignUpBtn.setOnAction(e-> moveSignUp());
-		
+		FindBtn.setOnAction(e->moveFind());
 		if(!visited) {
 			introMusic = new Music("Game On.mp3", true);
 			try {
@@ -220,6 +220,28 @@ public class DOSApplicationController extends Thread implements Initializable {
 
 		}
 
+	}
+	public void moveFind() {
+		Stage stage = (Stage) FindBtn.getScene().getWindow();
+
+		try {
+
+			AnchorPane findPage = FXMLLoader.load(getClass().getResource("FindScreen.fxml"));
+			
+		
+			FindController find= new FindController(findPage);
+			// 씬에 레이아웃 추가
+			Scene sc = new Scene(findPage);
+
+			stage.setScene(sc);
+
+			stage.show();
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
 	}
 	public void loginBeta() {
 	      MultiThreadClient.sendID(MultiThreadClient.threadNum);
