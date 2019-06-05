@@ -122,8 +122,8 @@ public class MultiThreadClient implements Runnable {
 		clientId=value;
 	}
 	
-	public static void joinRoom(int musicIndex) { // 사용자가 원하는 방에 입장하기 위해 서버에게 방 리스트를 보내달라고 요청하는 메소드
-		os.println("@joinRoom "+musicIndex);
+	public static void joinRoom(int musicIndex, boolean voiceMode) { // 사용자가 원하는 방에 입장하기 위해 서버에게 방 리스트를 보내달라고 요청하는 메소드
+		os.println("@joinRoom "+musicIndex+" "+voiceMode);
 	}
 	
 	public static void ready() {

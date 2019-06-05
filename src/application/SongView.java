@@ -319,6 +319,7 @@ public class SongView {
 				stage.setScene(sc);
 				Game game = null;
 				stage.show();
+				new item(stage);
 				Task<Void> task = new Task<Void>() {
 					public Void call() throws Exception {
 						Game tmp = game;
@@ -338,6 +339,7 @@ public class SongView {
 				stage.setScene(sc);
 				Game game = null;
 				stage.show();
+				new item(stage);
 				Task<Void> task = new Task<Void>() {
 					public Void call() throws Exception {
 						Game tmp = game;
@@ -351,7 +353,7 @@ public class SongView {
 				t.run();
 			} else if (LobbyView.mod.equals("Multi") && LobbyView.mode_voice.equals("voice")) {
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("MultiScreen.fxml"));
-				MultiThreadClient.joinRoom(i);
+				MultiThreadClient.joinRoom(i,true);
 				new MultiScreenViewTest(pane, i);
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
@@ -360,7 +362,7 @@ public class SongView {
 				stage.show();
 			} else if (LobbyView.mod.equals("Multi") && LobbyView.mode_voice.equals("none")) {
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("MultiScreen.fxml"));
-				MultiThreadClient.joinRoom(i);
+				MultiThreadClient.joinRoom(i,false);
 				new MultiScreenViewTest(pane, i);
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);

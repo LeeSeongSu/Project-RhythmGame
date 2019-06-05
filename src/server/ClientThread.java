@@ -34,6 +34,7 @@ public class ClientThread extends Thread {
 	private String clientID;
 	private int threadNum;
 	private boolean stop = false;
+	private boolean voiceMode;
 	
 	public ClientThread(Socket clientSocket, ClientThread[] threads , int index) {
 		this.clientSocket = clientSocket;
@@ -68,7 +69,14 @@ public class ClientThread extends Thread {
 				
 				if(line.startsWith("@joinRoom")) { // 방 정보
 					words=line.split(" ");
+					if(words[2].equals("true")) {
+						voiceMode=true;
+					}
+					else
+						voiceMode=false;
+					
 					roomMembers=searchRoom(Integer.parseInt(words[1]));
+					
 					for(int i=0; i<roomMembers.size(); i++) { // 방의 정보가 업데이트 될때 마다 해당방 클라이언트에게 신호를 보냄.
 						obj=roomMembers.get(i);
 						num=obj.getThreadNum();
@@ -188,7 +196,7 @@ public class ClientThread extends Thread {
 		ArrayList<RoomMember> newRoomList;
 		for(int i=0; i<roomList.size();i++) {
 			newRoomList=roomList.get(i).getRoomMembers();
-			if(!roomList.get(i).isStart()&&newRoomList.size()!=maxRoomMember) {
+			if(roomList.get(i).isVoiceMode()==voiceMode&&!roomList.get(i).isStart()&&newRoomList.size()!=maxRoomMember) {
 				newRoomList.add(new RoomMember (threadNum,0,0));
 				room=roomList.get(i);
 				return newRoomList;
@@ -196,7 +204,7 @@ public class ClientThread extends Thread {
 				
 		}
 		
-		Room newRoom = new Room();
+		Room newRoom = new Room(voiceMode);
 		roomList.add(newRoom);
 		room=newRoom;
 		newRoom.getRoomMembers().add(new RoomMember (threadNum,0,0));

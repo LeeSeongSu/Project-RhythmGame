@@ -4,15 +4,23 @@ import java.util.ArrayList;
 
 public class Room {
 	private int roomNum;
+	private boolean voiceMode;
 	private ArrayList<RoomMember> roomMembers;
 	private boolean start;
 	
-	public Room() {
+	public Room(boolean voiceMode) {
 		roomMembers=new ArrayList<RoomMember> ();
 		start=false;
+		this.voiceMode=voiceMode;
 	}
 	public int getRoomNum() {
 		return roomNum;
+	}
+	public boolean isVoiceMode() {
+		return voiceMode;
+	}
+	public void setVoiceMode(boolean voiceMode) {
+		this.voiceMode = voiceMode;
 	}
 	public void setRoomNum(int roomNum) {
 		this.roomNum = roomNum;
