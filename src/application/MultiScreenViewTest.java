@@ -188,6 +188,7 @@ public class MultiScreenViewTest {
 			Game game = null;
 			new ScoreBoard(pane);
 			stage.show();
+			new item(stage);
 			Task<Void> task = new Task<Void>() {
 				public Void call() throws Exception {
 					Game tmp = game;

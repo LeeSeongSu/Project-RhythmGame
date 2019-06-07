@@ -58,6 +58,8 @@ public class KeyListener implements EventHandler<KeyEvent> {
 			drawEffect(6);
 			judge(6);
 			break;
+		case Z:item.silence();break;
+		case X:item.blockScreen();break;
 		}
 		if (LobbyView.mode_voice == "none") {
 			switch (event.getCode()) {
