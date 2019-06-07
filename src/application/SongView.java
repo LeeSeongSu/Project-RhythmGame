@@ -354,7 +354,7 @@ public class SongView {
 			} else if (LobbyView.mod.equals("Multi") && LobbyView.mode_voice.equals("voice")) {
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("MultiScreen.fxml"));
 				MultiThreadClient.joinRoom(i,true);
-				new MultiScreenViewTest(pane, i);
+				new MultiScreenView(pane, i);
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
 				stage.setScene(sc);
@@ -363,7 +363,7 @@ public class SongView {
 			} else if (LobbyView.mod.equals("Multi") && LobbyView.mode_voice.equals("none")) {
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("MultiScreen.fxml"));
 				MultiThreadClient.joinRoom(i,false);
-				new MultiScreenViewTest(pane, i);
+				new MultiScreenView(pane, i);
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
 				stage.setScene(sc);

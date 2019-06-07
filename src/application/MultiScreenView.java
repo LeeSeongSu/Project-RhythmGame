@@ -21,7 +21,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class MultiScreenViewTest {
+public class MultiScreenView {
 	private AnchorPane pane;
 	private Button startBtn, readyBtn;
 	private static Button exButton;
@@ -35,7 +35,7 @@ public class MultiScreenViewTest {
 	private BackgroundImage startBtnBgImg, readyBtnImg, startBtnEffectImg, readyBtnBgImg, readyBtnBgEffectImg,
 			exButtonBlueImg, exButtonRedImg;
 
-	public MultiScreenViewTest(AnchorPane pane, int musicIndex) {
+	public MultiScreenView(AnchorPane pane, int musicIndex) {
 		this.pane = pane;
 		this.musicIndex = musicIndex;
 		start = false;
