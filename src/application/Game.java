@@ -21,7 +21,7 @@ public class Game extends Thread {
 	
 	private Scene sc;
 	private AnchorPane pane;
-	private Music music;
+	private static Music music;
 	private static String title;
 	private Image image;
 	private VoiceKeyListener voice;
@@ -112,7 +112,7 @@ public class Game extends Thread {
 		this.pane = pane;
 	}
 
-	public Music getMusic() {
+	public static Music getMusic() {
 		return music;
 	}
 
