@@ -1,6 +1,7 @@
 package server;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -21,7 +22,7 @@ import java.util.stream.Collector;
 public class ClientThread extends Thread {
 	private String clientName = null;
 	private DataInputStream is = null;
-	private PrintStream os = null;
+	private DataOutputStream os = null;
 	private Socket clientSocket = null;
 	private final  ClientThread[] threads;
 	private int index;
@@ -53,11 +54,11 @@ public class ClientThread extends Thread {
 		
 		try {
 			is = new DataInputStream(clientSocket.getInputStream());
-			os = new PrintStream(clientSocket.getOutputStream());
+			os = new DataOutputStream(clientSocket.getOutputStream());
 			
 			for (int i = 0; i < maxClientsCount; i++) {
 				if (threads[i] == this) {
-					threads[i].os.println(i);
+					threads[i].os.writeUTF(i+"");
 					threads[i].setName("thread "+i);
 					threadNum=i;
 					break;
@@ -65,7 +66,7 @@ public class ClientThread extends Thread {
 			}
 			
 			while(!stop) {
-				String line = is.readLine();
+				String line = is.readUTF();
 				
 				if(line.startsWith("@joinRoom")) { // 방 정보
 					words=line.split(" ");
@@ -80,10 +81,10 @@ public class ClientThread extends Thread {
 					for(int i=0; i<roomMembers.size(); i++) { // 방의 정보가 업데이트 될때 마다 해당방 클라이언트에게 신호를 보냄.
 						obj=roomMembers.get(i);
 						num=obj.getThreadNum();
-						threads[num].os.println("@roomReset");
+						threads[num].os.writeUTF("@roomReset");
 						for(int j=0; j<roomMembers.size(); j++) { 
-							threads[num].os.println("@room "+threads[roomMembers.get(j).getThreadNum()].getClientID());
-							threads[num].os.println("@ready "+roomMembers.get(j).getReady());
+							threads[num].os.writeUTF("@room "+threads[roomMembers.get(j).getThreadNum()].getClientID());
+							threads[num].os.writeUTF("@ready "+roomMembers.get(j).getReady());
 						}
 					}
 					
@@ -110,15 +111,15 @@ public class ClientThread extends Thread {
 					for(int i=0; i<roomMembers.size(); i++) { // 방의 정보가 업데이트 될때 마다 해당방 클라이언트에게 신호를 보냄.
 						obj=roomMembers.get(i);
 						num=obj.getThreadNum();
-						threads[num].os.println("@readyReset");
+						threads[num].os.writeUTF("@readyReset");
 						for(int j=0; j<roomMembers.size(); j++) { 
-							threads[num].os.println("@ready "+roomMembers.get(j).getReady());
+							threads[num].os.writeUTF("@ready "+roomMembers.get(j).getReady());
 						}
 					}
 				}
 				else if(line.startsWith("@start")) {
 					for(int i=0; i<roomMembers.size();i++) {
-						threads[roomMembers.get(i).getThreadNum()].os.println("@start");
+						threads[roomMembers.get(i).getThreadNum()].os.writeUTF("@start");
 					}
 					room.setStart(true);
 					
@@ -147,9 +148,9 @@ public class ClientThread extends Thread {
 					for(int i=0; i<roomMembers.size(); i++) { 
 						obj=roomMembers.get(i);
 						num=obj.getThreadNum();
-						threads[num].os.println("@scoreReset");
+						threads[num].os.writeUTF("@scoreReset");
 						for(int j=0; j<roomMembers.size(); j++) { 
-							threads[num].os.println("@score "+threads[roomMembers.get(j).getThreadNum()].getClientID()+" "+roomMembers.get(j).getScore());
+							threads[num].os.writeUTF("@score "+threads[roomMembers.get(j).getThreadNum()].getClientID()+" "+roomMembers.get(j).getScore());
 						}
 					}
 					
@@ -165,10 +166,10 @@ public class ClientThread extends Thread {
 						for(int i=0; i<roomMembers.size(); i++) { 
 							obj=roomMembers.get(i);
 							num=obj.getThreadNum();
-							threads[num].os.println("@roomReset");
+							threads[num].os.writeUTF("@roomReset");
 							for(int j=0; j<roomMembers.size(); j++) { 
-								threads[num].os.println("@room "+threads[roomMembers.get(j).getThreadNum()].getClientID());
-								threads[num].os.println("@ready "+roomMembers.get(j).getReady());
+								threads[num].os.writeUTF("@room "+threads[roomMembers.get(j).getThreadNum()].getClientID());
+								threads[num].os.writeUTF("@ready "+roomMembers.get(j).getReady());
 							}
 						}
 					}
@@ -181,7 +182,7 @@ public class ClientThread extends Thread {
 				else {
 					for (int i = 0; i < maxClientsCount; i++) {
 						if(threads[i]!=null) {
-							threads[i].os.println(line);
+							threads[i].os.writeUTF(line);
 						}
 					}
 				}

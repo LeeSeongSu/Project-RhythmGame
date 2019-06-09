@@ -3,8 +3,10 @@ package server;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.lang.reflect.Field;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 /**
@@ -28,6 +30,19 @@ public class MultiThreadServer {
 	private static String[] musicList;
 
 	public static void main(String args[]) {
+		System.setProperty("file.encoding","UTF-8");
+
+		Field charset;
+		try {
+			charset = Charset.class.getDeclaredField("defaultCharset");
+			charset.setAccessible(true);
+			charset.set(null,null);
+		} catch (NoSuchFieldException e1) {
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
 		
 		musicList = new String[5];
 		musicList[0] = "HAPPY ROCK";

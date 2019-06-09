@@ -10,8 +10,10 @@ import com.sun.org.apache.xerces.internal.xs.StringList;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -28,6 +30,7 @@ import javafx.stage.Stage;
 public class Menubar {
 
 	private AnchorPane pane;
+	private Label money;
 	private ImageView Background, select;
 	private BackgroundImage selectBtnBgImg;
 	private Button homeBtn, themeBtn, storeBtn, btn;
@@ -39,7 +42,14 @@ public class Menubar {
 		this.pane = pane;
 
 		Image selectImage = (new ImageParser("Lobby_selectEffect.png").getImage());
-
+		money = new Label(LoginSession.money);
+		money.setLayoutX(1740);
+		money.setLayoutY(20);
+		money.setPrefWidth(135);
+		money.setPrefHeight(70);
+		money.setAlignment(Pos.BASELINE_RIGHT);
+		money.setStyle("-fx-font-size : 38px; -fx-font-weight : bold; -fx-text-fill:white");
+		pane.getChildren().add(money);
 		buttons = new ArrayList<Button>();
 
 		selectBtnBgImg = new BackgroundImage(selectImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,

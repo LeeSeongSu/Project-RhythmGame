@@ -1,7 +1,17 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,10 +31,10 @@ import javafx.stage.Stage;
 public class SignUpController {
 
 	private ImageView Background;
-	private TextField id, name, mail;
+	private TextField email, name, answer;
 	private PasswordField pw, rePw;
-	private Text idText, pwText, rePwText, nameText, mailText;
-	private Label idlbl, pwlbl, rePwlbl, namelbl, maillbl;
+	private Text emailText, pwText, rePwText, nameText, answerText;
+	private Label emailbl, pwlbl, rePwlbl, namelbl, answerlbl;
 	private Button signUpBtn, BackBtn;
 	private AnchorPane pane;
 
@@ -39,18 +49,18 @@ public class SignUpController {
 		BackBtn.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:black");
 		pane.getChildren().add(BackBtn);
 
-		id = new TextField();
-		id.setMinWidth(430);
-		id.setMinHeight(65);
-		id.setLayoutX(918);
-		id.setLayoutY(325);
-		pane.getChildren().add(id);
+		email = new TextField();
+		email.setMinWidth(430);
+		email.setMinHeight(65);
+		email.setLayoutX(918);
+		email.setLayoutY(325);
+		pane.getChildren().add(email);
 
-		idlbl = new Label("ID");
-		idlbl.setLayoutX(600);
-		idlbl.setLayoutY(340);
-		idlbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
-		pane.getChildren().add(idlbl);
+		emailbl = new Label("Email");
+		emailbl.setLayoutX(600);
+		emailbl.setLayoutY(340);
+		emailbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
+		pane.getChildren().add(emailbl);
 
 		pw = new PasswordField();
 		pw.setMinWidth(430);
@@ -68,7 +78,6 @@ public class SignUpController {
 		pwText = new Text();
 		pwText.setLayoutX(918);
 		pwText.setLayoutY(500);
-		pw.setOnKeyReleased(e -> passwordInspect());
 
 		rePw = new PasswordField();
 		rePw.setMinWidth(430);
@@ -86,7 +95,6 @@ public class SignUpController {
 		rePwText = new Text();
 		rePwText.setLayoutX(918);
 		rePwText.setLayoutY(610);
-		rePw.setOnKeyReleased(e -> passwordInspect());
 		pane.getChildren().add(rePwText);
 
 		name = new TextField();
@@ -102,18 +110,18 @@ public class SignUpController {
 		namelbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
 		pane.getChildren().add(namelbl);
 
-		mail = new TextField();
-		mail.setMinWidth(430);
-		mail.setMinHeight(65);
-		mail.setLayoutX(918);
-		mail.setLayoutY(725);
-		pane.getChildren().add(mail);
+		answer = new TextField();
+		answer.setMinWidth(430);
+		answer.setMinHeight(65);
+		answer.setLayoutX(918);
+		answer.setLayoutY(725);
+		pane.getChildren().add(answer);
 
-		maillbl = new Label("Email");
-		maillbl.setLayoutX(600);
-		maillbl.setLayoutY(740);
-		maillbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
-		pane.getChildren().add(maillbl);
+		answerlbl = new Label("가장 좋아하는 숫자는?");
+		answerlbl.setLayoutX(600);
+		answerlbl.setLayoutY(740);
+		answerlbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
+		pane.getChildren().add(answerlbl);
 
 		signUpBtn = new Button();
 		Image signUpImage = (new ImageParser("Login_join.png").getImage());
@@ -129,20 +137,57 @@ public class SignUpController {
 
 	}
 
-	public void passwordInspect() {
-		if (pw.getText() == rePw.getText())
-			rePwText.setText("");
-		else
-			rePwText.setText("비밀번호가 일치 하지 않습니다.");
+	public boolean passwordInspect() {
+		if (pw.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요.");
+			return false;
+		}
+		if (pw.getText().equals(rePw.getText())) {
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
+			return false;
+		}
 
 	}
 
 	public void signUp() {
-		UserDto dto = new UserDto(id.getText(), pw.getText(), name.getText(), mail.getText());
-		if (new Dao().signUp(dto) == 1) {
-			moveMain();
+		if (name.getText().isEmpty()||answer.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "모든 칸을 입력해주세요.");
+			return;
 		}
-
+		if (!isValidEmail(email.getText())) {
+			JOptionPane.showMessageDialog(null, "이메일을 확인해주세요.");
+			return;
+		}
+		if (passwordInspect()) {
+			Map<String, String> map = new HashMap<>();
+			map.put("email", email.getText());
+			map.put("password", pw.getText());
+			map.put("nickname", name.getText());
+			map.put("answer", answer.getText());
+			HttpConnector hc = new HttpConnector("signup", map);
+			Task<Void> task = new Task<Void>() {
+				@Override
+				protected Void call() throws Exception {
+					try {
+						String result = hc.request();
+						if (result.equals("Duplicate Email")) {
+							JOptionPane.showMessageDialog(null, "중복된 이메일입니다.");
+						} else {
+							JOptionPane.showMessageDialog(null, "회원가입 성공하셨습니다.");
+							Platform.runLater(() -> moveMain());
+						}
+					} catch (Exception e) {
+						System.out.println("login Fail");
+					}
+					return null;
+				}
+			};
+			Thread thread = new Thread(task);
+			thread.setDaemon(true);
+			thread.start();
+		}
 	}
 
 	public void BackPage() {
@@ -192,4 +237,14 @@ public class SignUpController {
 
 	}
 
+	public boolean isValidEmail(String email) {
+		boolean err = false;
+		String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(email);
+		if (m.matches()) {
+			err = true;
+		}
+		return err;
+	}
 }
