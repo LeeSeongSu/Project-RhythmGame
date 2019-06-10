@@ -20,9 +20,9 @@ import javafx.stage.Stage;
 public class LobbyView {
 
 	private AnchorPane pane;
-	private ImageView Background, start;
+	private ImageView Background, start, expBar;
 	private BackgroundImage multiBtnBgImg, multiBtnBgEffectImg, singleBtnBgImg, singleBtnBgEffectImg, onBtnBgImg,
-			onBtnBgEffectImg, offBtnBgImg, offBtnBgEffectImg, startBtnBgImg, startEffectBtnBgEffectImg;
+			onBtnBgEffectImg, offBtnBgImg, offBtnBgEffectImg, startBtnBgImg, startEffectBtnBgEffectImg,expBarImg;
 	private Button multiBtn, singleBtn, onBtn, offBtn;
 	private Label levelLabel, nicknameLabel, expLabel;
 	
@@ -48,7 +48,7 @@ public class LobbyView {
 		Image offEffectImage = (new ImageParser("Lobby_offEffect.png").getImage());
 		Image startImage = (new ImageParser("Lobby_start.png").getImage());
 		Image startEffectImage = (new ImageParser("Lobby_startEffect.png").getImage());
-
+		Image expBarImage = (new ImageParser("expbar.png").getImage());
 		multiBtnBgImg = new BackgroundImage(multiImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 				BackgroundPosition.CENTER, null);
 		multiBtnBgEffectImg = new BackgroundImage(multiEffectImage, BackgroundRepeat.NO_REPEAT,
@@ -69,7 +69,7 @@ public class LobbyView {
 				BackgroundPosition.CENTER, null);
 		startEffectBtnBgEffectImg = new BackgroundImage(startEffectImage, BackgroundRepeat.NO_REPEAT,
 				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, null);
-
+		
 		start = new ImageView(startImage);
 		start.setLayoutX(1330);
 		start.setLayoutY(870);
@@ -113,7 +113,27 @@ public class LobbyView {
 		pane.getChildren().add(offBtn);
 		
 		nicknameLabel = new Label(LoginSession.nickname);
+		nicknameLabel.setLayoutX(200);
+		nicknameLabel.setLayoutY(360);
+		nicknameLabel.setStyle("-fx-font-size : 50px; -fx-font-weight : bold; -fx-text-fill:white");
+		pane.getChildren().add(nicknameLabel);
 		
+		levelLabel = new Label("Lv : "+LoginSession.level);
+		levelLabel.setLayoutX(200);
+		levelLabel.setLayoutY(460);
+		levelLabel.setStyle("-fx-font-size : 50px; -fx-font-weight : bold; -fx-text-fill:white");
+		pane.getChildren().add(levelLabel);
+		
+		expLabel = new Label("Exp : "+LoginSession.exp);
+		expLabel.setLayoutX(200);
+		expLabel.setLayoutY(560);
+		expLabel.setStyle("-fx-font-size : 50px; -fx-font-weight : bold; -fx-text-fill:white");
+		pane.getChildren().add(expLabel);
+		
+		expBar= new ImageView(expBarImage);
+		expBar.setLayoutX(200);
+		expBar.setLayoutY(660);
+		pane.getChildren().add(expBar);
 	}
 
 	private void multiBtnClick() {// 멀티버튼
