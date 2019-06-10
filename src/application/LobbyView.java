@@ -6,6 +6,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -23,7 +24,9 @@ public class LobbyView {
 	private BackgroundImage multiBtnBgImg, multiBtnBgEffectImg, singleBtnBgImg, singleBtnBgEffectImg, onBtnBgImg,
 			onBtnBgEffectImg, offBtnBgImg, offBtnBgEffectImg, startBtnBgImg, startEffectBtnBgEffectImg;
 	private Button multiBtn, singleBtn, onBtn, offBtn;
-
+	private Label levelLabel, nicknameLabel, expLabel;
+	
+	
 	public static String mod = "Single";
 	public static String mode_voice = "none";
 
@@ -34,7 +37,7 @@ public class LobbyView {
 		Image backGroundImage = (new ImageParser("Lobby.png").getImage());
 		Background = new ImageView(backGroundImage);
 		pane.getChildren().add(Background);// 로비 배경
-
+		
 		Image singleImage = (new ImageParser("Lobby_single.png").getImage());
 		Image singleEffectImage = (new ImageParser("Lobby_singleEffect.png").getImage());
 		Image multiImage = (new ImageParser("Lobby_multi.png").getImage());
@@ -108,7 +111,9 @@ public class LobbyView {
 		offBtn.setLayoutY(740);
 		offBtn.setOnMouseClicked(e -> offBtnClick());
 		pane.getChildren().add(offBtn);
-
+		
+		nicknameLabel = new Label(LoginSession.nickname);
+		
 	}
 
 	private void multiBtnClick() {// 멀티버튼
