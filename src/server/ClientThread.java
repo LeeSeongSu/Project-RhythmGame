@@ -152,6 +152,7 @@ public class ClientThread extends Thread {
 						for(int j=0; j<roomMembers.size(); j++) { 
 							threads[num].os.writeUTF("@score "+threads[roomMembers.get(j).getThreadNum()].getClientID()+" "+roomMembers.get(j).getScore());
 						}
+						threads[num].os.writeUTF("@scoreEnd");
 					}
 					
 				}

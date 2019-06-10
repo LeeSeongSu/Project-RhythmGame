@@ -5,7 +5,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -51,7 +50,7 @@ public class MultiThreadClient implements Runnable {
 			e1.printStackTrace();
 		}
 		int portNumber = 9999;
-//		String host = "192.168.0.45";
+//		String host = "localhost";
 		String host = "13.125.71.112";
 
 		if (args.length < 2) {
@@ -90,6 +89,7 @@ public class MultiThreadClient implements Runnable {
 			room=new ArrayList<String>();
 			ready=new ArrayList<String>();
 			score=new ArrayList<String>();
+			ArrayList<String> newRoom = new ArrayList<String>();
 			
 			while ((responseLine = is.readUTF()) != null) {
 				if (responseLine.indexOf("quit") != -1)
@@ -113,11 +113,16 @@ public class MultiThreadClient implements Runnable {
 				}
 				else if(responseLine.startsWith("@scoreReset")) {
 					score.clear();
+					newRoom.clear();
+				}
+				else if(responseLine.startsWith("@scoreEnd")) {
 					room.clear();
+					room.addAll(newRoom);
+				
 				}
 				else if(responseLine.startsWith("@score")) {
 					words=responseLine.split(" ");
-					room.add(words[1]);
+					newRoom.add(words[1]);
 					score.add(words[2]);
 				}
 			}
