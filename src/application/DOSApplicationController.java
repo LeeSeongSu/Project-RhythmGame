@@ -2,7 +2,9 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -51,7 +53,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 		Image backgroundImage = (new ImageParser("Main_bg.gif").getImage());
 		backgroundImageView.setImage(backgroundImage);
 		
-		loginBtn.setOnAction(e-> loginBeta());
+		loginBtn.setOnAction(e-> login());
 		SignUpBtn.setOnAction(e-> moveSignUp());
 		FindBtn.setOnAction(e->moveFind());
 		if(!visited) {
@@ -147,11 +149,21 @@ public class DOSApplicationController extends Thread implements Initializable {
 			@Override
 			protected Void call() throws Exception {
 				try{
-					Map<String, String> result = hc.request();
+					List<String> requestList = new ArrayList<>();
+					requestList.add("email");
+					requestList.add("token");
+					requestList.add("nickname");
+					requestList.add("money");
+					requestList.add("level");
+					requestList.add("exp");
+					Map<String, String> result = hc.request(requestList);
 					LoginSession.email=result.get("email");
 					LoginSession.token=result.get("token");
 					LoginSession.nickname=result.get("nickname");
-					MultiThreadClient.clientId=idTextField.getText();
+					LoginSession.money=result.get("money");
+					LoginSession.level=result.get("level");
+					LoginSession.exp=result.get("exp");
+					MultiThreadClient.clientId=LoginSession.nickname;
 					MultiThreadClient.sendID(MultiThreadClient.clientId);
 					System.out.println(LoginSession.nickname);
 					Platform.runLater(()->moveLobby());

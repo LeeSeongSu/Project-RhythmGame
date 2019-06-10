@@ -2,11 +2,13 @@ package application;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.lang.reflect.Field;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 public class MultiThreadClient implements Runnable {
 	
 	private static Socket clientSocket = null;
-	private static PrintStream os = null;
+	private static DataOutputStream os = null;
 	private static DataInputStream is = null;
 
 	private static BufferedReader inputLine = null;
@@ -35,10 +37,21 @@ public class MultiThreadClient implements Runnable {
 	public static boolean flag = false;
 
 	public static void main(String[] args) {
+		System.setProperty("file.encoding","UTF-8");
 
+		Field charset;
+		try {
+			charset = Charset.class.getDeclaredField("defaultCharset");
+			charset.setAccessible(true);
+			charset.set(null,null);
+		} catch (NoSuchFieldException e1) {
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		int portNumber = 9999;
-//		String host = "192.168.0.45";
-		String host = "localhost";
+//		String host = "localhost";
+		String host = "13.125.71.112";
 
 		if (args.length < 2) {
 			System.out.println("Usage: java MultiThreadChatClient <host> <portNumber>\n"
@@ -52,7 +65,7 @@ public class MultiThreadClient implements Runnable {
 		try {
 			clientSocket = new Socket(host, portNumber);
 			inputLine = new BufferedReader(new InputStreamReader(System.in));
-			os = new PrintStream(clientSocket.getOutputStream());
+			os = new DataOutputStream(clientSocket.getOutputStream());
 			is = new DataInputStream(clientSocket.getInputStream());
 		} catch (UnknownHostException e) {
 			System.err.println("Don't know about host " + host);
@@ -70,14 +83,15 @@ public class MultiThreadClient implements Runnable {
 			
 			String responseLine;
 			String[] words;
-			threadNum=is.readLine();
+			threadNum=is.readUTF();
 			System.out.println(threadNum);
 			
 			room=new ArrayList<String>();
 			ready=new ArrayList<String>();
 			score=new ArrayList<String>();
+			ArrayList<String> newRoom = new ArrayList<String>();
 			
-			while ((responseLine = is.readLine()) != null) {
+			while ((responseLine = is.readUTF()) != null) {
 				if (responseLine.indexOf("quit") != -1)
 					break;
 				else if(responseLine.startsWith("@roomReset")) {
@@ -99,11 +113,16 @@ public class MultiThreadClient implements Runnable {
 				}
 				else if(responseLine.startsWith("@scoreReset")) {
 					score.clear();
+					newRoom.clear();
+				}
+				else if(responseLine.startsWith("@scoreEnd")) {
 					room.clear();
+					room.addAll(newRoom);
+				
 				}
 				else if(responseLine.startsWith("@score")) {
 					words=responseLine.split(" ");
-					room.add(words[1]);
+					newRoom.add(words[1]);
 					score.add(words[2]);
 				}
 			}
@@ -118,31 +137,66 @@ public class MultiThreadClient implements Runnable {
 	}
 	
 	public static void sendID(String value) { //서버에게 클라이언트가 로그인한 아이디 값을 보냄
-		os.println("@id "+ value);
+		try {
+			os.writeUTF("@id "+ value);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		clientId=value;
 	}
 	
 	public static void joinRoom(int musicIndex, boolean voiceMode) { // 사용자가 원하는 방에 입장하기 위해 서버에게 방 리스트를 보내달라고 요청하는 메소드
-		os.println("@joinRoom "+musicIndex+" "+voiceMode);
+		try {
+			os.writeUTF("@joinRoom "+musicIndex+" "+voiceMode);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void ready() {
-		os.println("@ready");
+		try {
+			os.writeUTF("@ready");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void start() {
-		os.println("@start");
+		try {
+			os.writeUTF("@start");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void sendScore(int value) {
-		os.println("@score "+value);
+		try {
+			os.writeUTF("@score "+value);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void roomExit() {
-		os.println("@roomExit");
+		try {
+			os.writeUTF("@roomExit");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public static void exit() {
-		os.println("@exit");
+		try {
+			os.writeUTF("@exit");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static ArrayList<String> getRoom(){

@@ -355,6 +355,7 @@ public class SongView {
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("MultiScreen.fxml"));
 				MultiThreadClient.joinRoom(i,true);
 				new MultiScreenView(pane, i);
+				new Menubar(pane, -1);
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
 				stage.setScene(sc);
@@ -364,6 +365,7 @@ public class SongView {
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("MultiScreen.fxml"));
 				MultiThreadClient.joinRoom(i,false);
 				new MultiScreenView(pane, i);
+				new Menubar(pane, -1);
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
 				stage.setScene(sc);

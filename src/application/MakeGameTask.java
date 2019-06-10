@@ -542,7 +542,7 @@ public class MakeGameTask extends Task<Void>{
 		}
 	
 	
-		//Platform.runLater(()-> pane.getChildren().add(ImageStorage.judgeImgView));
+		Platform.runLater(()-> pane.getChildren().add(ImageStorage.judgeImgView));
 		Note[] notes = new Note[beats.length];
 		for(int i=0; i<beats.length;i++) {
 			notes[i]= new Note(beats[i].getNoteLocation(), pane);

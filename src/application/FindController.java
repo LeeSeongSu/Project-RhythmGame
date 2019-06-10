@@ -1,7 +1,15 @@
 package application;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,10 +29,8 @@ import javafx.stage.Stage;
 public class FindController {
 
 	private ImageView Background;
-	private TextField id, name, mail;
-	private PasswordField pw, rePw;
-	private Text idText, pwText, rePwText, nameText, mailText;
-	private Label idlbl, pwlbl, rePwlbl, namelbl, maillbl;
+	private TextField email, answer;
+	private Label emaillbl, answerlbl;
 	private Button signUpBtn, BackBtn;
 	private AnchorPane pane;
 
@@ -39,81 +45,31 @@ public class FindController {
 		BackBtn.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:black");
 		pane.getChildren().add(BackBtn);
 
-		id = new TextField();
-		id.setMinWidth(430);
-		id.setMinHeight(65);
-		id.setLayoutX(918);
-		id.setLayoutY(325);
-		pane.getChildren().add(id);
+		email = new TextField();
+		email.setMinWidth(430);
+		email.setMinHeight(65);
+		email.setLayoutX(918);
+		email.setLayoutY(325);
+		pane.getChildren().add(email);
 
-		idlbl = new Label("아이디");
-		idlbl.setLayoutX(600);
-		idlbl.setLayoutY(340);
-		idlbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
-		pane.getChildren().add(idlbl);
+		emaillbl = new Label("Email");
+		emaillbl.setLayoutX(600);
+		emaillbl.setLayoutY(340);
+		emaillbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
+		pane.getChildren().add(emaillbl);
 
-		pw = new PasswordField();
-		pw.setMinWidth(430);
-		pw.setMinHeight(65);
-		pw.setLayoutX(918);
-		pw.setLayoutY(425);
-		pane.getChildren().add(pw);
+		answer = new TextField();
+		answer.setMinWidth(430);
+		answer.setMinHeight(65);
+		answer.setLayoutX(918);
+		answer.setLayoutY(425);
+		pane.getChildren().add(answer);
 
-		pwlbl = new Label("비밀번호");
-		pwlbl.setLayoutX(600);
-		pwlbl.setLayoutY(440);
-		pwlbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
-		pane.getChildren().add(pwlbl);
-
-		pwText = new Text();
-		pwText.setLayoutX(918);
-		pwText.setLayoutY(500);
-		pw.setOnKeyReleased(e -> passwordInspect());
-
-		rePw = new PasswordField();
-		rePw.setMinWidth(430);
-		rePw.setMinHeight(65);
-		rePw.setLayoutX(918);
-		rePw.setLayoutY(525);
-		pane.getChildren().add(rePw);
-
-		rePwlbl = new Label("비밀번호 확인");
-		rePwlbl.setLayoutX(600);
-		rePwlbl.setLayoutY(540);
-		rePwlbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
-		pane.getChildren().add(rePwlbl);
-
-		rePwText = new Text();
-		rePwText.setLayoutX(918);
-		rePwText.setLayoutY(610);
-		rePw.setOnKeyReleased(e -> passwordInspect());
-		pane.getChildren().add(rePwText);
-
-		name = new TextField();
-		name.setMinWidth(430);
-		name.setMinHeight(65);
-		name.setLayoutX(918);
-		name.setLayoutY(625);
-		pane.getChildren().add(name);
-
-		namelbl = new Label("닉네임");
-		namelbl.setLayoutX(600);
-		namelbl.setLayoutY(640);
-		namelbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
-		pane.getChildren().add(namelbl);
-
-		mail = new TextField();
-		mail.setMinWidth(430);
-		mail.setMinHeight(65);
-		mail.setLayoutX(918);
-		mail.setLayoutY(725);
-		pane.getChildren().add(mail);
-
-		maillbl = new Label("이메일");
-		maillbl.setLayoutX(600);
-		maillbl.setLayoutY(740);
-		maillbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
-		pane.getChildren().add(maillbl);
+		answerlbl = new Label("가장 좋아하는 숫자는?");
+		answerlbl.setLayoutX(600);
+		answerlbl.setLayoutY(440);
+		answerlbl.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:white");
+		pane.getChildren().add(answerlbl);
 
 		signUpBtn = new Button();
 		Image signUpImage = (new ImageParser("Login_join.png").getImage());
@@ -121,28 +77,60 @@ public class FindController {
 				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, null);
 		signUpBtn.setBackground(new Background(signUpBtnBgImg));
 		signUpBtn.setLayoutX(750);
-		signUpBtn.setLayoutY(850);
+		signUpBtn.setLayoutY(650);
 		signUpBtn.setPrefSize(376, 88);
 		pane.getChildren().add(signUpBtn);
 
-		signUpBtn.setOnAction(e -> signUp());
+		signUpBtn.setOnAction(e -> findPassword());
 
 	}
 
-	public void passwordInspect() {
-		if (pw.getText() == rePw.getText())
-			rePwText.setText("");
-		else
-			rePwText.setText("비밀번호가 일치 하지 않습니다.");
-
-	}
-
-	public void signUp() {
-		UserDto dto = new UserDto(id.getText(), pw.getText(), name.getText(), mail.getText());
-		if (new Dao().signUp(dto) == 1) {
-			moveMain();
+	public void findPassword() {
+		if (answer.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "모든 칸을 입력해주세요.");
+			return;
 		}
+		if (!isValidEmail(email.getText())) {
+			JOptionPane.showMessageDialog(null, "이메일을 확인해주세요.");
+			return;
+		}
+		Map<String, String> map = new HashMap<>();
+		map.put("email", email.getText());
+		map.put("answer", answer.getText());
+		HttpConnector hc = new HttpConnector("sendMail", map);
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				try {
+					String result = hc.request();
+					if (result.equals("Wrong Email or Answer")) {
+						JOptionPane.showMessageDialog(null, "옳바르지 않은 메일이거나 답변이 틀리셨습니다.");
+					} else if (result.equals("Connect Error")) {
+						JOptionPane.showMessageDialog(null, "메일 보내기에 실패하였습니다.");
+					} else {
+						JOptionPane.showMessageDialog(null, "메일 보내기에 성공하셨습니다.");
+						Platform.runLater(() -> moveMain());
+					}
+				} catch (Exception e) {
+					System.out.println("Find Fail");
+				}
+				return null;
+			}
+		};
+		Thread thread = new Thread(task);
+		thread.setDaemon(true);
+		thread.start();
+	}
 
+	public boolean isValidEmail(String email) {
+		boolean err = false;
+		String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(email);
+		if (m.matches()) {
+			err = true;
+		}
+		return err;
 	}
 
 	public void BackPage() {
