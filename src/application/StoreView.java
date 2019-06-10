@@ -26,6 +26,7 @@ public class StoreView {
 	private static ArrayList<Button> buttons1;
 	private static ArrayList<String> fxmlList1;
 	private static ArrayList<String> screenList1;
+	private static ArrayList<Button> buttons;
 	private boolean isFirst;
 
 	public StoreView(AnchorPane pane, boolean isFirst) {
@@ -35,6 +36,22 @@ public class StoreView {
 			Image backGroundImage = (new ImageParser("Store_IGM.png").getImage());
 			Background = new ImageView(backGroundImage);
 			pane.getChildren().add(Background);// 로비 배경
+			for (int a = 0; a < 6; a++) {
+				Button btn = new Button();
+				if(a<3) {
+					btn.setPrefSize(472, 372);
+					btn.setLayoutX(443 + a * 470);
+					btn.setLayoutY(215);
+					btn.setOpacity(1);
+				}else {
+					btn.setPrefSize(472, 372);
+					btn.setLayoutX(443 + (a-3) * 470);
+					btn.setLayoutY(590);
+					btn.setOpacity(1);
+				}
+				pane.getChildren().add(btn);
+
+			}
 		}
 		buttons1 = new ArrayList<Button>();
 
@@ -48,12 +65,16 @@ public class StoreView {
 			buttons1.add(btn1);
 
 			pane.getChildren().add(btn1);
-
+			
 		}
+		
+		buttons = new ArrayList<Button>();
+
 		buttons1.get(0).setOnMouseClicked(e -> btnClick1(0));
 		buttons1.get(1).setOnMouseClicked(e -> btnClick1(1));
 		buttons1.get(2).setOnMouseClicked(e -> btnClick1(2));
 
+		
 		fxmlList1 = new ArrayList<String>();
 		fxmlList1.add("StoreIgmScreen.fxml");
 		fxmlList1.add("StoreGameScreen.fxml");
