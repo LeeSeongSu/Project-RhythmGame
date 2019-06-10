@@ -3,13 +3,10 @@ package server;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collector;
 
 /**
  * 
@@ -163,6 +160,7 @@ public class ClientThread extends Thread {
 								roomMembers.remove(i);
 							}
 						}
+							
 						
 						for(int i=0; i<roomMembers.size(); i++) { 
 							obj=roomMembers.get(i);
@@ -198,7 +196,8 @@ public class ClientThread extends Thread {
 		ArrayList<RoomMember> newRoomList;
 		for(int i=0; i<roomList.size();i++) {
 			newRoomList=roomList.get(i).getRoomMembers();
-			if(roomList.get(i).isVoiceMode()==voiceMode&&!roomList.get(i).isStart()&&newRoomList.size()!=maxRoomMember) {
+			
+			if(roomList.get(i).isVoiceMode()==voiceMode&&!roomList.get(i).isStart()&&newRoomList.size()<=maxRoomMember) {
 				newRoomList.add(new RoomMember (threadNum,0,0));
 				room=roomList.get(i);
 				return newRoomList;
