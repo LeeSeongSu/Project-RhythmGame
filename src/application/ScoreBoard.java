@@ -61,7 +61,9 @@ public class ScoreBoard {
                     Platform.runLater(() -> {
 
                     	room= MultiThreadClient.getRoom();
+                    	
                     	scores=MultiThreadClient.getScore();
+                    	
                 		for(int i=0; i<room.size();i++) {
                 			textList1.get(i).setText(room.get(i));
                 			textList2.get(i).setText(scores.get(i));

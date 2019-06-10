@@ -1,12 +1,8 @@
 package application;
 
-import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
 
 public class Note extends Thread{
 	

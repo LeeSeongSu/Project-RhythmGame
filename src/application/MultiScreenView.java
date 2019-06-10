@@ -39,6 +39,9 @@ public class MultiScreenView {
 		this.pane = pane;
 		this.musicIndex = musicIndex;
 		start = false;
+		
+		room = MultiThreadClient.getRoom();
+		ready = MultiThreadClient.getReady();
 
 		Image startBtnImg = (new ImageParser("Wait_start2.png").getImage());
 
@@ -124,6 +127,8 @@ public class MultiScreenView {
 						for (int i = 0; i < room.size(); i++) {
 							exButton = buttons.get(i);
 							text = room.get(i);
+							if(ready.size()==0)
+								continue;
 							if (ready.get(i).equals("1")) {
 								readyBtn.setBackground(new Background(readyBtnBgEffectImg));
 								exButton.setBackground(new Background(exButtonRedImg));
