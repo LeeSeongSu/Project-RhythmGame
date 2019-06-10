@@ -149,15 +149,16 @@ public class NoteDropTask<Void> extends Task<Void> {
 		String comboString = String.valueOf(Game.getCombo());
 		char[] comboArr = comboString.toCharArray();
 		for (int i = 0; i < comboArr.length; i++) {
+			int startX = 960-comboArr.length*40;
 			if(oneCombo||!pane.getChildren().contains(ImageStorage.comboImageView[0][(int) comboArr[i] - 48])) {
-				ImageStorage.comboImageView[0][(int) comboArr[i] - 48].setLayoutX(920 - 80 * (comboArr.length - i - 1));
+				ImageStorage.comboImageView[0][(int) comboArr[i] - 48].setLayoutX(startX + 80 * i);
 				ImageStorage.comboImageView[0][(int) comboArr[i] - 48].setLayoutY(110);
 				pane.getChildren().add(ImageStorage.comboImageView[0][(int) comboArr[i] - 48]);
 				oneCombo=false;
 			}else {
 				for(int j=0;j<ImageStorage.comboImageView.length;j++) {
 					if(!pane.getChildren().contains(ImageStorage.comboImageView[j][(int) comboArr[i] - 48])){
-						ImageStorage.comboImageView[j][(int) comboArr[i] - 48].setLayoutX(920 - 80 * (comboArr.length - i - 1));
+						ImageStorage.comboImageView[j][(int) comboArr[i] - 48].setLayoutX(startX + 80 * i);
 						ImageStorage.comboImageView[j][(int) comboArr[i] - 48].setLayoutY(110);
 						pane.getChildren().add(ImageStorage.comboImageView[j][(int) comboArr[i] - 48]);
 						break;
