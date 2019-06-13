@@ -198,9 +198,9 @@ public class MultiScreenView {
 				public Void call() throws Exception {
 					Game tmp = game;
 					if(LobbyView.mode_voice.equals("voice")) {
-						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,true);
+						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,true,stage);
 					}else {
-						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,false);
+						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,false,stage);
 					}
 					tmp.run();
 					return null;

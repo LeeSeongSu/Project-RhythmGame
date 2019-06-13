@@ -66,7 +66,8 @@ public class ScoreBoard {
                     	
                 		for(int i=0; i<room.size();i++) {
                 			textList1.get(i).setText(room.get(i));
-                			textList2.get(i).setText(scores.get(i));
+                			if(scores.size()>i)
+                				textList2.get(i).setText(scores.get(i));
                 			
                 			if(room.get(i).equals(MultiThreadClient.clientId)) {
                 				textList1.get(i).setStyle("-fx-text-fill: red; -fx-font-size : 30px;");

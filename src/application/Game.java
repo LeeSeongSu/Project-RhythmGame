@@ -2,15 +2,15 @@ package application;
 
 import java.util.ArrayList;
 
-
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 /**
  * @author 양태일
@@ -20,12 +20,16 @@ import javafx.scene.text.Text;
 public class Game extends Thread {
 	
 	private Scene sc;
-	private AnchorPane pane;
+	private static AnchorPane pane;
 	private static Music music;
 	private static String title;
 	private Image image;
 	private VoiceKeyListener voice;
-	private boolean isVoiceMode;
+	private static boolean VoiceMode;
+	private static Stage stage;
+	
+	private static Button pauseBtn,exitBtn,cancleBtn;
+	private static Thread makeGameThread,voiceThread,gameThread;
 	
 	private static int combo=0;
 	private static int score=0;
@@ -45,17 +49,21 @@ public class Game extends Thread {
 		combo=0;
 	}
 	
-	public Game(String title, AnchorPane pane, Scene sc, boolean isVoiceMode) {
+	public Game(String title, AnchorPane pane, Scene sc, boolean VoiceMode, Stage stage) {
 		this.pane = pane;
 		this.title = title;
 		this.sc = sc;
-		this.isVoiceMode= isVoiceMode;
-		DOSApplicationController.introMusic.close();
+		this.VoiceMode= VoiceMode;
+		this.stage=stage;
+		DOSApplicationController.introMusic.silence();
 		sc.setOnKeyPressed(new KeyListener(pane, noteList));
 		sc.setOnKeyReleased(new NoteEffectKeyListener(pane));
-		if(isVoiceMode) {
+		if(VoiceMode) {
 			voiceMode();
 		}
+		System.out.println(VoiceMode);
+		
+
 		
 	}
 	public void voiceMode() {
@@ -77,11 +85,13 @@ public class Game extends Thread {
 		boolean flag =false;
 		int startTime = 1000-Main.REACH_TIME*1000;
 		music = new Music(title, false);
-		Thread t = new Thread(new MakeGameTask(music,pane,noteList));
-		t.setDaemon(true);
-		t.start();
-		Thread voiceT = new Thread(voice);
-		voiceT.start();
+		makeGameThread = new Thread(new MakeGameTask(music,pane,noteList));
+		makeGameThread.setDaemon(true);
+		makeGameThread.start();
+		if(VoiceMode) {
+			voiceThread = new Thread(voice);
+			voiceThread.start();
+		}
 	}
 
 	@Override
@@ -103,6 +113,77 @@ public class Game extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void pause() {
+		Task<Void> task = new Task<Void>() {
+			public Void call() throws Exception {
+				Popup pop =new Popup();
+				Platform.runLater(() -> {
+					try {
+						AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("QuestionExit.fxml"));
+						pop.getContent().add(second);
+						pop.show(stage);
+						exitBtn = new Button("나가기");
+						cancleBtn = new Button("취소");
+						exitBtn.setLayoutX(40);
+						exitBtn.setLayoutY(31);
+						cancleBtn.setLayoutX(181);
+						cancleBtn.setLayoutY(31);
+						
+						exitBtn.setOnMouseClicked(e->{pop.hide(); moveHome();});
+						cancleBtn.setOnMouseClicked(e->{pop.hide();});
+						
+						pop.setAutoHide(true);
+						
+						second.getChildren().add(exitBtn);
+						second.getChildren().add(cancleBtn);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				});
+				
+				return null;
+			}
+		};
+		
+		Thread thread = new Thread(task);
+		thread.setDaemon(true);
+		thread.start();
+	}
+	
+	private static void moveHome() {
+		music.close();
+		makeGameThread.interrupt();
+		if(VoiceMode)
+			voiceThread.interrupt();
+	
+		
+		ImageStorage.judgeImgView.setImage(null);
+
+		try {
+
+			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SelectScreen.fxml"));
+			LobbyView lobbyView = new LobbyView(second);
+			Menubar menubar = new Menubar(second,0);
+			MultiThreadClient.roomExit();
+			// 씬에 레이아웃 추가
+			Scene sc = new Scene(second);
+
+			stage.setScene(sc);
+
+			stage.show();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		
+		DOSApplicationController.introMusic.normalVolume();
+		
+	}
+	
 
 	public AnchorPane getPane() {
 		return pane;
@@ -111,7 +192,10 @@ public class Game extends Thread {
 	public void setPane(AnchorPane pane) {
 		this.pane = pane;
 	}
-
+	public static boolean isVoiceMode() {
+		return VoiceMode;
+		
+	}
 	public static Music getMusic() {
 		return music;
 	}
