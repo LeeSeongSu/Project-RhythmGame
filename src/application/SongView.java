@@ -323,7 +323,7 @@ public class SongView {
 				Task<Void> task = new Task<Void>() {
 					public Void call() throws Exception {
 						Game tmp = game;
-						tmp = new Game(SongView.mp3List.get(selectCircleIndex), pane, sc, true);
+						tmp = new Game(SongView.mp3List.get(selectCircleIndex), pane, sc, true, stage);
 						tmp.run();
 						return null;
 					}
@@ -343,7 +343,7 @@ public class SongView {
 				Task<Void> task = new Task<Void>() {
 					public Void call() throws Exception {
 						Game tmp = game;
-						tmp = new Game(SongView.mp3List.get(selectCircleIndex), pane, sc, false);
+						tmp = new Game(SongView.mp3List.get(selectCircleIndex), pane, sc, false, stage);
 						tmp.run();
 						return null;
 					}

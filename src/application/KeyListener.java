@@ -62,9 +62,14 @@ public class KeyListener implements EventHandler<KeyEvent> {
 		case Z:item.items(0);break;
 		case X:item.items(1);break;
 		case C:item.items(2);break;
+		case ESCAPE:
+			System.out.println("ESC");
+			Game.pause();
+			break;
+		
 		}
 		
-		if (LobbyView.mode_voice == "none") {
+		if (!Game.isVoiceMode()) {
 			switch (event.getCode()) {
 			case SPACE:
 				System.out.println("SPACE");
