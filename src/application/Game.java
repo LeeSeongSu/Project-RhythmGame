@@ -25,7 +25,7 @@ public class Game extends Thread {
 	private static String title;
 	private Image image;
 	private VoiceKeyListener voice;
-	private static boolean VoiceMode;
+	private static boolean VoiceMode,MultiMode;
 	private static Stage stage;
 	
 	private static Button pauseBtn,exitBtn,cancleBtn;
@@ -49,12 +49,15 @@ public class Game extends Thread {
 		combo=0;
 	}
 	
-	public Game(String title, AnchorPane pane, Scene sc, boolean VoiceMode, Stage stage) {
+	public Game(String title, AnchorPane pane, Scene sc, boolean VoiceMode,boolean MultiMode, Stage stage) {
 		this.pane = pane;
 		this.title = title;
 		this.sc = sc;
 		this.VoiceMode= VoiceMode;
+		this.MultiMode = MultiMode;
 		this.stage=stage;
+		score=0;
+		combo=0;
 		DOSApplicationController.introMusic.silence();
 		sc.setOnKeyPressed(new KeyListener(pane, noteList));
 		sc.setOnKeyReleased(new NoteEffectKeyListener(pane));
@@ -120,15 +123,19 @@ public class Game extends Thread {
 				Popup pop =new Popup();
 				Platform.runLater(() -> {
 					try {
-						AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("QuestionExit.fxml"));
+						AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("PopupPause.fxml"));
 						pop.getContent().add(second);
 						pop.show(stage);
-						exitBtn = new Button("나가기");
-						cancleBtn = new Button("취소");
-						exitBtn.setLayoutX(40);
-						exitBtn.setLayoutY(31);
-						cancleBtn.setLayoutX(181);
-						cancleBtn.setLayoutY(31);
+						exitBtn = new Button();
+						cancleBtn = new Button();
+						exitBtn.setLayoutX(365);
+						exitBtn.setLayoutY(239);
+						exitBtn.setPrefSize(126, 189);
+						exitBtn.setOpacity(0);
+						cancleBtn.setLayoutX(87);
+						cancleBtn.setLayoutY(239);
+						cancleBtn.setPrefSize(186, 189);
+						cancleBtn.setOpacity(0);
 						
 						exitBtn.setOnMouseClicked(e->{pop.hide(); moveHome();});
 						cancleBtn.setOnMouseClicked(e->{pop.hide();});
@@ -195,6 +202,10 @@ public class Game extends Thread {
 	public static boolean isVoiceMode() {
 		return VoiceMode;
 		
+	}
+	
+	public static boolean isMultiMode() {
+		return MultiMode;
 	}
 	public static Music getMusic() {
 		return music;

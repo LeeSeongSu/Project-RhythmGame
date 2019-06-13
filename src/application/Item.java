@@ -11,11 +11,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
-public class item {
+public class Item {
 
 	private static Popup pop;
 	
-	public item(Stage stage) {
+	public Item(Stage stage) {
 		
 		pop = new Popup();
 		try {
@@ -33,6 +33,7 @@ public class item {
 	}
 	
 	public static void items(int i) {
+		System.out.println("item "+i);
 		Task<Void> task = new Task<Void>() {
 			public Void call() throws Exception {
 				if(i==0)
@@ -67,7 +68,9 @@ public class item {
 	
 	public static void silence() {
     	Game.getMusic().silence();
+    	DOSApplicationController.introMusic.normalVolume();
     	count();
+    	DOSApplicationController.introMusic.silence();
 		Game.getMusic().normalVolume();
 	}
 	

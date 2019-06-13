@@ -18,6 +18,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 	ImageView[] addedImgViewArr = new ImageView[4];
 	boolean oneCombo = true;
 	int arrIndex = 0;
+	static int item = 1;
 	public NoteDropTask(Note note) {
 		this.imgView = note.getImageView();
 		this.pane = note.getPane();
@@ -142,6 +143,11 @@ public class NoteDropTask<Void> extends Task<Void> {
 		}
 		System.out.println("combo = " + Game.getCombo());
 		MultiThreadClient.sendScore(Game.getScore());
+		
+		if(Game.getScore()/1000==item) {
+			ItemView.addItem((int) (Math.random()*3));
+			item++;
+		}
 	}
 
 	public void drawCombo() {

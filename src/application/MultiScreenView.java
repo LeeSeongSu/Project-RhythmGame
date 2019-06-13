@@ -192,15 +192,16 @@ public class MultiScreenView {
 		
 			Game game = null;
 			new ScoreBoard(pane);
+			new ItemView(pane);
 			stage.show();
-			new item(stage);
+			new Item(stage);
 			Task<Void> task = new Task<Void>() {
 				public Void call() throws Exception {
 					Game tmp = game;
 					if(LobbyView.mode_voice.equals("voice")) {
-						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,true,stage);
+						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,true,true,stage);
 					}else {
-						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,false,stage);
+						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,false,true,stage);
 					}
 					tmp.run();
 					return null;

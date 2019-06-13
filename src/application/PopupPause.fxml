@@ -9,8 +9,10 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="113.0" layoutX="-18.0" layoutY="-11.0" stroke="BLACK" strokeType="INSIDE" width="318.0" />
-      <Button layoutX="40.0" layoutY="31.0" mnemonicParsing="false" text="나가기" />
-      <Button layoutX="181.0" layoutY="31.0" mnemonicParsing="false" text="취소" />
+      <ImageView fitHeight="507.0" fitWidth="616.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/PopUp_pause.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

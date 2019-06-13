@@ -319,11 +319,11 @@ public class SongView {
 				stage.setScene(sc);
 				Game game = null;
 				stage.show();
-				new item(stage);
+				new Item(stage);
 				Task<Void> task = new Task<Void>() {
 					public Void call() throws Exception {
 						Game tmp = game;
-						tmp = new Game(SongView.mp3List.get(selectCircleIndex), pane, sc, true, stage);
+						tmp = new Game(SongView.mp3List.get(selectCircleIndex), pane, sc, true,false, stage);
 						tmp.run();
 						return null;
 					}
@@ -339,11 +339,11 @@ public class SongView {
 				stage.setScene(sc);
 				Game game = null;
 				stage.show();
-				new item(stage);
+				new Item(stage);
 				Task<Void> task = new Task<Void>() {
 					public Void call() throws Exception {
 						Game tmp = game;
-						tmp = new Game(SongView.mp3List.get(selectCircleIndex), pane, sc, false, stage);
+						tmp = new Game(SongView.mp3List.get(selectCircleIndex), pane, sc, false,false, stage);
 						tmp.run();
 						return null;
 					}

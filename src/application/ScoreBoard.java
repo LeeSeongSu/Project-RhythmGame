@@ -9,8 +9,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class ScoreBoard {
-	ArrayList<String> room;
-	ArrayList<String> scores;
+	static ArrayList<String> room;
+	static ArrayList<String> scores;
 	boolean playing;
 	private ArrayList<Label> textList1 = new ArrayList<Label>();
 	private ArrayList<Label> textList2 = new ArrayList<Label>();

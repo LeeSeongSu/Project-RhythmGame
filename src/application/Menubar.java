@@ -108,15 +108,21 @@ public class Menubar {
 				Platform.runLater(() -> {
 					try {
 						AnchorPane second = FXMLLoader
-								.load(Class.forName("application.Main").getResource("QuestionExit.fxml"));
+								.load(Class.forName("application.Main").getResource("PopupMulti.fxml"));
 						pop.getContent().add(second);
 						pop.show(stage);
-						exitBtn = new Button("나가기");
-						cancleBtn = new Button("취소");
-						exitBtn.setLayoutX(40);
-						exitBtn.setLayoutY(31);
-						cancleBtn.setLayoutX(181);
-						cancleBtn.setLayoutY(31);
+						exitBtn = new Button();
+						cancleBtn = new Button();
+						
+						exitBtn.setLayoutX(364);
+						exitBtn.setLayoutY(111);
+						exitBtn.setPrefSize(141, 198);
+						exitBtn.setOpacity(0);
+						
+						cancleBtn.setLayoutX(113);
+						cancleBtn.setLayoutY(111);
+						cancleBtn.setPrefSize(141, 198);
+						cancleBtn.setOpacity(0);
 
 						exitBtn.setOnMouseClicked(e -> {
 							exit = true;
@@ -186,7 +192,9 @@ public class Menubar {
 
 				stage.show();
 			}
-
+			
+			LobbyView.mod="Single";
+			LobbyView.mode_voice="none";
 			MultiThreadClient.roomExit();
 			System.out.println("Exit");
 
