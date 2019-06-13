@@ -32,11 +32,11 @@ import javafx.stage.Stage;
 public class Menubar {
 
 	private AnchorPane pane;
-	private Label money;
+	private Label money = new Label(LoginSession.money);
 	private ImageView Background, select;
 	private BackgroundImage selectBtnBgImg;
-	private Button homeBtn, themeBtn, storeBtn, btn,exitBtn,cancleBtn;
-	private boolean inRoom, exit=false, clicked=false;
+	private Button homeBtn, themeBtn, storeBtn, btn, exitBtn, cancleBtn;
+	private boolean inRoom, exit = false, clicked = false;
 
 	private static ArrayList<Button> buttons;
 	private static ArrayList<String> fxmlList;
@@ -46,7 +46,6 @@ public class Menubar {
 		this.pane = pane;
 
 		Image selectImage = (new ImageParser("Lobby_selectEffect.png").getImage());
-		money = new Label(LoginSession.money);
 		money.setLayoutX(1740);
 		money.setLayoutY(20);
 		money.setPrefWidth(135);
@@ -72,14 +71,13 @@ public class Menubar {
 			pane.getChildren().add(btn);
 
 		}
-		
-		if(i!=-1) {
+
+		if (i != -1) {
 			buttons.get(i).setOpacity(1);
-			inRoom=false;
-		}
-		else {
+			inRoom = false;
+		} else {
 			buttons.get(0).setOpacity(1);
-			inRoom=true;
+			inRoom = true;
 		}
 
 		buttons.get(0).setOnMouseClicked(e -> btnClick(0));
@@ -98,14 +96,19 @@ public class Menubar {
 
 	}
 	
+	public void setMoney(String changeMoney) {
+		Platform.runLater(()->money.setText(String.valueOf(changeMoney)));
+	}
+	
 	private void QestionExit(int i, Stage stage) {
 		Task<Void> task = new Task<Void>() {
 			public Void call() throws Exception {
-				Popup pop =new Popup();
-				
+				Popup pop = new Popup();
+
 				Platform.runLater(() -> {
 					try {
-						AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("QuestionExit.fxml"));
+						AnchorPane second = FXMLLoader
+								.load(Class.forName("application.Main").getResource("QuestionExit.fxml"));
 						pop.getContent().add(second);
 						pop.show(stage);
 						exitBtn = new Button("나가기");
@@ -114,12 +117,21 @@ public class Menubar {
 						exitBtn.setLayoutY(31);
 						cancleBtn.setLayoutX(181);
 						cancleBtn.setLayoutY(31);
-						
-						exitBtn.setOnMouseClicked(e->{exit=true;clicked=true; pop.hide(); moveScreen(i, stage);});
-						cancleBtn.setOnMouseClicked(e->{exit=false;clicked=true; pop.hide();});
-						
+
+						exitBtn.setOnMouseClicked(e -> {
+							exit = true;
+							clicked = true;
+							pop.hide();
+							moveScreen(i, stage);
+						});
+						cancleBtn.setOnMouseClicked(e -> {
+							exit = false;
+							clicked = true;
+							pop.hide();
+						});
+
 						pop.setAutoHide(true);
-						
+
 						second.getChildren().add(exitBtn);
 						second.getChildren().add(cancleBtn);
 					} catch (Exception e) {
@@ -127,25 +139,25 @@ public class Menubar {
 						e.printStackTrace();
 					}
 				});
-				
+
 				return null;
 			}
 		};
-		
+
 		Thread thread = new Thread(task);
 		thread.setDaemon(true);
 		thread.start();
 
 	}
-	
+
 	private void moveScreen(int i, Stage stage) {
-		
+
 		try {
 			if (fxmlList.get(i) == "StoreScreen.fxml") {
-				AnchorPane second = FXMLLoader.load(getClass().getResource(fxmlList.get(i)));
+				AnchorPane second = FXMLLoader.load(getClass().getResource("StoreScreen.fxml"));
 				StoreView storeview = new StoreView(second, true);
 				Menubar menubar = new Menubar(second, i);
-
+				
 				Scene sc = new Scene(second);
 
 				stage.setScene(sc);
@@ -162,9 +174,9 @@ public class Menubar {
 				stage.setScene(sc);
 
 				stage.show();
-			} else {
+			} else if (fxmlList.get(i) == "ThemeScreen.fxml") {
 				AnchorPane second = FXMLLoader.load(getClass().getResource("ThemeScreen.fxml"));
-				ThemeView themeView = new ThemeView(second);
+				ThemeView themeView = new ThemeView(second, true);
 
 				Menubar menubar = new Menubar(second, i);
 
@@ -174,13 +186,13 @@ public class Menubar {
 
 				stage.show();
 			}
-			
+
 			MultiThreadClient.roomExit();
 			System.out.println("Exit");
 
-			} catch (IOException e) {
-	
-				e.printStackTrace();
+		} catch (IOException e) {
+
+			e.printStackTrace();
 
 		}
 	}
@@ -194,11 +206,10 @@ public class Menubar {
 		}
 
 		Stage stage = (Stage) buttons.get(i).getScene().getWindow();
-		
-		if(inRoom) {
-			QestionExit(i,stage);
-		}
-		else {
+
+		if (inRoom) {
+			QestionExit(i, stage);
+		} else {
 			moveScreen(i, stage);
 		}
 	}
