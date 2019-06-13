@@ -156,6 +156,8 @@ public class DOSApplicationController extends Thread implements Initializable {
 					requestList.add("money");
 					requestList.add("level");
 					requestList.add("exp");
+					requestList.add("chooseEffect");
+					requestList.add("chooseNote");
 					Map<String, String> result = hc.request(requestList);
 					LoginSession.email=result.get("email");
 					LoginSession.token=result.get("token");

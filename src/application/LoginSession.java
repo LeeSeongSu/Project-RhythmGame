@@ -7,4 +7,6 @@ public class LoginSession {
 	public static String money;
 	public static String level;
 	public static String exp;
+	public static String chooseNote;
+	public static String chooseEffect;
 }
