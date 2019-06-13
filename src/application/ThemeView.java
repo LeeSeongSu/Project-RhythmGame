@@ -44,8 +44,8 @@ public class ThemeView {
 			btn = new Button();
 			btn.setPrefSize(287, 87);
 
-			btn.setLayoutX(96);
-			btn.setLayoutY(398 + a * 160);
+			btn.setLayoutX(100);
+			btn.setLayoutY(463 + a * 160);
 			btn.setOpacity(0);
 			buttons.add(btn);
 
