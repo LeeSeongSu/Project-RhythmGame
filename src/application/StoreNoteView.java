@@ -47,8 +47,8 @@ public class StoreNoteView {
 
 	public void buyItem(int itemId) {
 		int isBuy = JOptionPane.showConfirmDialog(null, "정말 구매하시겠습니까?", "확인", JOptionPane.OK_CANCEL_OPTION);
-		for(int i=0; i<LoginSession.items.size();i++) {
-			if(LoginSession.items.get(i).getItemId()==itemId) {
+		for (int i = 0; i < LoginSession.items.size(); i++) {
+			if (LoginSession.items.get(i).getItemId() == itemId) {
 				JOptionPane.showMessageDialog(null, "이미 구매한 아이템입니다.");
 				return;
 			}
@@ -81,6 +81,7 @@ public class StoreNoteView {
 							stage.show();
 						}
 					} catch (Exception e) {
+						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "인터넷 연결을 확인해주세요.");
 					}
 					return null;
