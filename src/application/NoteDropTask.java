@@ -16,9 +16,16 @@ public class NoteDropTask<Void> extends Task<Void> {
 	Note note;
 	List<ImageView> addedImgView = new ArrayList<ImageView>();
 	ImageView[] addedImgViewArr = new ImageView[4];
+	
+	public static int perfect;
+	public static int great;
+	public static int good;
+	public static int bad;
+	public static int miss;
 	boolean oneCombo = true;
 	int arrIndex = 0;
 	static int item = 1;
+	
 	public NoteDropTask(Note note) {
 		this.imgView = note.getImageView();
 		this.pane = note.getPane();
@@ -56,6 +63,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			oneCombo=true;
 			Platform.runLater(()->eraseCombo());
 			Game.resetCombo();
+			miss+=1;
 			Game.noteList.remove(note);
 			note.close();
 		}
@@ -71,6 +79,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			oneCombo=true;
 			Game.resetCombo();
 			Game.addScore(70);
+			bad+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
@@ -82,6 +91,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(80);
+			good+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
@@ -93,6 +103,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(90);
+			great+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
@@ -104,6 +115,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(100);
+			perfect+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
@@ -115,6 +127,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(90);
+			great+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
@@ -126,6 +139,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(80);
+			good+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
@@ -138,6 +152,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			oneCombo=true;
 			Game.resetCombo();
 			Game.addScore(70);
+			bad+=1;
 			Game.noteList.remove(note);
 			note.close();
 		}
@@ -199,6 +214,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			oneCombo=true;
 			Game.resetCombo();
 			Game.addScore(70);
+			bad+=1;
 			Game.noteList.remove(note);
 			note.close();
 		} else if (y >= 965) {
@@ -209,6 +225,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(80);
+			good+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
@@ -220,6 +237,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(90);
+			great+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
@@ -231,6 +249,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(100);
+			perfect+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
@@ -242,6 +261,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(90);
+			great+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
@@ -253,6 +273,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(80);
+			good+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
@@ -265,11 +286,52 @@ public class NoteDropTask<Void> extends Task<Void> {
 			oneCombo=true;
 			Game.resetCombo();
 			Game.addScore(70);
+			bad+=1;
 			Game.noteList.remove(note);
 			note.close();
 		}
 		System.out.println("combo = " + Game.getCombo());
 		MultiThreadClient.sendScore(Game.getScore());
+	}
+
+	public static int getPerfect() {
+		return perfect;
+	}
+
+	public static void setPerfect(int perfect) {
+		NoteDropTask.perfect = perfect;
+	}
+
+	public static int getGreat() {
+		return great;
+	}
+
+	public static void setGreat(int great) {
+		NoteDropTask.great = great;
+	}
+
+	public static int getGood() {
+		return good;
+	}
+
+	public static void setGood(int good) {
+		NoteDropTask.good = good;
+	}
+
+	public static int getBad() {
+		return bad;
+	}
+
+	public static void setBad(int bad) {
+		NoteDropTask.bad = bad;
+	}
+
+	public static int getMiss() {
+		return miss;
+	}
+
+	public static void setMiss(int miss) {
+		NoteDropTask.miss = miss;
 	}
 
 }

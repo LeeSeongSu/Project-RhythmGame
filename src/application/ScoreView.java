@@ -29,9 +29,15 @@ public class ScoreView {
 		this.pane = pane;
 
 		int scores = Game.getScore();
+		int perfects = NoteDropTask.getPerfect();
+		int greats = NoteDropTask.getGreat();
+		int goods = NoteDropTask.getGood();
+		int bads = NoteDropTask.getBad();
+		int misses = NoteDropTask.getMiss();
+		
 
 		Label totalScore;
-		Label perpect;
+		Label perfect;
 		Label great;
 		Label good;
 		Label bad;
@@ -44,35 +50,35 @@ public class ScoreView {
 		totalScore.setLayoutY(110);
 		pane.getChildren().add(totalScore);
 
-		perpect = new Label(scores + "");
-		perpect.setFont(Font.font("210 OmniGothic 020", 50));
-		perpect.setTextFill(Color.GRAY);
-		perpect.setLayoutX(826);
-		perpect.setLayoutY(309);
-		pane.getChildren().add(perpect);
+		perfect = new Label(perfects + "");
+		perfect.setFont(Font.font("210 OmniGothic 020", 50));
+		perfect.setTextFill(Color.GRAY);
+		perfect.setLayoutX(826);
+		perfect.setLayoutY(309);
+		pane.getChildren().add(perfect);
 
-		great = new Label(scores + "");
+		great = new Label(greats + "");
 		great.setFont(Font.font("210 OmniGothic 020", 50));
 		great.setTextFill(Color.GRAY);
 		great.setLayoutX(726);
 		great.setLayoutY(428);
 		pane.getChildren().add(great);
 
-		good = new Label(scores + "");
+		good = new Label(goods + "");
 		good.setFont(Font.font("210 OmniGothic 020", 50));
 		good.setTextFill(Color.GRAY);
 		good.setLayoutX(676);
 		good.setLayoutY(547);
 		pane.getChildren().add(good);
 
-		bad = new Label(scores + "");
+		bad = new Label(bads + "");
 		bad.setFont(Font.font("210 OmniGothic 020", 50));
 		bad.setTextFill(Color.GRAY);
 		bad.setLayoutX(626);
 		bad.setLayoutY(666);
 		pane.getChildren().add(bad);
 
-		miss = new Label(scores + "");
+		miss = new Label(misses + "");
 		miss.setFont(Font.font("210 OmniGothic 020", 50));
 		miss.setTextFill(Color.GRAY);
 		miss.setLayoutX(676);
