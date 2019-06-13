@@ -30,6 +30,7 @@ public class MultiThreadClient implements Runnable {
 	
 	public static String threadNum; 
 	public static String clientId="";
+	
 	private static ArrayList<String> room;
 	private static ArrayList<String> ready;
 	private static ArrayList<String> score;
@@ -110,6 +111,8 @@ public class MultiThreadClient implements Runnable {
 				}
 				else if(responseLine.startsWith("@start")) {
 					MultiScreenView.setStart(true);
+					for(int i=0; i<score.size(); i++)
+						score.set(i, "0");
 				}
 				else if(responseLine.startsWith("@scoreReset")) {
 					score.clear();
@@ -124,6 +127,10 @@ public class MultiThreadClient implements Runnable {
 					words=responseLine.split(" ");
 					newRoom.add(words[1]);
 					score.add(words[2]);
+				}
+				else if(responseLine.startsWith("@item")) {
+					words=responseLine.split(" ");
+					Item.items(Integer.parseInt(words[1]));
 				}
 			}
 			os.close();
@@ -193,6 +200,16 @@ public class MultiThreadClient implements Runnable {
 	public static void exit() {
 		try {
 			os.writeUTF("@exit");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void useItem(String user,int item ) {
+		System.out.println(user);
+		try {
+			os.writeUTF("@useItem "+user+" "+ item);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

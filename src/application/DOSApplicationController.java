@@ -195,6 +195,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 					Platform.runLater(()->moveLobby());
 				}catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "로그인에 실패하셨습니다.");
+					System.out.println("login Fail");
 				}
 				return null;
 			}

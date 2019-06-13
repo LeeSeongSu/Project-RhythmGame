@@ -18,12 +18,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 	ImageView[] addedImgViewArr = new ImageView[4];
 	boolean oneCombo = true;
 	int arrIndex = 0;
-	private static int perfect;
-	private static int great;
-	private static int good;
-	private static int bad;
-	private static int miss;
-	
+	static int item = 1;
 	public NoteDropTask(Note note) {
 		this.imgView = note.getImageView();
 		this.pane = note.getPane();
@@ -53,15 +48,13 @@ public class NoteDropTask<Void> extends Task<Void> {
 
 	public void drop() {
 		y += Main.NOTE_SPEED;
-		if (y > 1100) {           //miss
+		if (y > 1100) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.missImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.missImage);
-				
 			}
 			oneCombo=true;
 			Platform.runLater(()->eraseCombo());
-			miss+=1;
 			Game.resetCombo();
 			Game.noteList.remove(note);
 			note.close();
@@ -69,69 +62,59 @@ public class NoteDropTask<Void> extends Task<Void> {
 	}
 
 	public void judge() {
-		if (y >= 1005) {          //bad
+		if (y >= 1005) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.badImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.badImage);
-				
 			}
 			Platform.runLater(()->eraseCombo());
 			oneCombo=true;
 			Game.resetCombo();
 			Game.addScore(70);
-			bad+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
-		} else if (y >= 945) {      //good
+		} else if (y >= 945) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.goodImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.goodImage);
-				
 			}
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(80);
-			good+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
-		} else if (y >= 885) {          //great
+		} else if (y >= 885) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.greatImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.greatImage);
-				
 			}
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(90);
-			great+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
-			note.close(); 
-		} else if (y >= 825) {         //perfect
+			note.close();
+		} else if (y >= 825) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.perfectImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.perfectImage);
-				
 			}
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(100);
-			perfect+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
-		} else if (y >= 765) {      //great
+		} else if (y >= 765) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.greatImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.greatImage);
-			
 			}
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(90);
-			great+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
@@ -139,31 +122,32 @@ public class NoteDropTask<Void> extends Task<Void> {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.goodImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.goodImage);
-				
 			}
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(80);
-			good+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
-		} else if (y >= 645) {    //bad
+		} else if (y >= 645) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.badImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.badImage);
-			
 			}
 			Platform.runLater(()->eraseCombo());
 			oneCombo=true;
 			Game.resetCombo();
 			Game.addScore(70);
-			bad+=1;
 			Game.noteList.remove(note);
 			note.close();
 		}
 		System.out.println("combo = " + Game.getCombo());
 		MultiThreadClient.sendScore(Game.getScore());
+		
+		if(Game.getScore()/1000==item) {
+			ItemView.addItem((int) (Math.random()*3));
+			item++;
+		}
 	}
 
 	public void drawCombo() {
@@ -205,142 +189,87 @@ public class NoteDropTask<Void> extends Task<Void> {
 			pane.getChildren().remove(ImageStorage.comboWordImageView);
 	}
 
-	public void soundJudge() {    //bad
+	public void soundJudge() {
 		if (y >= 1035) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.badImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.badImage);
-				
 			}
 			Platform.runLater(()->eraseCombo());
 			oneCombo=true;
 			Game.resetCombo();
 			Game.addScore(70);
-			bad+=1;
 			Game.noteList.remove(note);
-			note.close();              //good
+			note.close();
 		} else if (y >= 965) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.goodImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.goodImage);
-				
 			}
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(80);
-			good+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
-		} else if (y >= 895) {           //great
+		} else if (y >= 895) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.greatImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.greatImage);
-				
 			}
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(90);
-			great+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
-		} else if (y >= 815) {             //perfect
+		} else if (y >= 815) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.perfectImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.perfectImage);
-				
 			}
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(100);
-			perfect+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
-		} else if (y >= 755) {         //great
+		} else if (y >= 755) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.greatImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.greatImage);
-				
 			}
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(90);
-			great+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
-			note.close();    
-		} else if (y >= 675) {               //good
+			note.close();
+		} else if (y >= 675) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.goodImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.goodImage);
-				
 			}
 			Platform.runLater(()->eraseCombo());
 			Game.addCombo();
 			Game.addScore(80);
-			good+=1;
 			Platform.runLater(() -> drawCombo());
 			Game.noteList.remove(note);
 			note.close();
-		} else if (y >= 615) {          //bad
+		} else if (y >= 615) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.badImage)) {
 				ImageStorage.judgeImgView.setImage(ImageStorage.badImage);
-			
 			}
 			Platform.runLater(()->eraseCombo());
 			oneCombo=true;
 			Game.resetCombo();
 			Game.addScore(70);
-			bad+=1;
 			Game.noteList.remove(note);
 			note.close();
 		}
 		System.out.println("combo = " + Game.getCombo());
 		MultiThreadClient.sendScore(Game.getScore());
-		
-	}
-
-	public static int getPerfect() {
-		return perfect;
-	}
-
-	public static void setPerfect(int perfect) {
-		NoteDropTask.perfect = perfect;
-	}
-
-	public static int getGreat() {
-		return great;
-	}
-
-	public static void setGreat(int great) {
-		NoteDropTask.great = great;
-	}
-
-	public static int getGood() {
-		return good;
-	}
-
-	public static void setGood(int good) {
-		NoteDropTask.good = good;
-	}
-
-	public static int getBad() {
-		return bad;
-	}
-
-	public static void setBad(int bad) {
-		NoteDropTask.bad = bad;
-	}
-
-	public static int getMiss() {
-		return miss;
-	}
-
-	public static void setMiss(int miss) {
-		NoteDropTask.miss = miss;
 	}
 
 }

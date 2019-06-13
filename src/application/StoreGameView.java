@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -42,7 +41,6 @@ public class StoreGameView {
 		}
 		Menubar menubar = new Menubar(pane, 2);
 	}
-
 	public void buyItem(int itemId) {
 		int isBuy = JOptionPane.showConfirmDialog(null, "정말 구매하시겠습니까?", "확인", JOptionPane.OK_CANCEL_OPTION);
 		for(int i=0; i<LoginSession.items.size();i++) {

@@ -28,6 +28,11 @@ public class KeyListener implements EventHandler<KeyEvent> {
 	@Override
 	public void handle(KeyEvent event) {
 		switch (event.getCode()) {
+		case ESCAPE:
+			System.out.println("ESC");
+			Game.pause();
+			break;
+			
 		case S:
 			System.out.println("S");
 			drawEffect(0);
@@ -59,13 +64,9 @@ public class KeyListener implements EventHandler<KeyEvent> {
 			judge(6);
 			break;
 			
-		case Z:item.items(0);break;
-		case X:item.items(1);break;
-		case C:item.items(2);break;
-		case ESCAPE:
-			System.out.println("ESC");
-			Game.pause();
-			break;
+		case Z:Item.items(0);break;
+		case X:Item.items(1);break;
+		case C:Item.items(2);break;
 		
 		}
 		
@@ -77,6 +78,36 @@ public class KeyListener implements EventHandler<KeyEvent> {
 				judge(3);
 				break;
 			}
+		}
+		
+		if(Game.isMultiMode()) {
+			switch (event.getCode()) {
+				case DIGIT1:
+					ItemView.useItem(MultiThreadClient.getRoom().get(0));
+					System.out.println("Key "+1);
+					break;
+				case DIGIT2:
+					System.out.println("Key "+2);
+					if(MultiThreadClient.getRoom().size()>1)
+						ItemView.useItem(MultiThreadClient.getRoom().get(1));
+					break;
+				case DIGIT3:
+					System.out.println("Key "+3);
+					if(MultiThreadClient.getRoom().size()>2)
+						ItemView.useItem(MultiThreadClient.getRoom().get(2));
+					break;
+				case DIGIT4:
+					System.out.println("Key "+4);
+					if(MultiThreadClient.getRoom().size()>3)
+						ItemView.useItem(MultiThreadClient.getRoom().get(3));
+					break;
+				case DIGIT5:
+					System.out.println("Key "+5);
+					if(MultiThreadClient.getRoom().size()>4)
+						ItemView.useItem(MultiThreadClient.getRoom().get(4));
+					break;
+			}
+			
 		}
 	}
 

@@ -37,22 +37,14 @@ public class SignUpController {
 	private Label emailbl, pwlbl, rePwlbl, namelbl, answerlbl;
 	private Button signUpBtn, BackBtn;
 	private AnchorPane pane;
-	private BackgroundImage homeBtnBgImg;
 
 	public SignUpController(AnchorPane pane) {
 		this.pane = pane;
 
-		Image homeImage = new ImageParser("HomeBtn.png").getImage();
-
-		homeBtnBgImg = new BackgroundImage(homeImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-				BackgroundPosition.CENTER, null);
-		
-		
-		BackBtn = new Button();
-		BackBtn.setBackground(new Background(homeBtnBgImg));
-		BackBtn.setLayoutX(1705);
-		BackBtn.setLayoutY(32);
-		BackBtn.setPrefSize(154, 193);
+		BackBtn = new Button("Back");
+		BackBtn.setLayoutX(112);
+		BackBtn.setLayoutY(110);
+		BackBtn.setPrefSize(231, 130);
 		BackBtn.setOnMouseClicked(e -> BackPage());
 		BackBtn.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:black");
 		pane.getChildren().add(BackBtn);
@@ -187,7 +179,7 @@ public class SignUpController {
 							Platform.runLater(() -> moveMain());
 						}
 					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, "인터넷 연결을 확인해주세요.");
+						System.out.println("login Fail");
 					}
 					return null;
 				}

@@ -1,6 +1,5 @@
 package application;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -10,15 +9,12 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MultiScreenView {
@@ -191,18 +187,22 @@ public class MultiScreenView {
 			stage.setScene(sc);
 		
 			Game game = null;
-			new ScoreBoard(pane); 
+
+			new ScoreBoard(pane);
+			new ItemView(pane);
+
 			
 			stage.show();
-			new item(stage);
-			
+
+			new Item(stage);
+
 			Task<Void> task = new Task<Void>() {
 				public Void call() throws Exception {
 					Game tmp = game;
 					if(LobbyView.mode_voice.equals("voice")) {
-						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,true,stage);
+						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,true,true,stage);
 					}else {
-						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,false,stage);
+						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,false,true,stage);
 					}
 					tmp.run();
 					return null;

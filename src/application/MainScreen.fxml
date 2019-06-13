@@ -69,15 +69,13 @@
             <TextField fx:id="idTextField" layoutX="14.0" layoutY="16.0" prefHeight="63.0" prefWidth="376.0" style="-fx-text-inner-color: white;  -fx-background-color: TRANSPARENT; " />
           </children>
         </Group>
-        <Group id="Group" layoutX="862.0" layoutY="655.0">
-               <children>
-              <ImageView fitHeight="95.0" fitWidth="405.0" y="0.0">
-                <image>
-                  <Image url="@../images/Login_pw_text.png" />
-                </image>
-              </ImageView>
-              <PasswordField fx:id="passwordTextField" layoutX="15.0" layoutY="14.0" prefHeight="63.0" prefWidth="376.0" style="-fx-text-inner-color: white;  -fx-background-color: TRANSPARENT;" />
-               </children></Group>
+        <Group id="Group" layoutX="367.0" layoutY="292.0" />
+        <ImageView fitHeight="95.0" fitWidth="405.0" layoutX="862.0" layoutY="649.0" y="0.0">
+          <image>
+            <Image url="@../images/Login_pw_text.png" />
+          </image>
+        </ImageView>
+        <PasswordField fx:id="passwordTextField" layoutX="876.0" layoutY="665.0" prefHeight="63.0" prefWidth="376.0" style="-fx-text-inner-color: white;" />
       </children>
     </Group>
   </children>

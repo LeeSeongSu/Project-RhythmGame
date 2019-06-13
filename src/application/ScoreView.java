@@ -11,9 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -24,25 +21,14 @@ import javafx.stage.Stage;
 public class ScoreView {
 
 	private AnchorPane pane;
-	private ImageView grade, album, homeBtnImgView;
+	private ImageView grade, album;
 	private Button exitBtn;
 	private static boolean visited = false;
-	private BackgroundImage homeBtnBgImg;
 
 	public ScoreView(AnchorPane pane) {
 		this.pane = pane;
 
-		Image homeImage = new ImageParser("HomeBtn.png").getImage();
-
-		homeBtnBgImg = new BackgroundImage(homeImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-				BackgroundPosition.CENTER, null);
-
 		int scores = Game.getScore();
-		int perfects = NoteDropTask.getPerfect();
-		int greats = NoteDropTask.getGreat();
-		int goods = NoteDropTask.getGood();
-		int bads = NoteDropTask.getBad();
-		int misses = NoteDropTask.getMiss();
 
 		Label totalScore;
 		Label perpect;
@@ -58,35 +44,35 @@ public class ScoreView {
 		totalScore.setLayoutY(110);
 		pane.getChildren().add(totalScore);
 
-		perpect = new Label(perfects + "");
+		perpect = new Label(scores + "");
 		perpect.setFont(Font.font("210 OmniGothic 020", 50));
 		perpect.setTextFill(Color.GRAY);
 		perpect.setLayoutX(826);
 		perpect.setLayoutY(309);
 		pane.getChildren().add(perpect);
 
-		great = new Label(greats + "");
+		great = new Label(scores + "");
 		great.setFont(Font.font("210 OmniGothic 020", 50));
 		great.setTextFill(Color.GRAY);
 		great.setLayoutX(726);
 		great.setLayoutY(428);
 		pane.getChildren().add(great);
 
-		good = new Label(goods + "");
+		good = new Label(scores + "");
 		good.setFont(Font.font("210 OmniGothic 020", 50));
 		good.setTextFill(Color.GRAY);
 		good.setLayoutX(676);
 		good.setLayoutY(547);
 		pane.getChildren().add(good);
 
-		bad = new Label(bads + "");
+		bad = new Label(scores + "");
 		bad.setFont(Font.font("210 OmniGothic 020", 50));
 		bad.setTextFill(Color.GRAY);
 		bad.setLayoutX(626);
 		bad.setLayoutY(666);
 		pane.getChildren().add(bad);
 
-		miss = new Label(misses + "");
+		miss = new Label(scores + "");
 		miss.setFont(Font.font("210 OmniGothic 020", 50));
 		miss.setTextFill(Color.GRAY);
 		miss.setLayoutX(676);
@@ -98,19 +84,12 @@ public class ScoreView {
 		grade.setLayoutX(115);
 		grade.setLayoutY(764);
 		pane.getChildren().add(grade);
-		
-		homeBtnImgView = new ImageView(homeImage);
-		homeBtnImgView.setFitHeight(193);
-		homeBtnImgView.setFitWidth(164);
-		homeBtnImgView.setLayoutX(1705);
-		homeBtnImgView.setLayoutY(32);
-		pane.getChildren().add(homeBtnImgView);
-		
+
 		exitBtn = new Button();
-		exitBtn.setPrefSize(164, 193);
-		exitBtn.setLayoutX(1705);
+		exitBtn.setPrefSize(164, 150);
+		// exitBtn.setBackground(new Background());
+		exitBtn.setLayoutX(1235);
 		exitBtn.setLayoutY(32);
-		exitBtn.setStyle("-fx-background-color: TRANSPARENT");
 		exitBtn.setOnMouseClicked(e -> exitBtnClick());
 		pane.getChildren().add(exitBtn);
 
