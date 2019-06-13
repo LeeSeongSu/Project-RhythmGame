@@ -37,14 +37,22 @@ public class SignUpController {
 	private Label emailbl, pwlbl, rePwlbl, namelbl, answerlbl;
 	private Button signUpBtn, BackBtn;
 	private AnchorPane pane;
+	private BackgroundImage homeBtnBgImg;
 
 	public SignUpController(AnchorPane pane) {
 		this.pane = pane;
 
-		BackBtn = new Button("Back");
-		BackBtn.setLayoutX(112);
-		BackBtn.setLayoutY(110);
-		BackBtn.setPrefSize(231, 130);
+		Image homeImage = new ImageParser("HomeBtn.png").getImage();
+
+		homeBtnBgImg = new BackgroundImage(homeImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+				BackgroundPosition.CENTER, null);
+		
+		
+		BackBtn = new Button();
+		BackBtn.setBackground(new Background(homeBtnBgImg));
+		BackBtn.setLayoutX(1705);
+		BackBtn.setLayoutY(32);
+		BackBtn.setPrefSize(154, 193);
 		BackBtn.setOnMouseClicked(e -> BackPage());
 		BackBtn.setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:black");
 		pane.getChildren().add(BackBtn);

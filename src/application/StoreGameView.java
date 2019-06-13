@@ -7,10 +7,13 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import javafx.concurrent.Task;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class StoreGameView {
 	private AnchorPane pane;
@@ -68,6 +71,14 @@ public class StoreGameView {
 							JOptionPane.showMessageDialog(null, "아이템을 구매할 수 없습니다.");
 						} else {
 							JOptionPane.showMessageDialog(null, "아이템 구매에 성공하셨습니다.");
+							AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("StoreGameScreen.fxml"));
+							new StoreGameView(nextScreen);
+							new StoreView(nextScreen, false);
+							Scene sc = new Scene(nextScreen);
+							Stage stage = (Stage) pane.getScene().getWindow();
+							stage.setScene(sc);
+
+							stage.show();
 						}
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, "인터넷 연결을 확인해주세요.");
