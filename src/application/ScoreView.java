@@ -1,7 +1,6 @@
 package application;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,8 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -21,13 +21,14 @@ import javafx.stage.Stage;
 public class ScoreView {
 
 	private AnchorPane pane;
-	private ImageView grade, album;
+	private ImageView grade, album,homeBtnImgView;
+	private BackgroundImage homeBtnBgImg;
 	private Button exitBtn;
 	private static boolean visited = false;
 
 	public ScoreView(AnchorPane pane) {
 		this.pane = pane;
-
+		
 		int scores = Game.getScore();
 		int perfects = NoteDropTask.getPerfect();
 		int greats = NoteDropTask.getGreat();
@@ -36,6 +37,20 @@ public class ScoreView {
 		int misses = NoteDropTask.getMiss();
 		
 
+		
+		Image homeImage = new ImageParser("HomeBtn.png").getImage();
+
+		homeBtnBgImg = new BackgroundImage(homeImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+				BackgroundPosition.CENTER, null);
+		
+		homeBtnImgView = new ImageView(homeImage);
+		homeBtnImgView.setFitHeight(193);
+		homeBtnImgView.setFitWidth(164);
+		homeBtnImgView.setLayoutX(1705);
+		homeBtnImgView.setLayoutY(32);
+		homeBtnImgView.setOnMouseClicked(e -> exitBtnClick());
+		pane.getChildren().add(homeBtnImgView);
+		
 		Label totalScore;
 		Label perfect;
 		Label great;
@@ -91,13 +106,7 @@ public class ScoreView {
 		grade.setLayoutY(764);
 		pane.getChildren().add(grade);
 
-		exitBtn = new Button();
-		exitBtn.setPrefSize(164, 150);
-		// exitBtn.setBackground(new Background());
-		exitBtn.setLayoutX(1235);
-		exitBtn.setLayoutY(32);
-		exitBtn.setOnMouseClicked(e -> exitBtnClick());
-		pane.getChildren().add(exitBtn);
+		
 
 		String t = Game.getTitle();
 		int idx = t.indexOf(".");
@@ -114,7 +123,7 @@ public class ScoreView {
 	}
 
 	public void exitBtnClick() {
-		Stage stage = (Stage) exitBtn.getScene().getWindow();
+		Stage stage = (Stage) homeBtnImgView.getScene().getWindow();
 
 		Music music = Game.getMusic();
 		music.close();

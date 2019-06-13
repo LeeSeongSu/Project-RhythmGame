@@ -3,31 +3,18 @@ package application;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.Scene;
-
 import javafx.scene.control.Button;
-
 import javafx.scene.control.PasswordField;
-
 import javafx.scene.control.TextArea;
-
 import javafx.scene.control.TextField;
-
 import javafx.scene.image.Image;
-
 import javafx.scene.image.ImageView;
-
 import javafx.scene.layout.AnchorPane;
-
 import javafx.scene.layout.BackgroundImage;
-
 import javafx.scene.layout.BackgroundPosition;
-
 import javafx.scene.layout.BackgroundRepeat;
-
 import javafx.scene.text.Font;
-
 import javafx.stage.Stage;
 
 public class SettingView {
