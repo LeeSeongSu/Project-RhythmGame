@@ -3,6 +3,8 @@ package application;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -28,7 +30,7 @@ public class StoreView {
 	private static ArrayList<String> screenList1;
 	private static ArrayList<Button> buttons;
 	private boolean isFirst;
-
+	private int[] moneys = {100,400,700,1500,5000,13000};
 	public StoreView(AnchorPane pane, boolean isFirst) {
 		this.isFirst = isFirst;
 		this.pane = pane;
@@ -42,13 +44,15 @@ public class StoreView {
 					btn.setPrefSize(472, 372);
 					btn.setLayoutX(443 + a * 470);
 					btn.setLayoutY(215);
-					btn.setOpacity(1);
+					btn.setOpacity(0.5);
 				}else {
 					btn.setPrefSize(472, 372);
 					btn.setLayoutX(443 + (a-3) * 470);
 					btn.setLayoutY(590);
-					btn.setOpacity(1);
+					btn.setOpacity(0.5);
 				}
+				int money = moneys[a];
+				btn.setOnMouseClicked(e-> butIGM(money));
 				pane.getChildren().add(btn);
 
 			}
@@ -85,7 +89,27 @@ public class StoreView {
 		screenList1.add("StoreGameView");
 		screenList1.add("StoreNoteView");
 	}
-
+	
+	
+	public void butIGM(int money) {
+		int isBuy = JOptionPane.showConfirmDialog(null, "정말 구매하시겠습니까?","확인",JOptionPane.OK_CANCEL_OPTION);
+		if(isBuy==0) {
+			LoginSession.money= String.valueOf(Integer.parseInt(LoginSession.money)+money);
+			AnchorPane nextScreen;
+			try {
+				nextScreen = FXMLLoader.load(getClass().getResource("StoreIgmScreen.fxml"));
+				new StoreIgmView(nextScreen);
+				new StoreView(nextScreen, false);
+				Scene sc = new Scene(nextScreen);
+				Stage stage = (Stage) pane.getScene().getWindow();
+				stage.setScene(sc);
+				stage.show();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	private void btnClick1(int i) {
 
 		Stage stage = (Stage) buttons1.get(i).getScene().getWindow();
@@ -95,7 +119,6 @@ public class StoreView {
 			if (fxmlList1.get(i) == "StoreIgmScreen.fxml") {
 				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("StoreIgmScreen.fxml"));
 				new StoreIgmView(nextScreen);
-				new Menubar(nextScreen, 2);
 				new StoreView(nextScreen, false);
 				Scene sc = new Scene(nextScreen);
 
@@ -105,7 +128,6 @@ public class StoreView {
 			} else if (fxmlList1.get(i) == "StoreGameScreen.fxml") {
 				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("StoreGameScreen.fxml"));
 				new StoreGameView(nextScreen);
-				new Menubar(nextScreen, 2);
 				new StoreView(nextScreen, false);
 				Scene sc = new Scene(nextScreen);
 
@@ -115,7 +137,6 @@ public class StoreView {
 			} else {
 				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("StoreNoteScreen.fxml"));
 				new StoreNoteView(nextScreen);
-				new Menubar(nextScreen, 2);
 				new StoreView(nextScreen, false);
 				Scene sc = new Scene(nextScreen);
 
