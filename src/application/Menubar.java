@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 public class Menubar {
 
 	private AnchorPane pane;
-	private Label money;
+	private Label money = new Label(LoginSession.money);
 	private ImageView Background, select;
 	private BackgroundImage selectBtnBgImg;
 	private Button homeBtn, themeBtn, storeBtn, btn,exitBtn,cancleBtn;
@@ -46,7 +46,6 @@ public class Menubar {
 		this.pane = pane;
 
 		Image selectImage = (new ImageParser("Lobby_selectEffect.png").getImage());
-		money = new Label(LoginSession.money);
 		money.setLayoutX(1740);
 		money.setLayoutY(20);
 		money.setPrefWidth(135);
@@ -98,6 +97,10 @@ public class Menubar {
 
 	}
 	
+	public void setMoney(String changeMoney) {
+		Platform.runLater(()->money.setText(String.valueOf(changeMoney)));
+	}
+	
 	private void QestionExit(int i, Stage stage) {
 		Task<Void> task = new Task<Void>() {
 			public Void call() throws Exception {
@@ -145,7 +148,7 @@ public class Menubar {
 				AnchorPane second = FXMLLoader.load(getClass().getResource(fxmlList.get(i)));
 				StoreView storeview = new StoreView(second, true);
 				Menubar menubar = new Menubar(second, i);
-
+				
 				Scene sc = new Scene(second);
 
 				stage.setScene(sc);
