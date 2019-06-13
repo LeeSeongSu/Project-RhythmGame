@@ -26,17 +26,17 @@ public class ThemeView {
 	private static ArrayList<Button> buttons;
 	private static ArrayList<String> fxmlList;
 	private static ArrayList<String> screenList;
-	
+
 	private boolean isFirst;
 
 	public ThemeView(AnchorPane pane, boolean isFirst) {
 		this.isFirst = isFirst;
 		this.pane = pane;
-		if(isFirst) {
+		if (isFirst) {
 			Image backGroundImage = (new ImageParser("Theme_bg.png").getImage());
 			Background = new ImageView(backGroundImage);
 			pane.getChildren().add(Background);// 로비 배경
-		
+
 		}
 		buttons = new ArrayList<Button>();
 
@@ -45,28 +45,24 @@ public class ThemeView {
 			btn.setPrefSize(287, 87);
 
 			btn.setLayoutX(100);
-			btn.setLayoutY(463 + a * 160);
+			btn.setLayoutY(490 + a * 135);
 			btn.setOpacity(0);
 			buttons.add(btn);
 
 			pane.getChildren().add(btn);
-			
-		}
-		
-	
 
-		
+		}
+
 		buttons.get(0).setOnMouseClicked(e -> btnClick1(0));
 		buttons.get(1).setOnMouseClicked(e -> btnClick1(1));
 
-		
 		fxmlList = new ArrayList<String>();
-		
+
 		fxmlList.add("ThemeGameScreen.fxml");
 		fxmlList.add("ThemeNoteScreen.fxml");
 
 		screenList = new ArrayList<String>();
-	
+
 		screenList.add("ThemeGameView");
 		screenList.add("ThemeNoteView");
 	}
@@ -77,7 +73,6 @@ public class ThemeView {
 
 		try {
 
-			
 			if (fxmlList.get(i) == "ThemeGameScreen.fxml") {
 				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("ThemeGameScreen.fxml"));
 				new ThemeGameView(nextScreen);
