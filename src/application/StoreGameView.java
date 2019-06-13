@@ -29,7 +29,7 @@ public class StoreGameView {
 
 			btn.setLayoutX(432 + a * 480);
 			btn.setLayoutY(190);
-			btn.setOpacity(1);
+			btn.setOpacity(0);
 
 			buttons.add(btn);
 

@@ -164,7 +164,7 @@ public class Menubar {
 				stage.show();
 			} else {
 				AnchorPane second = FXMLLoader.load(getClass().getResource("ThemeScreen.fxml"));
-				ThemeView themeView = new ThemeView(second);
+				ThemeView themeView = new ThemeView(second, true);
 
 				Menubar menubar = new Menubar(second, i);
 

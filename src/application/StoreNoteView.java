@@ -27,7 +27,7 @@ public class StoreNoteView {
 
 			btn.setLayoutX(433 + a * 480);
 			btn.setLayoutY(208);
-			btn.setOpacity(1);
+			btn.setOpacity(0);
 
 			buttons.add(btn);
 

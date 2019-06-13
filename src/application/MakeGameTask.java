@@ -569,7 +569,7 @@ public class MakeGameTask extends Task<Void>{
 			}
 		}
 
-		/*TimeUnit.SECONDS.sleep(8);// 마지막노트 떨어지는 시점에서 딜레이 8초
+		TimeUnit.SECONDS.sleep(8);// 마지막노트 떨어지는 시점에서 딜레이 8초
 
 		Platform.runLater(() -> {
 
@@ -592,7 +592,7 @@ public class MakeGameTask extends Task<Void>{
 				e.printStackTrace();
 
 			}
-		});*/
+		});
 		return null;
 	}
 
