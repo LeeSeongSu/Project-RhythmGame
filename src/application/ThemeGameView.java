@@ -6,7 +6,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class ThemeGameView {
-
 	private Button btn;
 	private AnchorPane pane;
 	private ImageView Background;

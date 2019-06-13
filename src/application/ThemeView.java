@@ -84,7 +84,6 @@ public class ThemeView {
 				new Menubar(nextScreen, 1);
 				new ThemeView(nextScreen, false);
 				Scene sc = new Scene(nextScreen);
-
 				stage.setScene(sc);
 
 				stage.show();

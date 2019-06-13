@@ -22,7 +22,6 @@ public class ThemeNoteView {
 		btn.setLayoutY(500);
 		
 		pane.getChildren().add(btn);
-		// TODO Auto-generated constructor stub
 	}
 
 }
