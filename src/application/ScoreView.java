@@ -11,6 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -21,12 +24,18 @@ import javafx.stage.Stage;
 public class ScoreView {
 
 	private AnchorPane pane;
-	private ImageView grade, album;
+	private ImageView grade, album, homeBtnImgView;
 	private Button exitBtn;
 	private static boolean visited = false;
+	private BackgroundImage homeBtnBgImg;
 
 	public ScoreView(AnchorPane pane) {
 		this.pane = pane;
+
+		Image homeImage = new ImageParser("HomeBtn.png").getImage();
+
+		homeBtnBgImg = new BackgroundImage(homeImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+				BackgroundPosition.CENTER, null);
 
 		int scores = Game.getScore();
 		int perfects = NoteDropTask.getPerfect();
@@ -89,12 +98,19 @@ public class ScoreView {
 		grade.setLayoutX(115);
 		grade.setLayoutY(764);
 		pane.getChildren().add(grade);
-
+		
+		homeBtnImgView = new ImageView(homeImage);
+		homeBtnImgView.setFitHeight(193);
+		homeBtnImgView.setFitWidth(164);
+		homeBtnImgView.setLayoutX(1705);
+		homeBtnImgView.setLayoutY(32);
+		pane.getChildren().add(homeBtnImgView);
+		
 		exitBtn = new Button();
-		exitBtn.setPrefSize(164, 150);
-		// exitBtn.setBackground(new Background());
-		exitBtn.setLayoutX(1235);
+		exitBtn.setPrefSize(164, 193);
+		exitBtn.setLayoutX(1705);
 		exitBtn.setLayoutY(32);
+		exitBtn.setStyle("-fx-background-color: TRANSPARENT");
 		exitBtn.setOnMouseClicked(e -> exitBtnClick());
 		pane.getChildren().add(exitBtn);
 
