@@ -191,7 +191,6 @@ public class MultiScreenView {
 			new ScoreBoard(pane);
 			new ItemView(pane);
 
-			new ScoreBoard(pane); 
 			
 			stage.show();
 

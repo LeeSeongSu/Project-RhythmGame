@@ -109,6 +109,7 @@ public class Game extends Thread {
 			 
 			Thread thread = new Thread(task);
 			thread.setDaemon(true);
+			thread.setName("Game Thread");
 			thread.start();
 			
 			
@@ -164,6 +165,7 @@ public class Game extends Thread {
 		makeGameThread.interrupt();
 		if(VoiceMode)
 			voiceThread.interrupt();
+		ScoreBoard.playing=false;
 	
 		
 		ImageStorage.judgeImgView.setImage(null);

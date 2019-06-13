@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 public class ScoreBoard {
 	static ArrayList<String> room;
 	static ArrayList<String> scores;
-	boolean playing;
+	static boolean playing;
 	private ArrayList<Label> textList1 = new ArrayList<Label>();
 	private ArrayList<Label> textList2 = new ArrayList<Label>();
 	private Label scoreLbl;
