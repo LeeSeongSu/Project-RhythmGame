@@ -23,10 +23,9 @@ public class LobbyView {
 	private ImageView Background, start, expBar, expGage;
 	private BackgroundImage multiBtnBgImg, multiBtnBgEffectImg, singleBtnBgImg, singleBtnBgEffectImg, onBtnBgImg,
 			onBtnBgEffectImg, offBtnBgImg, offBtnBgEffectImg;
-	private Button multiBtn, singleBtn, onBtn, offBtn;
+	private Button multiBtn, singleBtn, onBtn, offBtn, settingBtn;
 	private Label levelLabel, nicknameLabel, expLabel;
-	
-	
+
 	public static String mod = "Single";
 	public static String mode_voice = "none";
 
@@ -37,7 +36,7 @@ public class LobbyView {
 		Image backGroundImage = (new ImageParser("Lobby.png").getImage());
 		Background = new ImageView(backGroundImage);
 		pane.getChildren().add(Background);// 로비 배경
-		
+
 		Image singleImage = (new ImageParser("Lobby_single.png").getImage());
 		Image singleEffectImage = (new ImageParser("Lobby_singleEffect.png").getImage());
 		Image multiImage = (new ImageParser("Lobby_multi.png").getImage());
@@ -65,7 +64,7 @@ public class LobbyView {
 				BackgroundPosition.CENTER, null);
 		offBtnBgEffectImg = new BackgroundImage(offEffectImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 				BackgroundPosition.CENTER, null);
-		
+
 		start = new ImageView(startImage);
 		start.setLayoutX(1330);
 		start.setLayoutY(870);
@@ -107,41 +106,49 @@ public class LobbyView {
 		offBtn.setLayoutY(740);
 		offBtn.setOnMouseClicked(e -> offBtnClick());
 		pane.getChildren().add(offBtn);
-		
+
 		nicknameLabel = new Label(LoginSession.nickname);
 		nicknameLabel.setLayoutX(200);
 		nicknameLabel.setLayoutY(360);
 		nicknameLabel.setStyle("-fx-font-size : 50px; -fx-font-weight : bold; -fx-text-fill:white");
 		pane.getChildren().add(nicknameLabel);
-		
-		levelLabel = new Label("Lv : "+LoginSession.level);
+
+		levelLabel = new Label("Lv : " + LoginSession.level);
 		levelLabel.setLayoutX(200);
 		levelLabel.setLayoutY(460);
 		levelLabel.setStyle("-fx-font-size : 50px; -fx-font-weight : bold; -fx-text-fill:white");
 		pane.getChildren().add(levelLabel);
-		
-		expLabel = new Label("Exp : "+LoginSession.exp+"/1000");
+
+		expLabel = new Label("Exp : " + LoginSession.exp + "/1000");
 		expLabel.setLayoutX(200);
 		expLabel.setLayoutY(560);
 		expLabel.setStyle("-fx-font-size : 50px; -fx-font-weight : bold; -fx-text-fill:white");
 		pane.getChildren().add(expLabel);
-		
-		Double gage = (double) (482.0/1000*Integer.parseInt(LoginSession.exp));
-		expGage= new ImageView(expGageImage);
+
+		Double gage = (double) (482.0 / 1000 * Integer.parseInt(LoginSession.exp));
+		expGage = new ImageView(expGageImage);
 		expGage.setLayoutX(202);
 		expGage.setLayoutY(660);
-		if(gage == 0) {
+		if (gage == 0) {
 			expGage.setFitWidth(1);
-		}else {
+		} else {
 			expGage.setFitWidth(gage);
 		}
 		pane.getChildren().add(expGage);
-		
-		expBar= new ImageView(expBarImage);
+
+		expBar = new ImageView(expBarImage);
 		expBar.setLayoutX(200);
 		expBar.setLayoutY(660);
 		pane.getChildren().add(expBar);
-		
+
+		settingBtn = new Button();
+		settingBtn.setPrefSize(85, 83);
+		settingBtn.setLayoutX(90);
+		settingBtn.setLayoutY(897);
+		settingBtn.setOnMouseClicked(e -> settingBtnClick());
+		settingBtn.setOpacity(0.5);
+		pane.getChildren().add(settingBtn);
+
 	}
 
 	private void multiBtnClick() {// 멀티버튼
@@ -195,6 +202,28 @@ public class LobbyView {
 
 	}
 
+	public void settingBtnClick() {
+		Stage stage = (Stage) settingBtn.getScene().getWindow();
+
+		try {
+
+			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SettingScreen.fxml"));
+
+			SettingView settingview = new SettingView(second);
+			Scene sc = new Scene(second);
+
+			stage.setScene(sc);
+
+			stage.show();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+	}
+
 	public void songViewPage() {
 
 		// 새 스테이지 추가
@@ -221,4 +250,5 @@ public class LobbyView {
 		}
 
 	}
+
 }
