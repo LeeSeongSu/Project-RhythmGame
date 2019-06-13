@@ -1,6 +1,11 @@
 package application;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.Image;
@@ -10,35 +15,96 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 public class ThemeView {
 
 	private AnchorPane pane;
 	private ImageView Background;
-	private Button Btn;
+	private Button btn;
+	private static ArrayList<Button> buttons;
+	private static ArrayList<String> fxmlList;
+	private static ArrayList<String> screenList;
+	
+	private boolean isFirst;
 
-	public ThemeView(AnchorPane pane) {
-
+	public ThemeView(AnchorPane pane, boolean isFirst) {
+		this.isFirst = isFirst;
 		this.pane = pane;
+		if(isFirst) {
+			Image backGroundImage = (new ImageParser("Theme_bg.png").getImage());
+			Background = new ImageView(backGroundImage);
+			pane.getChildren().add(Background);// 로비 배경
+		
+		}
+		buttons = new ArrayList<Button>();
 
-		Image backGroundImage = (new ImageParser("Lobby_image.png").getImage());
-		Background = new ImageView(backGroundImage);
-		pane.getChildren().add(Background);// 로비 배경
+		for (int a = 0; a < 2; a++) {
+			btn = new Button();
+			btn.setPrefSize(287, 87);
 
-		Button btn = new Button("aa");
-		btn.setLayoutX(500);
-		btn.setLayoutY(500);
-		pane.getChildren().add(btn);
+			btn.setLayoutX(96);
+			btn.setLayoutY(398 + a * 160);
+			btn.setOpacity(0);
+			buttons.add(btn);
+
+			pane.getChildren().add(btn);
+			
+		}
+		
+	
+
+		
+		buttons.get(0).setOnMouseClicked(e -> btnClick1(0));
+		buttons.get(1).setOnMouseClicked(e -> btnClick1(1));
+
+		
+		fxmlList = new ArrayList<String>();
+		
+		fxmlList.add("ThemeGameScreen.fxml");
+		fxmlList.add("ThemeNoteScreen.fxml");
+
+		screenList = new ArrayList<String>();
+	
+		screenList.add("ThemeGameView");
+		screenList.add("ThemeNoteView");
+	}
+
+	private void btnClick1(int i) {
+
+		Stage stage = (Stage) buttons.get(i).getScene().getWindow();
+
+		try {
+
+			
+			if (fxmlList.get(i) == "ThemeGameScreen.fxml") {
+				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("ThemeGameScreen.fxml"));
+				new ThemeGameView(nextScreen);
+				new Menubar(nextScreen, 1);
+				new ThemeView(nextScreen, false);
+				Scene sc = new Scene(nextScreen);
+
+				stage.setScene(sc);
+
+				stage.show();
+			} else {
+				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("ThemeNoteScreen.fxml"));
+				new ThemeNoteView(nextScreen);
+				new Menubar(nextScreen, 1);
+				new ThemeView(nextScreen, false);
+				Scene sc = new Scene(nextScreen);
+
+				stage.setScene(sc);
+
+				stage.show();
+			}
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
 	}
 
 }
-
-
-
-
-
-
-
-
-
-

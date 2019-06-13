@@ -1,22 +1,30 @@
 package application;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 
 public class ScoreView {
 
    private AnchorPane pane;
    private ImageView grade,album;
-   
+   private Button exitBtn;
+	private static boolean visited = false; 
 
    public ScoreView(AnchorPane pane) {
       this.pane = pane;
@@ -77,6 +85,14 @@ public class ScoreView {
       grade.setLayoutX(115);
       grade.setLayoutY(764);
       pane.getChildren().add(grade);
+      
+      exitBtn = new Button();
+      exitBtn.setPrefSize(164, 150);
+    //exitBtn.setBackground(new Background());
+      exitBtn.setLayoutX(1235);
+      exitBtn.setLayoutY(32);
+      exitBtn.setOnMouseClicked(e -> exitBtnClick());
+     pane.getChildren().add(exitBtn);
 
         
   String t= Game.getTitle();  
@@ -84,16 +100,60 @@ public class ScoreView {
     String title = t.substring(0,idx); 
     
    Image album = (new ImageParser(title+".jpg").getImage());
-	Circle c = new Circle();
-	c.setRadius(222);
-	c.setLayoutX(1477);
-	c.setLayoutY(539);
-	c.setFill(new ImagePattern(album));
-	pane.getChildren().add(c);  
-	
+   Circle c = new Circle();
+   c.setRadius(222);
+   c.setLayoutX(1477);
+   c.setLayoutY(539);
+   c.setFill(new ImagePattern(album));
+   pane.getChildren().add(c);  
+   
    }
-     }
- 
+   
+   public void exitBtnClick() {
+      Stage stage = (Stage) exitBtn.getScene().getWindow();
+      
+      Music music = Game.getMusic();
+      music.close();
+            
+  	if(!visited) {
+		DOSApplicationController.introMusic = new Music("Game On.mp3", true);
+		try {
+//			Thread.sleep(4500);
+			DOSApplicationController.introMusic.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	
+		visited=true;
+	}
+      //Music introMusic = new Music("Game On.mp3", true);   
+      //introMusic.start();
+      
+    
+      
+      try {
 
+         AnchorPane second = FXMLLoader.load(getClass().getResource("SelectScreen.fxml"));
+
+         LobbyView v = new LobbyView(second);
+         Menubar menubar = new Menubar(second, 0);
+         
+         Scene c = new Scene(second);
+
+         stage.setScene(c);
+
+         stage.show();
+
+      } catch (IOException e) {
+
+         e.printStackTrace();
+
+      }
+
+   }
+   }
+
+ 
 
 
