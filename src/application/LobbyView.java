@@ -130,12 +130,10 @@ public class LobbyView {
 		expGage= new ImageView(expGageImage);
 		expGage.setLayoutX(202);
 		expGage.setLayoutY(660);
-		System.out.println(gage+ " "+ LoginSession.exp);
 		if(gage == 0) {
 			expGage.setFitWidth(1);
 		}else {
 			expGage.setFitWidth(gage);
-			System.out.println(gage);
 		}
 		pane.getChildren().add(expGage);
 		

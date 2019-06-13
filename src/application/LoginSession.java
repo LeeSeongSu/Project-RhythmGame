@@ -1,6 +1,7 @@
 package application;
 
 public class LoginSession {
+	public static String memberId;
 	public static String email;
 	public static String nickname;
 	public static String token;

@@ -15,7 +15,6 @@ public class StoreNoteView {
 	public StoreNoteView(AnchorPane pane) {
 		// TODO Auto-generated constructor stub
 		this.pane = pane;
-
 		Image backGroundImage = (new ImageParser("Store_Note.png").getImage());
 		Background = new ImageView(backGroundImage);
 		pane.getChildren().add(Background);// 로비 배경
@@ -34,6 +33,7 @@ public class StoreNoteView {
 			pane.getChildren().add(btn);
 
 		}
+		Menubar menubar = new Menubar(pane, 2);
 	}
 
 }

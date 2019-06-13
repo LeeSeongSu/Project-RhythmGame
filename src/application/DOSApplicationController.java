@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -150,6 +152,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 			protected Void call() throws Exception {
 				try{
 					List<String> requestList = new ArrayList<>();
+					requestList.add("memberId");
 					requestList.add("email");
 					requestList.add("token");
 					requestList.add("nickname");
@@ -159,6 +162,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 					requestList.add("chooseEffect");
 					requestList.add("chooseNote");
 					Map<String, String> result = hc.request(requestList);
+					LoginSession.memberId=result.get("memberId");
 					LoginSession.email=result.get("email");
 					LoginSession.token=result.get("token");
 					LoginSession.nickname=result.get("nickname");
@@ -170,6 +174,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 					System.out.println(LoginSession.nickname);
 					Platform.runLater(()->moveLobby());
 				}catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "로그인에 실패하셨습니다.");
 					System.out.println("login Fail");
 				}
 				return null;
