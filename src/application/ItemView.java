@@ -62,7 +62,7 @@ public class ItemView {
 		else if(i==2)
 			itemName="Fast.png";
 		
-		if(imageList.size()<4) {
+		if(imageList.size()<5) {
 			ImageView imageView=new ImageView();
 			imageView.setFitHeight(65);
 			imageView.setFitWidth(65);
