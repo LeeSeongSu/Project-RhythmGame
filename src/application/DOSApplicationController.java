@@ -171,6 +171,27 @@ public class DOSApplicationController extends Thread implements Initializable {
 					LoginSession.exp=result.get("exp");
 					MultiThreadClient.clientId=LoginSession.nickname;
 					MultiThreadClient.sendID(MultiThreadClient.clientId);
+					Map<String, String> map = new HashMap<>();
+					map.put("memberId", LoginSession.memberId);
+					HttpConnector hc = new HttpConnector("loadItems", map);
+					Task<Void> task = new Task<Void>() {
+						@Override
+						protected Void call() throws Exception {
+							try{
+								List<String> requestList = new ArrayList<>();
+								requestList.add("itemId");
+								requestList.add("name");
+								requestList.add("image");
+								LoginSession.items = hc.request(requestList,true);
+							}catch (Exception e) {
+								e.printStackTrace();
+							}
+							return null;
+						}
+					};
+					Thread thread = new Thread(task);
+					thread.setDaemon(true);
+					thread.start();
 					Platform.runLater(()->moveLobby());
 				}catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "로그인에 실패하셨습니다.");

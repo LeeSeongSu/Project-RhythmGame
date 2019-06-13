@@ -5,10 +5,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -74,6 +76,42 @@ public class HttpConnector {
 			map.put(key, jsonObject.get(key).getAsString());
 		}
 		return map;
+	}
+	
+	public List<ItemDTO> request(List<String> keys, boolean flag) throws Exception {
+		List<ItemDTO> list = new ArrayList<>();
+		URL url = new URL(sourceUrl);
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+		conn.setDoOutput(true);
+		conn.setRequestMethod("POST");
+		conn.setRequestProperty("Accept-Language", "ko-kr,ko;q=0.8,en-us;q=0.5,en;q=0.3");
+		conn.setRequestProperty("Content-Type", "application/json");
+		conn.setConnectTimeout(5000);
+		conn.connect();
+
+		// write
+		OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+		osw.write(param.toString());
+		osw.flush();
+		// 응답
+		BufferedReader br = null;
+		br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+		String result = "";
+		String line = null;
+		while ((line = br.readLine()) != null) {
+			result += line;
+		}
+		osw.close();
+		br.close();
+		conn.disconnect();
+
+		JsonParser jp = new JsonParser();
+		JsonArray jsonArray = (JsonArray) jp.parse(result);
+		for(int i=0;i<jsonArray.size();i++) {
+			list.add(new ItemDTO(jsonArray.get(i).getAsJsonObject().get("itemId").getAsInt(), jsonArray.get(i).getAsJsonObject().get("name").getAsString(), jsonArray.get(i).getAsJsonObject().get("image").getAsString(), jsonArray.get(i).getAsJsonObject().get("price").getAsInt()));
+		}
+		return list;
 	}
 	
 	public String request() throws Exception {

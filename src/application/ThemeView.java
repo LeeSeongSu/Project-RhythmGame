@@ -2,7 +2,14 @@ package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.swing.JOptionPane;
+
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -26,7 +33,7 @@ public class ThemeView {
 	private static ArrayList<Button> buttons;
 	private static ArrayList<String> fxmlList;
 	private static ArrayList<String> screenList;
-
+	private List<ItemDTO> result;
 	private boolean isFirst;
 
 	public ThemeView(AnchorPane pane, boolean isFirst) {

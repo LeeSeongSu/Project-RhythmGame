@@ -1,5 +1,7 @@
 package application;
 
+import java.util.List;
+
 public class LoginSession {
 	public static String memberId;
 	public static String email;
@@ -10,4 +12,5 @@ public class LoginSession {
 	public static String exp;
 	public static String chooseNote;
 	public static String chooseEffect;
+	public static List<ItemDTO> items;
 }
