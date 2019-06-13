@@ -52,7 +52,7 @@ public class StoreView {
 					btn.setPrefSize(472, 372);
 					btn.setLayoutX(443 + (a-3) * 470);
 					btn.setLayoutY(590);
-					btn.setOpacity(0.5);
+					btn.setOpacity(0);
 				}
 				int money = moneys[a];
 				btn.setOnMouseClicked(e-> buyIGM(money));

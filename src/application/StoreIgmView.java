@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
@@ -47,7 +48,7 @@ public class StoreIgmView {
 				btn.setPrefSize(472, 372);
 				btn.setLayoutX(443 + (a-3) * 470);
 				btn.setLayoutY(590);
-				btn.setOpacity(0.5);
+				btn.setOpacity(0);
 			}
 			int money = moneys[a];
 			btn.setOnMouseClicked(e-> buyIGM(money));
@@ -84,6 +85,27 @@ public class StoreIgmView {
 				Thread thread = new Thread(task);
 				thread.setDaemon(true);
 				thread.start();
+				Map<String, String> mapItem = new HashMap<>();
+				mapItem.put("memberId", LoginSession.memberId);
+				HttpConnector hcc = new HttpConnector("loadItems", mapItem);
+				Task<Void> taskk = new Task<Void>() {
+					@Override
+					protected Void call() throws Exception {
+						try{
+							List<String> requestList = new ArrayList<>();
+							requestList.add("itemId");
+							requestList.add("name");
+							requestList.add("image");
+							LoginSession.items = hcc.request(requestList,true);
+						}catch (Exception e) {
+							e.printStackTrace();
+						}
+						return null;
+					}
+				};
+				Thread threadd = new Thread(taskk);
+				threadd.setDaemon(true);
+				threadd.start();
 				nextScreen = FXMLLoader.load(getClass().getResource("StoreIgmScreen.fxml"));
 				new StoreIgmView(nextScreen);
 				new StoreView(nextScreen, false);
