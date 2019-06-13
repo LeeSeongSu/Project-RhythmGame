@@ -54,42 +54,47 @@ public class StoreNoteView {
 			}
 		}
 		if (isBuy == 0) {
-			if (Integer.parseInt(LoginSession.money) < 3500) {
-				JOptionPane.showMessageDialog(null, "돈이 부족합니다.");
-				return;
-			}
-			Map<String, String> map = new HashMap<>();
-			map.put("memberId", LoginSession.memberId);
-			map.put("money", LoginSession.money);
-			map.put("itemId", String.valueOf(itemId));
-			HttpConnector hc = new HttpConnector("buyItem", map);
-			Task<Void> task = new Task<Void>() {
-				@Override
-				protected Void call() throws Exception {
-					try {
-						String result = hc.request();
-						if (result.equals("Error")) {
-							JOptionPane.showMessageDialog(null, "아이템을 구매할 수 없습니다.");
-						} else {
-							JOptionPane.showMessageDialog(null, "아이템 구매에 성공하셨습니다.");
-							AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("StoreNoteScreen.fxml"));
-							new StoreNoteView(nextScreen);
-							new StoreView(nextScreen, false);
-							Scene sc = new Scene(nextScreen);
-							Stage stage = (Stage) pane.getScene().getWindow();
-							stage.setScene(sc);
-							stage.show();
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "인터넷 연결을 확인해주세요.");
-					}
-					return null;
+			try {
+				if (Integer.parseInt(LoginSession.money) < 350) {
+					JOptionPane.showMessageDialog(null, "돈이 부족합니다.");
+					return;
 				}
-			};
-			Thread thread = new Thread(task);
-			thread.setDaemon(true);
-			thread.start();
+				LoginSession.money =String.valueOf(Integer.parseInt(LoginSession.money)-350);
+				Map<String, String> map = new HashMap<>();
+				map.put("memberId", LoginSession.memberId);
+				map.put("money", "350");
+				map.put("itemId", String.valueOf(itemId));
+				HttpConnector hc = new HttpConnector("buyItem", map);
+				Task<Void> task = new Task<Void>() {
+					@Override
+					protected Void call() throws Exception {
+						try {
+							String result = hc.request();
+							if (result.equals("Error")) {
+								JOptionPane.showMessageDialog(null, "아이템을 구매할 수 없습니다.");
+							} else {
+								JOptionPane.showMessageDialog(null, "아이템 구매에 성공하셨습니다.");
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+							JOptionPane.showMessageDialog(null, "인터넷 연결을 확인해주세요.");
+						}
+						return null;
+					}
+				};
+				Thread thread = new Thread(task);
+				thread.setDaemon(true);
+				thread.start();
+				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("StoreNoteScreen.fxml"));
+				new StoreNoteView(nextScreen);
+				new StoreView(nextScreen, false);
+				Scene sc = new Scene(nextScreen);
+				Stage stage = (Stage) pane.getScene().getWindow();
+				stage.setScene(sc);
+				stage.show();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

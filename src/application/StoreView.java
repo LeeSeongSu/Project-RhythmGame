@@ -55,7 +55,7 @@ public class StoreView {
 					btn.setOpacity(0.5);
 				}
 				int money = moneys[a];
-				btn.setOnMouseClicked(e-> butIGM(money));
+				btn.setOnMouseClicked(e-> buyIGM(money));
 				pane.getChildren().add(btn);
 
 			}
@@ -94,7 +94,7 @@ public class StoreView {
 	}
 	
 	
-	public void butIGM(int money) {
+	public void buyIGM(int money) {
 		int isBuy = JOptionPane.showConfirmDialog(null, "정말 구매하시겠습니까?","확인",JOptionPane.OK_CANCEL_OPTION);
 		if(isBuy==0) {
 			LoginSession.money= String.valueOf(Integer.parseInt(LoginSession.money)+money);

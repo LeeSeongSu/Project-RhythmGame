@@ -46,6 +46,7 @@ public class Menubar {
 		this.pane = pane;
 
 		Image selectImage = (new ImageParser("Lobby_selectEffect.png").getImage());
+		money.setText(LoginSession.money);
 		money.setLayoutX(1740);
 		money.setLayoutY(20);
 		money.setPrefWidth(135);
