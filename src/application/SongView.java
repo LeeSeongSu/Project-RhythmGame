@@ -319,7 +319,10 @@ public class SongView {
 				stage.setScene(sc);
 				Game game = null;
 				stage.show();
+
 				new Item(stage);
+
+				new VolumeBoard(pane);
 				Task<Void> task = new Task<Void>() {
 					public Void call() throws Exception {
 						Game tmp = game;
@@ -339,7 +342,10 @@ public class SongView {
 				stage.setScene(sc);
 				Game game = null;
 				stage.show();
+
 				new Item(stage);
+
+				new VolumeBoard(pane);
 				Task<Void> task = new Task<Void>() {
 					public Void call() throws Exception {
 						Game tmp = game;
@@ -357,6 +363,7 @@ public class SongView {
 				new MultiScreenView(pane, i);
 				new Menubar(pane, -1);
 				// 씬에 레이아웃 추가
+				
 				Scene sc = new Scene(pane);
 				stage.setScene(sc);
 
@@ -367,6 +374,7 @@ public class SongView {
 				new MultiScreenView(pane, i);
 				new Menubar(pane, -1);
 				// 씬에 레이아웃 추가
+			
 				Scene sc = new Scene(pane);
 				stage.setScene(sc);
 

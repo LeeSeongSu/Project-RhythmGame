@@ -1,6 +1,5 @@
 package application;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -10,15 +9,12 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MultiScreenView {
@@ -191,10 +187,16 @@ public class MultiScreenView {
 			stage.setScene(sc);
 		
 			Game game = null;
+
 			new ScoreBoard(pane);
 			new ItemView(pane);
+
+			new ScoreBoard(pane); 
+			
 			stage.show();
+
 			new Item(stage);
+
 			Task<Void> task = new Task<Void>() {
 				public Void call() throws Exception {
 					Game tmp = game;
@@ -207,6 +209,7 @@ public class MultiScreenView {
 					return null;
 				}
 			};
+			new VolumeBoard(pane);
 			Thread t = new Thread(task);
 			t.setDaemon(true);
 			t.run();

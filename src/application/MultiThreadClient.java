@@ -51,8 +51,8 @@ public class MultiThreadClient implements Runnable {
 			e1.printStackTrace();
 		}
 		int portNumber = 9999;
-		String host = "localhost";
-//		String host = "13.125.71.112";
+//		String host = "localhost";
+		String host = "13.125.71.112";
 
 		if (args.length < 2) {
 			System.out.println("Usage: java MultiThreadChatClient <host> <portNumber>\n"
