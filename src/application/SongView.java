@@ -314,15 +314,15 @@ public class SongView {
 			if (LobbyView.mod.equals("Single") && LobbyView.mode_voice.equals("voice")) {
 
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("GameScreen.fxml"));
+				new VolumeBoard(pane);
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
 				stage.setScene(sc);
 				Game game = null;
 				stage.show();
-
+				
 				new Item(stage);
 
-				new VolumeBoard(pane);
 				Task<Void> task = new Task<Void>() {
 					public Void call() throws Exception {
 						Game tmp = game;
@@ -344,8 +344,6 @@ public class SongView {
 				stage.show();
 
 				new Item(stage);
-
-				new VolumeBoard(pane);
 				Task<Void> task = new Task<Void>() {
 					public Void call() throws Exception {
 						Game tmp = game;

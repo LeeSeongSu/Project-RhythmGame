@@ -28,6 +28,7 @@ public class VoiceKeyListener extends Task<Void> {
 	ImageView effectImgView;
 	AnchorPane pane;
 	static boolean lock = false;
+	static double voiceFreq =0;
 	private static AudioFormat getAudioFormat() {
 		float sampleRate = 8000.0F; // The number of samples that will be acquired
 		// 8000,11025,16000,22050,44100 each second for each channel of audio data.
@@ -68,12 +69,15 @@ public class VoiceKeyListener extends Task<Void> {
 			int numBytesRead;
 			byte[] data = new byte[line.getBufferSize() / 7];
 			short convert[] = new short[data.length];
-			double voiceFreq = 0;
+			voiceFreq = 0;
 			// Begin audio capture.
 			line.start();
 
 			// Here, stopped is a global boolean set by another thread.
 			while (!stopped) {
+				
+				if(Thread.interrupted())
+					break;
 				// Read the next chunk of data from the TargetDataLine.
 				numBytesRead = line.read(data, 0, data.length);
 				// Save this chunk of data.
@@ -93,12 +97,13 @@ public class VoiceKeyListener extends Task<Void> {
 					voiceFreq = countzero;
 					// calculates the number of frequency and
 					// stores to the voiceFreq variable	
-					if (voiceFreq >= 5&& voiceFreq <= 50) {
+					if (voiceFreq >= 5&& voiceFreq <= 400) {
 						if (!lock&&!pane.getChildren().contains(ImageStorage.effectImgView[3])) {
 							lock=true;
 							Platform.runLater(() -> pane.getChildren().add(ImageStorage.effectImgView[3]));
 						}
 						judge();
+						
 					} else {
 						if (lock&&pane.getChildren().contains(ImageStorage.effectImgView[3])) {
 							Platform.runLater(() -> pane.getChildren().remove(ImageStorage.effectImgView[3]));

@@ -6,6 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -14,6 +15,9 @@
         <Image preserveRatio="true" smooth="true" url="@../images/Game_bg.png" />
       </image>
     </ImageView>
+    
+    <Rectangle fill="DODGERBLUE" height="613.0" layoutX="1576.0" layoutY="162.0" stroke="#f8f6f6" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="10">
+      </Rectangle>
       
    </children>
 </AnchorPane>

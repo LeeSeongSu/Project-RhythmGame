@@ -190,7 +190,6 @@ public class MultiScreenView {
 
 			new ScoreBoard(pane);
 			new ItemView(pane);
-
 			
 			stage.show();
 
@@ -201,6 +200,7 @@ public class MultiScreenView {
 					Game tmp = game;
 					if(LobbyView.mode_voice.equals("voice")) {
 						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,true,true,stage);
+						new VolumeBoard(pane);
 					}else {
 						tmp = new Game(SongView.mp3List.get(musicIndex), pane, sc,false,true,stage);
 					}
@@ -208,7 +208,6 @@ public class MultiScreenView {
 					return null;
 				}
 			};
-			new VolumeBoard(pane);
 			Thread t = new Thread(task);
 			t.setDaemon(true);
 			t.run();

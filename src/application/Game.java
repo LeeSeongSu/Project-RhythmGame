@@ -58,6 +58,7 @@ public class Game extends Thread {
 		this.stage=stage;
 		score=0;
 		combo=0;
+		ImageStorage.judgeImgView.setImage(null);
 		DOSApplicationController.introMusic.silence();
 		sc.setOnKeyPressed(new KeyListener(pane, noteList));
 		sc.setOnKeyReleased(new NoteEffectKeyListener(pane));
@@ -166,6 +167,7 @@ public class Game extends Thread {
 		if(VoiceMode)
 			voiceThread.interrupt();
 		ScoreBoard.playing=false;
+		VolumeBoard.playing=false;
 	
 		
 		ImageStorage.judgeImgView.setImage(null);
