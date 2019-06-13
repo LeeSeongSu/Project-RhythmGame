@@ -191,9 +191,11 @@ public class MultiScreenView {
 			stage.setScene(sc);
 		
 			Game game = null;
-			new ScoreBoard(pane);
+			new ScoreBoard(pane); 
+			
 			stage.show();
 			new item(stage);
+			
 			Task<Void> task = new Task<Void>() {
 				public Void call() throws Exception {
 					Game tmp = game;
@@ -206,6 +208,7 @@ public class MultiScreenView {
 					return null;
 				}
 			};
+			new VolumeBoard(pane);
 			Thread t = new Thread(task);
 			t.setDaemon(true);
 			t.run();
