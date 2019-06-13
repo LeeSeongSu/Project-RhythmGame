@@ -171,11 +171,9 @@ public class DOSApplicationController extends Thread implements Initializable {
 					LoginSession.exp=result.get("exp");
 					MultiThreadClient.clientId=LoginSession.nickname;
 					MultiThreadClient.sendID(MultiThreadClient.clientId);
-					System.out.println(LoginSession.nickname);
 					Platform.runLater(()->moveLobby());
 				}catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "로그인에 실패하셨습니다.");
-					System.out.println("login Fail");
 				}
 				return null;
 			}

@@ -2,20 +2,18 @@ package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
 import javafx.stage.Stage;
 
 public class StoreIgmView {
@@ -60,6 +58,29 @@ public class StoreIgmView {
 			LoginSession.money= String.valueOf(Integer.parseInt(LoginSession.money)+money);
 			AnchorPane nextScreen;
 			try {
+				Map<String, String> map = new HashMap<>();
+				map.put("memberId", LoginSession.memberId);
+				map.put("money", LoginSession.money);
+				HttpConnector hc = new HttpConnector("buyIGM", map);
+				Task<Void> task = new Task<Void>() {
+					@Override
+					protected Void call() throws Exception {
+						try {
+							String result = hc.request();
+							if (result.equals("Error")) {
+								JOptionPane.showMessageDialog(null, "구매에 실패하셨습니다.");
+							} else {
+								JOptionPane.showMessageDialog(null, "구매에 성공하셨습니다.");
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						return null;
+					}
+				};
+				Thread thread = new Thread(task);
+				thread.setDaemon(true);
+				thread.start();
 				nextScreen = FXMLLoader.load(getClass().getResource("StoreIgmScreen.fxml"));
 				new StoreIgmView(nextScreen);
 				new StoreView(nextScreen, false);

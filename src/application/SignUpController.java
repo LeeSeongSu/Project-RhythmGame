@@ -179,7 +179,7 @@ public class SignUpController {
 							Platform.runLater(() -> moveMain());
 						}
 					} catch (Exception e) {
-						System.out.println("login Fail");
+						JOptionPane.showMessageDialog(null, "인터넷 연결을 확인해주세요.");
 					}
 					return null;
 				}
