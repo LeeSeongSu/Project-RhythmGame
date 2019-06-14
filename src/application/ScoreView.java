@@ -113,9 +113,7 @@ public class ScoreView {
 		miss.setLayoutX(676);
 		miss.setLayoutY(785);
 		pane.getChildren().add(miss);
-		
-		System.out.println("토탈="+total+"퍼펙트="+perfects+"그레잇="+greats+"그레잇칼="+gradeCalc+"");
-		
+				
 		if(gradeCalc>0.9) {
 			Image gradeImage = (new ImageParser("Grade_S.png").getImage());
 			grade = new ImageView(gradeImage);
