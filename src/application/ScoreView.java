@@ -1,7 +1,15 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.swing.JOptionPane;
+
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,7 +27,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class ScoreView {
-
+	private int scores;
 	private AnchorPane pane;
 	private ImageView grade, album,homeBtnImgView;
 	private BackgroundImage homeBtnBgImg;
@@ -29,7 +37,7 @@ public class ScoreView {
 	public ScoreView(AnchorPane pane) {
 		this.pane = pane;
 		
-		int scores = Game.getScore();
+		scores = Game.getScore();
 		int perfects = NoteDropTask.getPerfect();
 		int greats = NoteDropTask.getGreat();
 		int goods = NoteDropTask.getGood();
@@ -156,6 +164,60 @@ public class ScoreView {
 		c.setFill(new ImagePattern(album));
 		pane.getChildren().add(c);
 
+	}
+	
+	public void levelAndMoneyUp() {
+		int value = scores/5000;
+		String level;
+		String money;
+		String exp = Integer.parseInt(LoginSession.money)+value+"";
+		if(Integer.parseInt(LoginSession.exp)+value>=1000) {
+			exp = (Integer.parseInt(LoginSession.exp)+value-1000)+"";
+			level = (Integer.parseInt(LoginSession.level)+1)+"";
+		}else {
+			exp = (Integer.parseInt(LoginSession.exp)+value)+"";
+			level = LoginSession.level;
+		}
+		money = Integer.parseInt(LoginSession.money)+value+"";
+		List<String> requestList = new ArrayList<>();
+		requestList.add("memberId");
+		requestList.add("email");
+		requestList.add("token");
+		requestList.add("nickname");
+		requestList.add("money");
+		requestList.add("level");
+		requestList.add("exp");
+		requestList.add("chooseEffect");
+		requestList.add("chooseNote");
+		Map<String, String> map = new HashMap<>();
+		map.put("memberId", LoginSession.memberId);
+		map.put("exp", exp);
+		map.put("money", money);
+		map.put("level", level);
+		HttpConnector hc = new HttpConnector("endGame", map);
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				try {
+					Map<String, String> result = hc.request(requestList);
+					LoginSession.memberId=result.get("memberId");
+					LoginSession.email=result.get("email");
+					LoginSession.token=result.get("token");
+					LoginSession.nickname=result.get("nickname");
+					LoginSession.money=result.get("money");
+					LoginSession.level=result.get("level");
+					LoginSession.chooseEffect=result.get("chooseEffect");
+					LoginSession.chooseNote=result.get("chooseNote");
+					LoginSession.exp=result.get("exp");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return null;
+			}
+		};
+		Thread thread = new Thread(task);
+		thread.setDaemon(true);
+		thread.start();
 	}
 
 	public void exitBtnClick() {
