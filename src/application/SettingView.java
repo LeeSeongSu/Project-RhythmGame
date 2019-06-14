@@ -111,7 +111,7 @@ public class SettingView {
 
 		reviseBtn.setOpacity(0.5);
 		
-		reviseBtn.setOnMouseClicked(e->{});
+		reviseBtn.setOnMouseClicked(e->changeInfo());
 
 		pane.getChildren().add(reviseBtn);
 
@@ -183,11 +183,12 @@ public class SettingView {
 			protected Void call() throws Exception {
 				try {
 					String result = hc.request();
-					if (result.equals("Duplicate Email")) {
-						JOptionPane.showMessageDialog(null, "중복된 이메일입니다.");
-					} else {
-						JOptionPane.showMessageDialog(null, "회원가입 성공하셨습니다.");
-						Platform.runLater(() -> moveMain());
+					if (result.equals("Email Error")) {
+						JOptionPane.showMessageDialog(null, "이메일을 확인해주세요.");
+					} else if(result.equals("Error")){
+						JOptionPane.showMessageDialog(null, "인터넷 연결을 확인해주세요.");
+					}else {
+						JOptionPane.showMessageDialog(null, "변경 성공하였습니다.");
 					}
 				} catch (Exception e) {
 					System.out.println("login Fail");
