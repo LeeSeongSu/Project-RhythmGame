@@ -231,9 +231,12 @@ public class SettingView {
 
 	}
 	
-
 	public static void changeVolume(double changeValue) {
-		DOSApplicationController.introMusic.setVolume(DOSApplicationController.introMusic.getVolume()+changeValue);
+		double volume=DOSApplicationController.introMusic.getVolume()+changeValue;
+		if(volume>0) {
+			if(volume<=1)
+			DOSApplicationController.introMusic.setVolume(volume);
+		}
 	}
 	public void volumeUp() {
 		SettingView.changeVolume(0.1);
@@ -242,6 +245,7 @@ public class SettingView {
 	public void volumeDown() {
 		SettingView.changeVolume(-0.1);
 	}
-	}
+	
+}
 
 
