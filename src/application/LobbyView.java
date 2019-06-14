@@ -14,6 +14,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -64,7 +65,10 @@ public class LobbyView {
 				BackgroundPosition.CENTER, null);
 		offBtnBgEffectImg = new BackgroundImage(offEffectImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 				BackgroundPosition.CENTER, null);
-
+		if(!LoginSession.chooseNote.equals("0")) {
+			int tmp = Integer.parseInt(LoginSession.chooseNote)-3;
+			ImageStorage.noteBasicImage = (new ImageParser("Note"+tmp+".png").getImage());
+		}
 		start = new ImageView(startImage);
 		start.setLayoutX(1330);
 		start.setLayoutY(870);
@@ -110,18 +114,21 @@ public class LobbyView {
 		nicknameLabel = new Label(LoginSession.nickname);
 		nicknameLabel.setLayoutX(200);
 		nicknameLabel.setLayoutY(360);
+		nicknameLabel.setFont(Font.font("210 OmniGothic 020", 50));
 		nicknameLabel.setStyle("-fx-font-size : 50px; -fx-font-weight : bold; -fx-text-fill:white");
 		pane.getChildren().add(nicknameLabel);
 
 		levelLabel = new Label("Lv : " + LoginSession.level);
 		levelLabel.setLayoutX(200);
 		levelLabel.setLayoutY(460);
+		levelLabel.setFont(Font.font("210 OmniGothic 020", 50));
 		levelLabel.setStyle("-fx-font-size : 50px; -fx-font-weight : bold; -fx-text-fill:white");
 		pane.getChildren().add(levelLabel);
 
 		expLabel = new Label("Exp : " + LoginSession.exp + "/1000");
 		expLabel.setLayoutX(200);
 		expLabel.setLayoutY(560);
+		expLabel.setFont(Font.font("210 OmniGothic 020", 50));
 		expLabel.setStyle("-fx-font-size : 50px; -fx-font-weight : bold; -fx-text-fill:white");
 		pane.getChildren().add(expLabel);
 
@@ -197,14 +204,12 @@ public class LobbyView {
 	}
 
 	private void startBtnEnter() {
-
 		start.setImage(new ImageParser("Lobby_startEffect.png").getImage());
 
 	}
 
 	public void settingBtnClick() {
 		Stage stage = (Stage) settingBtn.getScene().getWindow();
-
 		try {
 
 			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SettingScreen.fxml"));

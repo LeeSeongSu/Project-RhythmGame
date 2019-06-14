@@ -47,7 +47,7 @@ public class StoreView {
 					btn.setPrefSize(472, 372);
 					btn.setLayoutX(443 + a * 470);
 					btn.setLayoutY(215);
-					btn.setOpacity(0.5);
+					btn.setOpacity(0);
 				}else {
 					btn.setPrefSize(472, 372);
 					btn.setLayoutX(443 + (a-3) * 470);
