@@ -159,7 +159,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 		System.out.println("combo = " + Game.getCombo());
 		MultiThreadClient.sendScore(Game.getScore());
 		
-		if(Game.getScore()/1000==item) {
+		if(Game.getScore()/5000==item) {
 			ItemView.addItem((int) (Math.random()*3));
 			item++;
 		}

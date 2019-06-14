@@ -31,7 +31,7 @@ public class ScoreBoard {
 		playing=true;
 		
 		for(int i=0; i<room.size(); i++) {
-			if(i>5)
+			if(i>4)
 				break;
 			scores.add("0");
 			label = new Label(room.get(i));
@@ -67,7 +67,7 @@ public class ScoreBoard {
                     	scores=MultiThreadClient.getScore();
                     	
                 		for(int i=0; i<room.size();i++) {
-                			if(i>5)
+                			if(i>4)
                 				break;
                 			textList1.get(i).setText(room.get(i));
                 			if(scores.size()>i)
