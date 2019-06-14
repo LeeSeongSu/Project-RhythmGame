@@ -1,7 +1,13 @@
 package application;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.swing.JOptionPane;
+
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -100,6 +106,8 @@ public class SettingView {
 		reviseBtn.setLayoutY(519);
 
 		reviseBtn.setOpacity(0.5);
+		
+		reviseBtn.setOnMouseClicked(e->{});
 
 		pane.getChildren().add(reviseBtn);
 
@@ -156,6 +164,36 @@ public class SettingView {
 		pane.getChildren().add(exitBtn);
 
 	}
+	
+	public void changeInfo() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("email", id.getText());
+		map.put("password", passWord.getText());
+		map.put("memberId",LoginSession.memberId);
+		
+		HttpConnector hc = new HttpConnector("changeInfo", map);
+		
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				try {
+					String result = hc.request();
+					if (result.equals("Duplicate Email")) {
+						JOptionPane.showMessageDialog(null, "중복된 이메일입니다.");
+					} else {
+						JOptionPane.showMessageDialog(null, "회원가입 성공하셨습니다.");
+						Platform.runLater(() -> moveMain());
+					}
+				} catch (Exception e) {
+					System.out.println("login Fail");
+				}
+				return null;
+			}
+		};
+		Thread thread = new Thread(task);
+		thread.setDaemon(true);
+		thread.start();
+	}
 
 	public void moveMain() {
 
@@ -186,5 +224,7 @@ public class SettingView {
 		}
 
 	}
+	
+	
 
 }
