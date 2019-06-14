@@ -42,7 +42,7 @@ public class StoreIgmView {
 				btn.setLayoutX(443 + a * 470);
 				btn.setLayoutY(215);
 
-				btn.setOpacity(0.5);
+				btn.setOpacity(0);
 			}else {
 				btn = new Button();
 				btn.setPrefSize(472, 372);

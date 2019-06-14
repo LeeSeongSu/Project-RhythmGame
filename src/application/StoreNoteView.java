@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
@@ -85,6 +86,27 @@ public class StoreNoteView {
 				Thread thread = new Thread(task);
 				thread.setDaemon(true);
 				thread.start();
+				Map<String, String> mapItem = new HashMap<>();
+				mapItem.put("memberId", LoginSession.memberId);
+				HttpConnector hcc = new HttpConnector("loadItems", mapItem);
+				Task<Void> taskk = new Task<Void>() {
+					@Override
+					protected Void call() throws Exception {
+						try{
+							List<String> requestList = new ArrayList<>();
+							requestList.add("itemId");
+							requestList.add("name");
+							requestList.add("image");
+							LoginSession.items = hcc.request(requestList,true);
+						}catch (Exception e) {
+							e.printStackTrace();
+						}
+						return null;
+					}
+				};
+				Thread threadd = new Thread(taskk);
+				threadd.setDaemon(true);
+				threadd.start();
 				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("StoreNoteScreen.fxml"));
 				new StoreNoteView(nextScreen);
 				new StoreView(nextScreen, false);

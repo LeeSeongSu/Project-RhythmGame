@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 
 public class ImageStorage {
 	public static Image comboWordImage = (new ImageParser("combo.png").getImage());
+	public static Image noteBasicImage = (new ImageParser("note.png").getImage());
 	public static Image effectImage = (new ImageParser("NoteEffect.png").getImage());
 	public static Image badImage = (new ImageParser("BadEffect.png").getImage());
 	public static Image greatImage = (new ImageParser("GreatEffect.png").getImage());

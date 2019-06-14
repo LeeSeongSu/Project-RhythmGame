@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -181,13 +182,29 @@ public class MultiScreenView {
 
 		try {
 			AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("GameScreen.fxml"));
-
+			if(!LoginSession.chooseEffect.equals("0")) {
+				Image bg = (new ImageParser("Game_bg"+LoginSession.chooseEffect+".png").getImage());
+				ImageView imgView = new ImageView(bg);
+				imgView.setLayoutX(0);
+				imgView.setLayoutY(0);
+				imgView.setFitHeight(1080);
+				imgView.setFitWidth(1920);
+				pane.getChildren().add(imgView);
+			}
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(pane);
 			stage.setScene(sc);
 		
 			Game game = null;
-
+//			if(!LoginSession.chooseEffect.equals("0")) {
+//				Image img =(new ImageParser("Game_bg"+LoginSession.chooseEffect+".png").getImage());
+//				ImageView bg = new ImageView(img);
+//				bg.setFitHeight(1080);
+//				bg.setFitWidth(1920);
+//				bg.setLayoutX(0);
+//				bg.setLayoutY(0);
+//				Platform.runLater(()->pane.getChildren().add(bg));
+//			}
 			new ScoreBoard(pane);
 			new ItemView(pane);
 			

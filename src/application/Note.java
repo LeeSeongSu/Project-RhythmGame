@@ -9,7 +9,6 @@ public class Note extends Thread{
 	private NoteDropTask<Void> task;
 	
 	// 노트 이미지
-	private Image noteBasicImage = (new ImageParser("note.png").getImage());
 	private ImageView imageView;
 	private AnchorPane pane;
 	private int x, y = 800-(1000/Main.SLEEP_TIME*Main.NOTE_SPEED)*Main.REACH_TIME; // 노트의 현재 위치
@@ -20,7 +19,7 @@ public class Note extends Thread{
 	public Note(int x,AnchorPane pane) {
 		this.x = x;
 		this.pane=pane;
-		imageView=new ImageView(noteBasicImage);
+		imageView=new ImageView(ImageStorage.noteBasicImage);
 		imageView.setX(startWidth+space*x);
 	}
 	
@@ -55,14 +54,6 @@ public class Note extends Thread{
 //		TranslateTransition tt = new TranslateTransition(new Duration(1000), imageView);
 //		tt.setAutoReverse(false); tt.setCycleCount(1);
 //		tt.setFromY(0); tt.setToY(950);tt.play();
-	}
-
-	public Image getNoteBasicImage() {
-		return noteBasicImage;
-	}
-
-	public void setNoteBasicImage(Image noteBasicImage) {
-		this.noteBasicImage = noteBasicImage;
 	}
 
 	public ImageView getImageView() {

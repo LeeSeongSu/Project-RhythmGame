@@ -314,6 +314,15 @@ public class SongView {
 			if (LobbyView.mod.equals("Single") && LobbyView.mode_voice.equals("voice")) {
 
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("GameScreen.fxml"));
+				if(!LoginSession.chooseEffect.equals("0")) {
+					Image bg = (new ImageParser("Game_bg"+LoginSession.chooseEffect+".png").getImage());
+					ImageView imgView = new ImageView(bg);
+					imgView.setLayoutX(0);
+					imgView.setLayoutY(0);
+					imgView.setFitHeight(1080);
+					imgView.setFitWidth(1920);
+					pane.getChildren().add(imgView);
+				}
 				new VolumeBoard(pane);
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
@@ -337,6 +346,15 @@ public class SongView {
 			} else if (LobbyView.mod.equals("Single") && LobbyView.mode_voice.equals("none")) {
 
 				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("GameScreen.fxml"));
+				if(!LoginSession.chooseEffect.equals("0")) {
+					Image bg = (new ImageParser("Game_bg"+LoginSession.chooseEffect+".png").getImage());
+					ImageView imgView = new ImageView(bg);
+					imgView.setLayoutX(0);
+					imgView.setLayoutY(0);
+					imgView.setFitHeight(1080);
+					imgView.setFitWidth(1920);
+					pane.getChildren().add(imgView);
+				}
 				// 씬에 레이아웃 추가
 				Scene sc = new Scene(pane);
 				stage.setScene(sc);
