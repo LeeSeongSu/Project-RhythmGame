@@ -41,6 +41,14 @@ public class Music extends Thread {
 	public void normalVolume() {
 		mediaPlayer.setVolume(1);
 	}
+	
+	public void setVolume(double volume) {
+		mediaPlayer.setVolume(volume);
+	}
+	
+	public double getVolume() {
+		return mediaPlayer.getVolume();
+	}
 
 	public void close() {
 		isLoop = false;

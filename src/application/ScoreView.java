@@ -35,6 +35,12 @@ public class ScoreView {
 		int goods = NoteDropTask.getGood();
 		int bads = NoteDropTask.getBad();
 		int misses = NoteDropTask.getMiss();
+		double total = perfects + greats + goods + bads + misses; 
+		
+		double gradeCalc;
+		int grade_A, grade_B, grade_C, grade_F, grade_S; 
+		
+		gradeCalc = (perfects + greats) / total ;
 		
 
 		
@@ -99,15 +105,45 @@ public class ScoreView {
 		miss.setLayoutX(676);
 		miss.setLayoutY(785);
 		pane.getChildren().add(miss);
-
-		Image gradeImage = (new ImageParser("Grade_S.png").getImage());
-		grade = new ImageView(gradeImage);
-		grade.setLayoutX(115);
-		grade.setLayoutY(764);
-		pane.getChildren().add(grade);
-
 		
-
+		System.out.println("토탈="+total+"퍼펙트="+perfects+"그레잇="+greats+"그레잇칼="+gradeCalc+"");
+		
+		if(gradeCalc>0.9) {
+			Image gradeImage = (new ImageParser("Grade_S.png").getImage());
+			grade = new ImageView(gradeImage);
+			grade.setLayoutX(115);
+			grade.setLayoutY(764);
+			pane.getChildren().add(grade);
+			}
+		else if (gradeCalc>0.8) {
+			Image gradeImage = (new ImageParser("Grade_A.png").getImage());
+			grade = new ImageView(gradeImage);
+			grade.setLayoutX(115);
+			grade.setLayoutY(764);
+			pane.getChildren().add(grade);
+		}
+		else if (gradeCalc>0.7) {
+			Image gradeImage = (new ImageParser("Grade_B.png").getImage());
+			grade = new ImageView(gradeImage);
+			grade.setLayoutX(115);
+			grade.setLayoutY(764);
+			pane.getChildren().add(grade);
+		}
+		else if (gradeCalc>0.6) {
+			Image gradeImage = (new ImageParser("Grade_C.png").getImage());
+			grade = new ImageView(gradeImage);
+			grade.setLayoutX(115);
+			grade.setLayoutY(764);
+			pane.getChildren().add(grade);
+		}
+		else if(gradeCalc<=0.6){ 
+			Image gradeImage = (new ImageParser("Grade_F.png").getImage());
+			grade = new ImageView(gradeImage);
+			grade.setLayoutX(115);
+			grade.setLayoutY(764);
+			pane.getChildren().add(grade);
+			}
+		
 		String t = Game.getTitle();
 		int idx = t.indexOf(".");
 		String title = t.substring(0, idx);
@@ -139,8 +175,7 @@ public class ScoreView {
 
 			visited = true;
 		}
-		// Music introMusic = new Music("Game On.mp3", true);
-		// introMusic.start();
+
 
 		try {
 
