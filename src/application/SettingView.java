@@ -58,6 +58,8 @@ public class SettingView {
 		bgSoundLeftBtn.setLayoutY(422);
 
 		bgSoundLeftBtn.setOpacity(0.5);
+		
+		bgSoundLeftBtn.setOnMouseClicked(e -> volumeDown());
 
 		pane.getChildren().add(bgSoundLeftBtn);
 
@@ -70,6 +72,8 @@ public class SettingView {
 		bgSoundRightBtn.setLayoutY(422);
 
 		bgSoundRightBtn.setOpacity(0.5);
+		
+		bgSoundRightBtn.setOnMouseClicked(e -> volumeUp());
 
 		pane.getChildren().add(bgSoundRightBtn);
 
@@ -165,6 +169,7 @@ public class SettingView {
 
 	}
 	
+
 	public void changeInfo() {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("email", id.getText());
@@ -196,6 +201,7 @@ public class SettingView {
 		thread.start();
 	}
 
+
 	public void moveMain() {
 
 		// 새 스테이지 추가
@@ -226,6 +232,17 @@ public class SettingView {
 
 	}
 	
-	
 
-}
+	public static void changeVolume(double changeValue) {
+		DOSApplicationController.introMusic.setVolume(DOSApplicationController.introMusic.getVolume()+changeValue);
+	}
+	public void volumeUp() {
+		SettingView.changeVolume(0.1);
+	}
+	
+	public void volumeDown() {
+		SettingView.changeVolume(-0.1);
+	}
+	}
+
+
