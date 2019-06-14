@@ -166,7 +166,6 @@ public class MakeGameTask extends Task<Void> {
 		int i = 0;
 		music.changeFlag();
 		music.start();
-		System.out.println(notes.length);
 		for (i = 0; i < notes.length; i++) {
 			Thread.sleep(1);
 			if (beats[i].getTime() <= music.getTime()) {

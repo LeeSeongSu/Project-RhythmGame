@@ -207,7 +207,6 @@ public class MultiThreadClient implements Runnable {
 	}
 	
 	public static void useItem(String user,int item ) {
-		System.out.println(user);
 		try {
 			os.writeUTF("@useItem "+user+" "+ item);
 		} catch (IOException e) {

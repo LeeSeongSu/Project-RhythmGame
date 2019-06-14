@@ -156,7 +156,6 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Game.noteList.remove(note);
 			note.close();
 		}
-		System.out.println("combo = " + Game.getCombo());
 		MultiThreadClient.sendScore(Game.getScore());
 		
 		if(Game.getScore()/5000==item) {
@@ -290,7 +289,6 @@ public class NoteDropTask<Void> extends Task<Void> {
 			Game.noteList.remove(note);
 			note.close();
 		}
-		System.out.println("combo = " + Game.getCombo());
 		MultiThreadClient.sendScore(Game.getScore());
 	}
 

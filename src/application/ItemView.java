@@ -88,8 +88,6 @@ public class ItemView {
 			imageList.get(0).setImage(null);
 			imageList.remove(0);
 			
-			System.out.println("imageSize "+imageList.size());
-			
 			for(int i=0; i<imageList.size(); i++) {
 				imageList.get(i).setLayoutX(60+85*i);
 			}

@@ -197,7 +197,6 @@ public class Menubar {
 			LobbyView.mod="Single";
 			LobbyView.mode_voice="none";
 			MultiThreadClient.roomExit();
-			System.out.println("Exit");
 
 		} catch (IOException e) {
 

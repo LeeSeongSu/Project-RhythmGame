@@ -65,7 +65,6 @@ public class Game extends Thread {
 		if(VoiceMode) {
 			voiceMode();
 		}
-		System.out.println(VoiceMode);
 		
 
 		

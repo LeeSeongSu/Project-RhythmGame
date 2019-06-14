@@ -29,7 +29,6 @@ public class DOSApplication extends Application {
 				public void handle(WindowEvent event) {
 					MultiThreadClient.roomExit();
 					MultiThreadClient.exit();
-					System.out.println("Exit");
 					System.exit(0);
 				}
 			});
