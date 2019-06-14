@@ -119,7 +119,7 @@ public class ScoreView {
 		String t = Game.getTitle();
 		int idx = t.indexOf(".");
 		String title = t.substring(0, idx);
-
+		levelAndMoneyUp();
 		Image album = (new ImageParser(title + ".jpg").getImage());
 		Circle c = new Circle();
 		c.setRadius(222);
@@ -131,7 +131,7 @@ public class ScoreView {
 	}
 	
 	public void levelAndMoneyUp() {
-		int value = scores/5000;
+		int value = scores/3000;
 		String level;
 		String money;
 		String exp = Integer.parseInt(LoginSession.money)+value+"";
