@@ -58,6 +58,8 @@ public class SettingView {
 		bgSoundLeftBtn.setLayoutY(422);
 
 		bgSoundLeftBtn.setOpacity(0.5);
+		
+		bgSoundLeftBtn.setOnMouseClicked(e -> volumeDown());
 
 		pane.getChildren().add(bgSoundLeftBtn);
 
@@ -70,6 +72,8 @@ public class SettingView {
 		bgSoundRightBtn.setLayoutY(422);
 
 		bgSoundRightBtn.setOpacity(0.5);
+		
+		bgSoundRightBtn.setOnMouseClicked(e -> volumeUp());
 
 		pane.getChildren().add(bgSoundRightBtn);
 
@@ -107,7 +111,7 @@ public class SettingView {
 
 		reviseBtn.setOpacity(0.5);
 		
-		reviseBtn.setOnMouseClicked(e->{});
+		reviseBtn.setOnMouseClicked(e->changeInfo());
 
 		pane.getChildren().add(reviseBtn);
 
@@ -165,6 +169,7 @@ public class SettingView {
 
 	}
 	
+
 	public void changeInfo() {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("email", id.getText());
@@ -178,11 +183,12 @@ public class SettingView {
 			protected Void call() throws Exception {
 				try {
 					String result = hc.request();
-					if (result.equals("Duplicate Email")) {
-						JOptionPane.showMessageDialog(null, "중복된 이메일입니다.");
-					} else {
-						JOptionPane.showMessageDialog(null, "회원가입 성공하셨습니다.");
-						Platform.runLater(() -> moveMain());
+					if (result.equals("Email Error")) {
+						JOptionPane.showMessageDialog(null, "이메일을 확인해주세요.");
+					} else if(result.equals("Error")){
+						JOptionPane.showMessageDialog(null, "인터넷 연결을 확인해주세요.");
+					}else {
+						JOptionPane.showMessageDialog(null, "변경 성공하였습니다.");
 					}
 				} catch (Exception e) {
 					System.out.println("login Fail");
@@ -194,6 +200,7 @@ public class SettingView {
 		thread.setDaemon(true);
 		thread.start();
 	}
+
 
 	public void moveMain() {
 
@@ -225,6 +232,21 @@ public class SettingView {
 
 	}
 	
+	public static void changeVolume(double changeValue) {
+		double volume=DOSApplicationController.introMusic.getVolume()+changeValue;
+		if(volume>0) {
+			if(volume<=1)
+			DOSApplicationController.introMusic.setVolume(volume);
+		}
+	}
+	public void volumeUp() {
+		SettingView.changeVolume(0.1);
+	}
 	
-
+	public void volumeDown() {
+		SettingView.changeVolume(-0.1);
+	}
+	
 }
+
+
