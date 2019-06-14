@@ -97,7 +97,7 @@ public class VoiceKeyListener extends Task<Void> {
 					voiceFreq = countzero;
 					// calculates the number of frequency and
 					// stores to the voiceFreq variable	
-					if (voiceFreq >= 5&& voiceFreq <= 400) {
+					if (voiceFreq >= 5&& voiceFreq <= 200) {
 						if (!lock&&!pane.getChildren().contains(ImageStorage.effectImgView[3])) {
 							lock=true;
 							Platform.runLater(() -> pane.getChildren().add(ImageStorage.effectImgView[3]));

@@ -139,6 +139,7 @@ public class MultiScreenView {
 
 						for (int i = room.size(); i < buttons.size(); i++) {
 							buttons.get(i).setText("");
+							buttons.get(i).setBackground(new Background(exButtonBlueImg));
 
 						}
 					});

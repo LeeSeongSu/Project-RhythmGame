@@ -45,8 +45,8 @@ public class VolumeBoard {
 				// TODO Auto-generated method stub
 				while(playing) {
 					
-					if(VoiceKeyListener.voiceFreq<400&&VoiceKeyListener.voiceFreq>5)
-						block.setHeight(VoiceKeyListener.voiceFreq*1.25);
+					if(VoiceKeyListener.voiceFreq<201&&VoiceKeyListener.voiceFreq>5)
+						block.setHeight(VoiceKeyListener.voiceFreq*2.5);
 					else
 						block.setHeight(613);
 				}
