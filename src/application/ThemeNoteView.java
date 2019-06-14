@@ -32,7 +32,7 @@ public class ThemeNoteView {
 				labels[0].setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:red");
 				btn = new Button();
 				btn.setPrefSize(481, 835);
-				btn.setLayoutX(432 + (LoginSession.items.get(i).getItemId()-3) * 480);
+				btn.setLayoutX(432 + (LoginSession.items.get(i).getItemId()-4) * 480);
 				btn.setLayoutY(190);
 				btn.setOpacity(0);
 				int tmp = i;
@@ -46,7 +46,7 @@ public class ThemeNoteView {
 				labels[1].setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:red");
 				btn = new Button();
 				btn.setPrefSize(481, 835);
-				btn.setLayoutX(432 + (LoginSession.items.get(i).getItemId()-3) * 480);
+				btn.setLayoutX(432 + (LoginSession.items.get(i).getItemId()-4) * 480);
 				btn.setLayoutY(190);
 				btn.setOpacity(0);
 				int tmp = i;
@@ -60,7 +60,7 @@ public class ThemeNoteView {
 				labels[2].setStyle("-fx-font-size : 30px; -fx-font-weight : bold; -fx-text-fill:red");
 				btn = new Button();
 				btn.setPrefSize(481, 835);
-				btn.setLayoutX(432 + (LoginSession.items.get(i).getItemId()-3) * 480);
+				btn.setLayoutX(432 + (LoginSession.items.get(i).getItemId()-4) * 480);
 				btn.setLayoutY(190);
 				btn.setOpacity(0);
 				int tmp = i;
