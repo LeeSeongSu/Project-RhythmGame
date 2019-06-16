@@ -50,7 +50,7 @@ public class VoiceKeyListener extends Task<Void> {
 
 	@Override
 	 protected Void call() throws Exception {
-		TargetDataLine line;
+		TargetDataLine line=null;
 		AudioFormat audioFormat = getAudioFormat();
 		boolean stopped = false;
 		DataLine.Info info = new DataLine.Info(TargetDataLine.class, audioFormat); // format is an AudioFormat object
@@ -72,12 +72,8 @@ public class VoiceKeyListener extends Task<Void> {
 			voiceFreq = 0;
 			// Begin audio capture.
 			line.start();
-
 			// Here, stopped is a global boolean set by another thread.
-			while (!stopped) {
-				
-				if(Thread.interrupted())
-					break;
+			while (Game.isVoiceMode()) {
 				// Read the next chunk of data from the TargetDataLine.
 				numBytesRead = line.read(data, 0, data.length);
 				// Save this chunk of data.
@@ -97,7 +93,7 @@ public class VoiceKeyListener extends Task<Void> {
 					voiceFreq = countzero;
 					// calculates the number of frequency and
 					// stores to the voiceFreq variable	
-					if (voiceFreq >= 5&& voiceFreq <= 200) {
+					if (voiceFreq >= 5&& voiceFreq <= 100) {
 						if (!lock&&!pane.getChildren().contains(ImageStorage.effectImgView[3])) {
 							lock=true;
 							Platform.runLater(() -> pane.getChildren().add(ImageStorage.effectImgView[3]));
@@ -110,14 +106,16 @@ public class VoiceKeyListener extends Task<Void> {
 							lock=false;
 						}
 					}
-				
+					
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
 			}
 		} catch (LineUnavailableException ex) {
+			ex.printStackTrace();
 			// Handle the error ...
 		}
+		if(line.isOpen())line.close();
 		return null;
 	}
 

@@ -36,6 +36,9 @@ public class Game extends Thread {
 
 	static ArrayList<Note> noteList = new ArrayList<>();
 	
+	public static Thread getVoiceThread() {
+		return voiceThread;
+	}
 	
 	public static synchronized void addScore(int addScore) {
 		score = score+addScore+combo*10;
@@ -50,12 +53,12 @@ public class Game extends Thread {
 	}
 	
 	public Game(String title, AnchorPane pane, Scene sc, boolean VoiceMode,boolean MultiMode, Stage stage) {
-		this.pane = pane;
-		this.title = title;
+		Game.pane = pane;
+		Game.title = title;
 		this.sc = sc;
-		this.VoiceMode= VoiceMode;
-		this.MultiMode = MultiMode;
-		this.stage=stage;
+		Game.VoiceMode= VoiceMode;
+		Game.MultiMode = MultiMode;
+		Game.stage=stage;
 		score=0;
 		combo=0;
 		ImageStorage.judgeImgView.setImage(null);
@@ -163,11 +166,14 @@ public class Game extends Thread {
 	private static void moveHome() {
 		music.close();
 		makeGameThread.interrupt();
-		if(VoiceMode)
+		if(VoiceMode) {
+			VoiceMode=false;
 			voiceThread.interrupt();
+		}
 		ScoreBoard.playing=false;
 		VolumeBoard.playing=false;
-	
+		LobbyView.mode_voice="none";
+		LobbyView.mod = "Single";
 		
 		ImageStorage.judgeImgView.setImage(null);
 
@@ -256,6 +262,9 @@ public class Game extends Thread {
 
 	public static void setScore(int score) {
 		Game.score = score;
+	}
+	public static void setVoiceMode(boolean mode) {
+		VoiceMode=mode;
 	}
 
 }

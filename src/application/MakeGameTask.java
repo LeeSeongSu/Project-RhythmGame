@@ -184,13 +184,17 @@ public class MakeGameTask extends Task<Void> {
 		}
 
 		TimeUnit.SECONDS.sleep(8);// 마지막노트 떨어지는 시점에서 딜레이 8초
-
+		
 		Platform.runLater(() -> {
-
+			if(Game.isVoiceMode()) {
+				LobbyView.mode_voice="none";
+				LobbyView.mod = "Single";
+				Game.setVoiceMode(false);
+				Game.getVoiceThread().interrupt();
+			}
 			Stage stage = (Stage) pane.getScene().getWindow();
 
 			try {
-
 				AnchorPane score = FXMLLoader.load(Class.forName("application.Main").getResource("ScoreScreen.fxml"));
 
 				ScoreView Score = new ScoreView(score);
