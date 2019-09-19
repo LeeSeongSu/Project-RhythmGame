@@ -210,7 +210,7 @@ public class SettingView {
 
 		try {
 
-			AnchorPane second = FXMLLoader.load(getClass().getResource("SelectScreen.fxml"));
+			AnchorPane second = FXMLLoader.load(getClass().getResource("/view/SelectScreen.fxml"));
 
 			LobbyView lobbyView = new LobbyView(second);
 

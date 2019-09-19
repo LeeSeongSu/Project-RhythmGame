@@ -43,7 +43,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 			if (note.isProceeded()) {
 				drop();
 				Platform.runLater(() -> imgView.setLayoutY(y));
-				Thread.sleep(Main.SLEEP_TIME);
+				Thread.sleep(DOSApplication.SLEEP_TIME);
 			} else {
 				Platform.runLater(() -> pane.getChildren().remove(imgView));
 				this.cancel();
@@ -54,7 +54,7 @@ public class NoteDropTask<Void> extends Task<Void> {
 	}
 
 	public void drop() {
-		y += Main.NOTE_SPEED;
+		y += DOSApplication.NOTE_SPEED;
 		if (y > 1100) {
 			if (ImageStorage.judgeImgView.getImage() == null
 					|| !ImageStorage.judgeImgView.getImage().equals(ImageStorage.missImage)) {

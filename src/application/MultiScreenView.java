@@ -182,7 +182,7 @@ public class MultiScreenView {
 		Stage stage = (Stage) startBtn.getScene().getWindow();
 
 		try {
-			AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("GameScreen.fxml"));
+			AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("/view/GameScreen.fxml"));
 			if(!LoginSession.chooseEffect.equals("0")) {
 				Image bg = (new ImageParser("Game_bg"+LoginSession.chooseEffect+".png").getImage());
 				ImageView imgView = new ImageView(bg);

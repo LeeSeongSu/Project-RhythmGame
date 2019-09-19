@@ -145,7 +145,7 @@ public class FindController {
 
 		try {
 
-			AnchorPane second = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+			AnchorPane second = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
 
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(second);
@@ -170,7 +170,7 @@ public class FindController {
 
 		try {
 
-			AnchorPane second = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+			AnchorPane second = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
 
 			// 씬에 레이아웃 추가
 			Scene sc = new Scene(second);

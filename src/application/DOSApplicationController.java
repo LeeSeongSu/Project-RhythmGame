@@ -146,31 +146,31 @@ public class DOSApplicationController extends Thread implements Initializable {
 		Map<String, String> map = new HashMap<>();
 		map.put("email", email);
 		map.put("password", password);
-		HttpConnector hc = new HttpConnector("login", map);
+//		HttpConnector hc = new HttpConnector("login", map);
 		Task<Void> task = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
 				try{
-					List<String> requestList = new ArrayList<>();
-					requestList.add("memberId");
-					requestList.add("email");
-					requestList.add("token");
-					requestList.add("nickname");
-					requestList.add("money");
-					requestList.add("level");
-					requestList.add("exp");
-					requestList.add("chooseEffect");
-					requestList.add("chooseNote");
-					Map<String, String> result = hc.request(requestList);
-					LoginSession.memberId=result.get("memberId");
-					LoginSession.email=result.get("email");
-					LoginSession.token=result.get("token");
-					LoginSession.nickname=result.get("nickname");
-					LoginSession.money=result.get("money");
-					LoginSession.level=result.get("level");
-					LoginSession.chooseEffect=result.get("chooseEffect");
-					LoginSession.chooseNote=result.get("chooseNote");
-					LoginSession.exp=result.get("exp");
+//					List<String> requestList = new ArrayList<>();
+//					requestList.add("memberId");
+//					requestList.add("email");
+//					requestList.add("token");
+//					requestList.add("nickname");
+//					requestList.add("money");
+//					requestList.add("level");
+//					requestList.add("exp");
+//					requestList.add("chooseEffect");
+//					requestList.add("chooseNote");
+//					Map<String, String> result = hc.request(requestList);
+//					LoginSession.memberId=result.get("memberId");
+//					LoginSession.email=result.get("email");
+//					LoginSession.token=result.get("token");
+//					LoginSession.nickname=result.get("nickname");
+//					LoginSession.money=result.get("money");
+//					LoginSession.level=result.get("level");
+//					LoginSession.chooseEffect=result.get("chooseEffect");
+//					LoginSession.chooseNote=result.get("chooseNote");
+//					LoginSession.exp=result.get("exp");
 					MultiThreadClient.clientId=LoginSession.nickname;
 					MultiThreadClient.sendID(MultiThreadClient.clientId);
 					Map<String, String> map = new HashMap<>();
@@ -191,9 +191,9 @@ public class DOSApplicationController extends Thread implements Initializable {
 							return null;
 						}
 					};
-					Thread thread = new Thread(task);
-					thread.setDaemon(true);
-					thread.start();
+//					Thread thread = new Thread(task);
+//					thread.setDaemon(true);
+//					thread.start();
 					Platform.runLater(()->moveLobby());
 				}catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "로그인에 실패하셨습니다.");
@@ -214,10 +214,12 @@ public class DOSApplicationController extends Thread implements Initializable {
 		// 새 스테이지 추가
 
 		Stage stage = (Stage) loginBtn.getScene().getWindow();
+		
+		System.out.println("Here");
 
 		try {
 
-			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SelectScreen.fxml"));
+			AnchorPane second = FXMLLoader.load(Class.forName("application.DOSApplication").getResource("/view/SelectScreen.fxml"));
 			LobbyView lobbyView = new LobbyView(second);
 			Menubar menubar = new Menubar(second,0);
 			// 씬에 레이아웃 추가
@@ -243,7 +245,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 
 		try {
 
-			AnchorPane signUpPage = FXMLLoader.load(getClass().getResource("SignUpScreen.fxml"));
+			AnchorPane signUpPage = FXMLLoader.load(getClass().getResource("/view/SignUpScreen.fxml"));
 			
 		
 			SignUpController signUp= new SignUpController(signUpPage);
@@ -266,7 +268,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 
 		try {
 
-			AnchorPane findPage = FXMLLoader.load(getClass().getResource("FindScreen.fxml"));
+			AnchorPane findPage = FXMLLoader.load(getClass().getResource("/view/FindScreen.fxml"));
 			
 		
 			FindController find= new FindController(findPage);
@@ -289,6 +291,15 @@ public class DOSApplicationController extends Thread implements Initializable {
 	         @Override
 	         protected Void call() throws Exception {
 	            try{
+	            	LoginSession.memberId="0";
+					LoginSession.email="0";
+					LoginSession.token="0";
+					LoginSession.nickname="0";
+					LoginSession.money="0";
+					LoginSession.level="0";
+					LoginSession.chooseEffect="0";
+					LoginSession.chooseNote="0";
+					LoginSession.exp="0";
 	               Platform.runLater(()->moveLobby());
 	            }catch (Exception e) {
 	               System.out.println("login Fail");

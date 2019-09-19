@@ -86,9 +86,9 @@ public class Menubar {
 		buttons.get(2).setOnMouseClicked(e -> btnClick(2));
 
 		fxmlList = new ArrayList<String>();
-		fxmlList.add("HomeScreen.fxml");
-		fxmlList.add("ThemeScreen.fxml");
-		fxmlList.add("StoreScreen.fxml");
+		fxmlList.add("/view/HomeScreen.fxml");
+		fxmlList.add("/view/ThemeScreen.fxml");
+		fxmlList.add("/view/StoreScreen.fxml");
 
 		screenList = new ArrayList<String>();
 		screenList.add("StoreView");
@@ -109,7 +109,7 @@ public class Menubar {
 				Platform.runLater(() -> {
 					try {
 						AnchorPane second = FXMLLoader
-								.load(Class.forName("application.Main").getResource("PopupMulti.fxml"));
+								.load(Class.forName("application.Main").getResource("/view/PopupMulti.fxml"));
 						pop.getContent().add(second);
 						pop.show(stage);
 						exitBtn = new Button();
@@ -161,7 +161,7 @@ public class Menubar {
 
 		try {
 			if (fxmlList.get(i) == "StoreScreen.fxml") {
-				AnchorPane second = FXMLLoader.load(getClass().getResource("StoreScreen.fxml"));
+				AnchorPane second = FXMLLoader.load(getClass().getResource("/view/StoreScreen.fxml"));
 				StoreView storeview = new StoreView(second, true);
 				Menubar menubar = new Menubar(second, i);
 				
@@ -171,7 +171,7 @@ public class Menubar {
 
 				stage.show();
 			} else if (fxmlList.get(i) == "HomeScreen.fxml") {
-				AnchorPane second = FXMLLoader.load(getClass().getResource("SelectScreen.fxml"));
+				AnchorPane second = FXMLLoader.load(getClass().getResource("/view/SelectScreen.fxml"));
 				LobbyView Lobbyview = new LobbyView(second);
 
 				Menubar menubar = new Menubar(second, i);
@@ -182,7 +182,7 @@ public class Menubar {
 
 				stage.show();
 			} else if (fxmlList.get(i) == "ThemeScreen.fxml") {
-				AnchorPane second = FXMLLoader.load(getClass().getResource("ThemeScreen.fxml"));
+				AnchorPane second = FXMLLoader.load(getClass().getResource("/view/ThemeScreen.fxml"));
 				ThemeView themeView = new ThemeView(second, true);
 
 				Menubar menubar = new Menubar(second, i);

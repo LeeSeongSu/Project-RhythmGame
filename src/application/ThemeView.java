@@ -104,14 +104,14 @@ public class ThemeView {
 		
 
 		
-		buttons.get(0).setOnMouseClicked(e -> btnClick1(0));
-		buttons.get(1).setOnMouseClicked(e -> btnClick1(1));
+		buttons.get(0).setOnMouseClicked(e -> btnClick(0));
+		buttons.get(1).setOnMouseClicked(e -> btnClick(1));
 
 		
 		fxmlList = new ArrayList<String>();
 		
-		fxmlList.add("ThemeGameScreen.fxml");
-		fxmlList.add("ThemeNoteScreen.fxml");
+		fxmlList.add("/view/ThemeGameScreen.fxml");
+		fxmlList.add("/view/ThemeNoteScreen.fxml");
 
 		screenList = new ArrayList<String>();
 	
@@ -150,22 +150,12 @@ public class ThemeView {
 		}
 	}
 
-	private void btnClick1(int i) {
+	private void btnClick(int i) {
 
 		Stage stage = (Stage) buttons.get(i).getScene().getWindow();
 
 		try {
-			if (fxmlList.get(i) == "ThemeGameScreen.fxml") {
-				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("ThemeGameScreen.fxml"));
-				new ThemeGameView(nextScreen);
-				new Menubar(nextScreen, 1);
-				new ThemeView(nextScreen, false);
-				Scene sc = new Scene(nextScreen);
-				stage.setScene(sc);
-
-				stage.show();
-			} else {
-				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("ThemeNoteScreen.fxml"));
+				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource(fxmlList.get(i)));
 				new ThemeNoteView(nextScreen);
 				new Menubar(nextScreen, 1);
 				new ThemeView(nextScreen, false);
@@ -174,8 +164,6 @@ public class ThemeView {
 				stage.setScene(sc);
 
 				stage.show();
-			}
-
 		} catch (IOException e) {
 
 			e.printStackTrace();

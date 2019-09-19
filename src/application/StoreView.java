@@ -77,15 +77,15 @@ public class StoreView {
 		
 		buttons = new ArrayList<Button>();
 
-		buttons1.get(0).setOnMouseClicked(e -> btnClick1(0));
-		buttons1.get(1).setOnMouseClicked(e -> btnClick1(1));
-		buttons1.get(2).setOnMouseClicked(e -> btnClick1(2));
+		buttons1.get(0).setOnMouseClicked(e -> btnClick(0));
+		buttons1.get(1).setOnMouseClicked(e -> btnClick(1));
+		buttons1.get(2).setOnMouseClicked(e -> btnClick(2));
 
 		
 		fxmlList1 = new ArrayList<String>();
-		fxmlList1.add("StoreIgmScreen.fxml");
-		fxmlList1.add("StoreGameScreen.fxml");
-		fxmlList1.add("StoreNoteScreen.fxml");
+		fxmlList1.add("/view/StoreIgmScreen.fxml");
+		fxmlList1.add("/view/StoreGameScreen.fxml");
+		fxmlList1.add("/view/StoreNoteScreen.fxml");
 
 		screenList1 = new ArrayList<String>();
 		screenList1.add("StoreIgmView");
@@ -123,7 +123,7 @@ public class StoreView {
 				Thread thread = new Thread(task);
 				thread.setDaemon(true);
 				thread.start();
-				nextScreen = FXMLLoader.load(getClass().getResource("StoreIgmScreen.fxml"));
+				nextScreen = FXMLLoader.load(getClass().getResource("/view/StoreIgmScreen.fxml"));
 				new StoreIgmView(nextScreen);
 				new StoreView(nextScreen, false);
 				Scene sc = new Scene(nextScreen);
@@ -136,40 +136,21 @@ public class StoreView {
 		}
 	}
 	
-	private void btnClick1(int i) {
+	private void btnClick(int i) {
 
 		Stage stage = (Stage) buttons1.get(i).getScene().getWindow();
 
 		try {
+			
+			AnchorPane nextScreen = FXMLLoader.load(getClass().getResource(fxmlList1.get(i)));
+			new StoreNoteView(nextScreen);
+			new StoreView(nextScreen, false);
+			Scene sc = new Scene(nextScreen);
 
-			if (fxmlList1.get(i) == "StoreIgmScreen.fxml") {
-				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("StoreIgmScreen.fxml"));
-				new StoreIgmView(nextScreen);
-				new StoreView(nextScreen, false);
-				Scene sc = new Scene(nextScreen);
+			stage.setScene(sc);
 
-				stage.setScene(sc);
+			stage.show();
 
-				stage.show();
-			} else if (fxmlList1.get(i) == "StoreGameScreen.fxml") {
-				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("StoreGameScreen.fxml"));
-				new StoreGameView(nextScreen);
-				new StoreView(nextScreen, false);
-				Scene sc = new Scene(nextScreen);
-
-				stage.setScene(sc);
-
-				stage.show();
-			} else {
-				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("StoreNoteScreen.fxml"));
-				new StoreNoteView(nextScreen);
-				new StoreView(nextScreen, false);
-				Scene sc = new Scene(nextScreen);
-
-				stage.setScene(sc);
-
-				stage.show();
-			}
 
 		} catch (IOException e) {
 

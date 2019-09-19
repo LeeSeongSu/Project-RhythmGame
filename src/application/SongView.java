@@ -313,7 +313,7 @@ public class SongView {
 		try {
 			if (LobbyView.mod.equals("Single") && LobbyView.mode_voice.equals("voice")) {
 
-				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("GameScreen.fxml"));
+				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("/view/GameScreen.fxml"));
 				if(!LoginSession.chooseEffect.equals("0")) {
 					Image bg = (new ImageParser("Game_bg"+LoginSession.chooseEffect+".png").getImage());
 					ImageView imgView = new ImageView(bg);
@@ -345,7 +345,7 @@ public class SongView {
 				t.run();
 			} else if (LobbyView.mod.equals("Single") && LobbyView.mode_voice.equals("none")) {
 
-				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("GameScreen.fxml"));
+				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("/view/GameScreen.fxml"));
 				if(!LoginSession.chooseEffect.equals("0")) {
 					Image bg = (new ImageParser("Game_bg"+LoginSession.chooseEffect+".png").getImage());
 					ImageView imgView = new ImageView(bg);
@@ -374,7 +374,7 @@ public class SongView {
 				t.setDaemon(true);
 				t.run();
 			} else if (LobbyView.mod.equals("Multi") && LobbyView.mode_voice.equals("voice")) {
-				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("MultiScreen.fxml"));
+				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("/view/MultiScreen.fxml"));
 				MultiThreadClient.joinRoom(i,true);
 				new MultiScreenView(pane, i);
 				new Menubar(pane, -1);
@@ -385,7 +385,7 @@ public class SongView {
 
 				stage.show();
 			} else if (LobbyView.mod.equals("Multi") && LobbyView.mode_voice.equals("none")) {
-				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("MultiScreen.fxml"));
+				AnchorPane pane = FXMLLoader.load(Class.forName("application.Main").getResource("/view/MultiScreen.fxml"));
 				MultiThreadClient.joinRoom(i,false);
 				new MultiScreenView(pane, i);
 				new Menubar(pane, -1);

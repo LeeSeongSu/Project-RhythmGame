@@ -107,7 +107,7 @@ public class StoreGameView {
 				threadd.setDaemon(true);
 				threadd.start();
 				
-				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("StoreGameScreen.fxml"));
+				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("/view/StoreGameScreen.fxml"));
 				new StoreGameView(nextScreen);
 				new StoreView(nextScreen, false);
 				Scene sc = new Scene(nextScreen);

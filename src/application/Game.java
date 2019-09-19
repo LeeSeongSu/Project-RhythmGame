@@ -89,7 +89,7 @@ public class Game extends Thread {
 
 	public void dropNotes(){
 		boolean flag =false;
-		int startTime = 1000-Main.REACH_TIME*1000;
+		int startTime = 1000-DOSApplication.REACH_TIME*1000;
 		music = new Music(title, false);
 		makeGameThread = new Thread(new MakeGameTask(music,pane,noteList));
 		makeGameThread.setDaemon(true);
@@ -127,7 +127,7 @@ public class Game extends Thread {
 				Popup pop =new Popup();
 				Platform.runLater(() -> {
 					try {
-						AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("PopupPause.fxml"));
+						AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("/view/PopupPause.fxml"));
 						pop.getContent().add(second);
 						pop.show(stage);
 						exitBtn = new Button();
@@ -179,7 +179,7 @@ public class Game extends Thread {
 
 		try {
 
-			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SelectScreen.fxml"));
+			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("/view/SelectScreen.fxml"));
 			LobbyView lobbyView = new LobbyView(second);
 			Menubar menubar = new Menubar(second,0);
 			MultiThreadClient.roomExit();

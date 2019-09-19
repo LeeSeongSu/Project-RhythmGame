@@ -11,7 +11,7 @@ public class Note extends Thread{
 	// 노트 이미지
 	private ImageView imageView;
 	private AnchorPane pane;
-	private int x, y = 800-(1000/Main.SLEEP_TIME*Main.NOTE_SPEED)*Main.REACH_TIME; // 노트의 현재 위치
+	private int x, y = 800-(1000/DOSApplication.SLEEP_TIME*DOSApplication.NOTE_SPEED)*DOSApplication.REACH_TIME; // 노트의 현재 위치
 	private boolean proceeded = true;
 	int space=115;
 	int startWidth=517;

@@ -239,7 +239,7 @@ public class ScoreView {
 
 		try {
 
-			AnchorPane second = FXMLLoader.load(getClass().getResource("SelectScreen.fxml"));
+			AnchorPane second = FXMLLoader.load(getClass().getResource("/view/SelectScreen.fxml"));
 
 			LobbyView v = new LobbyView(second);
 			Menubar menubar = new Menubar(second, 0);

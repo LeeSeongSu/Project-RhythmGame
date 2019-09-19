@@ -107,7 +107,7 @@ public class StoreNoteView {
 				Thread threadd = new Thread(taskk);
 				threadd.setDaemon(true);
 				threadd.start();
-				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("StoreNoteScreen.fxml"));
+				AnchorPane nextScreen = FXMLLoader.load(getClass().getResource("/view/StoreNoteScreen.fxml"));
 				new StoreNoteView(nextScreen);
 				new StoreView(nextScreen, false);
 				Scene sc = new Scene(nextScreen);

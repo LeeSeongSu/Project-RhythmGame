@@ -65,10 +65,10 @@ public class LobbyView {
 				BackgroundPosition.CENTER, null);
 		offBtnBgEffectImg = new BackgroundImage(offEffectImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 				BackgroundPosition.CENTER, null);
-		if(!LoginSession.chooseNote.equals("0")) {
-			int tmp = Integer.parseInt(LoginSession.chooseNote)-3;
-			ImageStorage.noteBasicImage = (new ImageParser("Note"+tmp+".png").getImage());
-		}
+//		if(!LoginSession.chooseNote.equals("0")) {
+//			int tmp = Integer.parseInt(LoginSession.chooseNote)-3;
+//			ImageStorage.noteBasicImage = (new ImageParser("Note"+tmp+".png").getImage());
+//		}
 		start = new ImageView(startImage);
 		start.setLayoutX(1330);
 		start.setLayoutY(870);
@@ -132,7 +132,7 @@ public class LobbyView {
 		expLabel.setStyle("-fx-font-size : 50px; -fx-font-weight : bold; -fx-text-fill:white");
 		pane.getChildren().add(expLabel);
 
-		Double gage = (double) (482.0 / 1000 * Integer.parseInt(LoginSession.exp));
+		Double gage =0.0; //(double) (482.0 / 1000 * Integer.parseInt(LoginSession.exp));
 		expGage = new ImageView(expGageImage);
 		expGage.setLayoutX(202);
 		expGage.setLayoutY(660);
@@ -212,7 +212,7 @@ public class LobbyView {
 		Stage stage = (Stage) settingBtn.getScene().getWindow();
 		try {
 
-			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SettingScreen.fxml"));
+			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("/view/SettingScreen.fxml"));
 
 			SettingView settingview = new SettingView(second);
 			Scene sc = new Scene(second);
@@ -237,7 +237,7 @@ public class LobbyView {
 
 		try {
 
-			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("SelectScreen.fxml"));
+			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("/view/SelectScreen.fxml"));
 
 			SongView songview = new SongView(second);
 			Menubar menubar = new Menubar(second, 0);

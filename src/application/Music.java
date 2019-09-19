@@ -19,7 +19,7 @@ public class Music extends Thread {
 	public Music(String name, boolean isLoop) {
 		try {
 			this.isLoop = isLoop;
-			file = new File(Class.forName("application.Main").getResource("../music/" + name).toURI());
+			file = new File(Class.forName("application.DOSApplication").getResource("../music/" + name).toURI());
 			media = new Media(file.toURI().toString());
 			mediaPlayer = new MediaPlayer(media);
 			

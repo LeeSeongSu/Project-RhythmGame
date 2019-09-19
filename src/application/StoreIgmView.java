@@ -106,7 +106,7 @@ public class StoreIgmView {
 				Thread threadd = new Thread(taskk);
 				threadd.setDaemon(true);
 				threadd.start();
-				nextScreen = FXMLLoader.load(getClass().getResource("StoreIgmScreen.fxml"));
+				nextScreen = FXMLLoader.load(getClass().getResource("/view/StoreIgmScreen.fxml"));
 				new StoreIgmView(nextScreen);
 				new StoreView(nextScreen, false);
 				Scene sc = new Scene(nextScreen);

@@ -28,7 +28,7 @@ public class Item {
 		speedIndex=1;
 		pop = new Popup();
 		try {
-			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("Block.fxml"));
+			AnchorPane second = FXMLLoader.load(Class.forName("application.Main").getResource("/view/Block.fxml"));
 			pop.getContent().add(second);
 	    	pop.setOpacity(0);
 	    	pop.show(stage,551,300);
@@ -122,10 +122,10 @@ public class Item {
 	}
 	
 	public static void speedUp() {
-		Main.NOTE_SPEED=16;
+		DOSApplication.NOTE_SPEED=16;
 		count(2);
 		speedIndex=1;
 		speed=false;
-		Main.NOTE_SPEED=8;
+		DOSApplication.NOTE_SPEED=8;
 	}
 }
