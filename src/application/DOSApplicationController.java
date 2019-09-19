@@ -147,6 +147,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 		map.put("email", email);
 		map.put("password", password);
 //		HttpConnector hc = new HttpConnector("login", map);
+		
 		Task<Void> task = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
