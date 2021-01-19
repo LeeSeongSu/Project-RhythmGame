@@ -55,7 +55,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 		Image backgroundImage = (new ImageParser("Main_bg.gif").getImage());
 		backgroundImageView.setImage(backgroundImage);
 		
-		loginBtn.setOnAction(e-> login());
+		loginBtn.setOnAction(e-> loginBeta());
 		SignUpBtn.setOnAction(e-> moveSignUp());
 		FindBtn.setOnAction(e->moveFind());
 		if(!visited) {
@@ -287,7 +287,7 @@ public class DOSApplicationController extends Thread implements Initializable {
 		}
 	}
 	public void loginBeta() {
-	      MultiThreadClient.sendID(MultiThreadClient.threadNum);
+//	      MultiThreadClient.sendID(MultiThreadClient.threadNum);
 	      Task<Void> task = new Task<Void>() {
 	         @Override
 	         protected Void call() throws Exception {
